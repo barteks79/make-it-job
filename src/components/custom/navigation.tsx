@@ -8,14 +8,14 @@ export default function Navigation() {
 			<div>
 				{/* hamburger menu  */}
 				<h1>MakeITWork</h1>
-			</div>
 
-			<ul>
-				<NavItem href="/dashboard">Dashboard</NavItem>
-				<NavItem href="/offers">Offers</NavItem>
-				<NavItem href="/bookmarks">Bookmarks</NavItem>
-				<NavItem href="/pricing">Pricing</NavItem>
-			</ul>
+				<ul>
+					<NavItem href="/dashboard">Dashboard</NavItem>
+					<NavItem href="/offers">Offers</NavItem>
+					<NavItem href="/bookmarks">Bookmarks</NavItem>
+					<NavItem href="/pricing">Pricing</NavItem>
+				</ul>
+			</div>
 
 			<ul>
 				<Button variant="outline" size="icon">
