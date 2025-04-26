@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import NavItem from '@/components/custom/nav-item';
+import Logo from '@/components/custom/logo';
 import { Inbox, Plus } from 'lucide-react';
 
 export default function Navigation() {
@@ -8,9 +9,7 @@ export default function Navigation() {
 			<div className="flex items-center gap-5 lg:gap-12">
 				{/* hamburger menu  */}
 
-				<h1 className="font-flavors text-sm md:text-base lg:text-lg tracking-wider uppercase text-foreground lg:text-secondary-foreground">
-					MakeITWork
-				</h1>
+				<Logo />
 
 				<ul className="hidden lg:flex gap-6 text-sm">
 					<NavItem href="/dashboard">Dashboard</NavItem>
