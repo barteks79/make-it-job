@@ -24,7 +24,11 @@ export default function Navigation() {
 					<Plus />
 				</Button>
 
-				<Button variant="outline" size="icon">
+				<Button
+					className="hidden md:inline-flex"
+					variant="outline"
+					size="icon"
+				>
 					<Inbox />
 				</Button>
 
