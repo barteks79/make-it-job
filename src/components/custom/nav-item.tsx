@@ -17,7 +17,12 @@ export default function NavItem({
 	const isActive = pathname.startsWith(href);
 
 	return (
-		<Link className={cn('')} href={href}>
+		<Link
+			href={href}
+			className={cn('text-muted-foreground transition-colors', {
+				'text-foreground hover:text-muted-foreground': isActive
+			})}
+		>
 			{children}
 		</Link>
 	);
