@@ -1,3 +1,4 @@
+import Navigation from '@/components/custom/navigation';
 import { ThemeProvider } from '@/store/theme-provider';
 import { LAYOUT_METADATA } from '@/config/metadata';
 
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 					enableSystem
 					disableTransitionOnChange
 				>
+					<Navigation />
 					{children}
 				</ThemeProvider>
 			</body>
