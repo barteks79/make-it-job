@@ -5,13 +5,13 @@ import { Inbox, Plus } from 'lucide-react';
 
 export default function Navigation() {
 	return (
-		<nav className="flex justify-between items-center border-b px-8 h-16 lg:h-20">
-			<div className="flex items-center gap-5 lg:gap-12">
+		<nav className="flex justify-between items-center border-b px-8 h-14 md:h-16 lg:h-20">
+			<div className="flex items-center gap-5 md:gap-8 lg:gap-12">
 				{/* hamburger menu  */}
 
 				<Logo />
 
-				<ul className="hidden lg:flex gap-6 text-sm">
+				<ul className="hidden md:flex md:items-center gap-6 text-sm">
 					<NavItem href="/dashboard">Dashboard</NavItem>
 					<NavItem href="/offers">Offers</NavItem>
 					<NavItem href="/bookmarks">Bookmarks</NavItem>
