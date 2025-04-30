@@ -4,9 +4,9 @@ export default function Logo() {
 	return (
 		<Link
 			href="/"
-			className="font-flavors text-sm md:text-base lg:text-lg tracking-wider uppercase text-foreground lg:text-secondary-foreground"
+			className="font-flavors text-sm md:text-base lg:text-lg tracking-wider uppercase text-foreground"
 		>
-			MakeITWork
+			MakeITJob
 		</Link>
 	);
 }
