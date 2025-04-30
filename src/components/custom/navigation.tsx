@@ -19,13 +19,17 @@ export default function Navigation() {
 				</ul>
 			</div>
 
-			<ul className="flex gap-3">
-				<Button variant="outline" size="icon">
+			<ul className="flex items-center gap-3">
+				<Button
+					className="size-7 md:size-8 lg:size-9 transition-none"
+					variant="outline"
+					size="icon"
+				>
 					<Plus />
 				</Button>
 
 				<Button
-					className="hidden md:inline-flex"
+					className="size-8 lg:size-9 hidden md:inline-flex transition-none"
 					variant="outline"
 					size="icon"
 				>
