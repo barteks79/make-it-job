@@ -5,8 +5,8 @@ import { Inbox, Plus } from 'lucide-react';
 
 export default function Navigation() {
 	return (
-		<nav className="flex justify-between items-center border-b px-8 h-14 md:h-16 lg:h-20">
-			<div className="flex items-center gap-5 md:gap-8 lg:gap-12">
+		<nav className="flex justify-between items-center border-b px-8 h-14">
+			<div className="flex items-center gap-6 md:gap-10">
 				{/* hamburger menu  */}
 
 				<Logo />
@@ -20,16 +20,12 @@ export default function Navigation() {
 			</div>
 
 			<ul className="flex items-center gap-3">
-				<Button
-					className="size-7 md:size-8 lg:size-9 transition-none"
-					variant="outline"
-					size="icon"
-				>
+				<Button className="size-8" variant="outline" size="icon">
 					<Plus />
 				</Button>
 
 				<Button
-					className="size-8 lg:size-9 hidden md:inline-flex transition-none"
+					className="hidden md:inline-flex size-8"
 					variant="outline"
 					size="icon"
 				>
