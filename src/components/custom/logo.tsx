@@ -4,7 +4,7 @@ export default function Logo() {
 	return (
 		<Link
 			href="/"
-			className="font-flavors text-base md:text-lg tracking-wider uppercase text-foreground"
+			className="font-flavors text-lg tracking-wider uppercase text-foreground"
 		>
 			MakeITJob
 		</Link>

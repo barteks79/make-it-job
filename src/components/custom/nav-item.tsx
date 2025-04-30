@@ -19,8 +19,8 @@ export default function NavItem({
 	return (
 		<Link
 			href={href}
-			className={cn('text-muted-foreground transition-colors', {
-				'text-foreground hover:text-muted-foreground': isActive
+			className={cn('text-foreground/80 transition-colors', {
+				'text-foreground hover:text-foreground/80': isActive
 			})}
 		>
 			{children}
