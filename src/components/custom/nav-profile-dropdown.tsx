@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { ChevronsUpDownIcon } from 'lucide-react';
+import DropdownLink from '@/components/custom/dropdown-link';
 
 import {
 	DropdownMenu,
@@ -16,7 +16,8 @@ import {
 	InboxIcon,
 	UserIcon,
 	SettingsIcon,
-	LogOutIcon
+	LogOutIcon,
+	ChevronsUpDownIcon
 } from 'lucide-react';
 
 import {
@@ -60,29 +61,29 @@ export default function NavProfileDropdown() {
 				<DropdownMenuSeparator />
 
 				<DropdownMenuGroup>
-					<DropdownMenuItem>
+					<DropdownLink href="/applications">
 						<BriefcaseBusinessIcon />
 						Applications
-					</DropdownMenuItem>
+					</DropdownLink>
 
-					<DropdownMenuItem>
+					<DropdownLink href="/inbox">
 						<InboxIcon />
 						Inbox
-					</DropdownMenuItem>
+					</DropdownLink>
 				</DropdownMenuGroup>
 
 				<DropdownMenuSeparator />
 
 				<DropdownMenuGroup>
-					<DropdownMenuItem>
+					<DropdownLink href="/profile">
 						<UserIcon />
 						Profile
-					</DropdownMenuItem>
+					</DropdownLink>
 
-					<DropdownMenuItem>
+					<DropdownLink href="/settings">
 						<SettingsIcon />
 						Settings
-					</DropdownMenuItem>
+					</DropdownLink>
 				</DropdownMenuGroup>
 
 				<DropdownMenuSeparator />
