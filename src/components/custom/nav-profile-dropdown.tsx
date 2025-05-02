@@ -5,8 +5,19 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuTrigger,
-	DropdownMenuLabel
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuGroup,
+	DropdownMenuItem
 } from '@/components/ui/dropdown-menu';
+
+import {
+	BriefcaseBusinessIcon,
+	InboxIcon,
+	UserIcon,
+	SettingsIcon,
+	LogOutIcon
+} from 'lucide-react';
 
 import {
 	Avatar,
@@ -45,6 +56,41 @@ export default function NavProfileDropdown() {
 						</div>
 					</div>
 				</DropdownMenuLabel>
+
+				<DropdownMenuSeparator />
+
+				<DropdownMenuGroup>
+					<DropdownMenuItem>
+						<BriefcaseBusinessIcon />
+						Applications
+					</DropdownMenuItem>
+
+					<DropdownMenuItem>
+						<InboxIcon />
+						Inbox
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
+
+				<DropdownMenuSeparator />
+
+				<DropdownMenuGroup>
+					<DropdownMenuItem>
+						<UserIcon />
+						Profile
+					</DropdownMenuItem>
+
+					<DropdownMenuItem>
+						<SettingsIcon />
+						Settings
+					</DropdownMenuItem>
+				</DropdownMenuGroup>
+
+				<DropdownMenuSeparator />
+
+				<DropdownMenuItem>
+					<LogOutIcon />
+					Logout
+				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
