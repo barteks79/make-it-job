@@ -1,3 +1,4 @@
+import MobileNav from '@/components/custom/mobile-nav';
 import { Button } from '@/components/ui/button';
 import NavItem from '@/components/custom/nav-item';
 import NavProfileDropdown from '@/components/custom/nav-profile-dropdown';
@@ -6,9 +7,11 @@ import { Inbox, Plus } from 'lucide-react';
 
 export default function Navigation() {
 	return (
-		<nav className="flex justify-between items-center border-b px-8 h-14">
-			<div className="flex items-center gap-6 md:gap-10">
-				{/* hamburger menu  */}
+		<nav className="flex justify-between items-center border-b px-3 md:px-8 h-14">
+			<div className="flex items-center gap-4 md:gap-8">
+				<div className="md:hidden">
+					<MobileNav />
+				</div>
 
 				<Logo />
 
@@ -20,7 +23,7 @@ export default function Navigation() {
 				</ul>
 			</div>
 
-			<ul className="flex items-center gap-3">
+			<ul className="flex items-center gap-2 md:gap-3">
 				<Button className="size-8" variant="outline" size="icon">
 					<Plus />
 				</Button>
