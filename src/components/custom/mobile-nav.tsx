@@ -17,10 +17,40 @@ export default function MobileNav() {
 				</button>
 			</DrawerTrigger>
 
-			<DrawerContent className="flex flex-col gap-3 p-4">
-				<NavItem href="/">Home</NavItem>
-				<DrawerTitle className="text-xl">Jobs</DrawerTitle>
-				<DrawerTitle className="text-xl">User</DrawerTitle>
+			<DrawerContent className="flex flex-col gap-5 px-6 pb-4">
+				<div className="flex flex-col gap-3">
+					<NavItem className="text-xl" href="/">
+						Home
+					</NavItem>
+
+					<NavItem className="text-xl" href="/offers">
+						Offers
+					</NavItem>
+
+					<NavItem className="text-xl" href="/bookmarks">
+						Bookmarks
+					</NavItem>
+				</div>
+
+				<div className="flex flex-col gap-3">
+					<DrawerTitle className="text-2xl">Dashboard</DrawerTitle>
+
+					<NavItem className="text-xl" href="/dashboard/applications">
+						Applications
+					</NavItem>
+
+					<NavItem className="text-xl" href="/dashboard/inbox">
+						Inbox
+					</NavItem>
+
+					<NavItem className="text-xl" href="/dashboard/profile">
+						Profile
+					</NavItem>
+
+					<NavItem className="text-xl" href="/dashboard/settings">
+						Settings
+					</NavItem>
+				</div>
 			</DrawerContent>
 		</Drawer>
 	);
