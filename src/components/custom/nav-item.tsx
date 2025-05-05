@@ -16,7 +16,7 @@ export default function NavItem({
 	className?: string;
 }) {
 	const pathname = usePathname();
-	const isActive = pathname.startsWith(href);
+	const isActive = pathname === href;
 
 	return (
 		<Link
