@@ -8,10 +8,12 @@ import { cn } from '@/lib/utils';
 
 export default function NavItem({
 	children,
-	href
+	href,
+	className
 }: {
 	children: ReactNode;
 	href: string;
+	className?: string;
 }) {
 	const pathname = usePathname();
 	const isActive = pathname.startsWith(href);
@@ -19,9 +21,11 @@ export default function NavItem({
 	return (
 		<Link
 			href={href}
-			className={cn('text-foreground/80 transition-colors', {
-				'text-foreground hover:text-foreground/80': isActive
-			})}
+			className={cn(
+				'text-foreground/80 transition-colors',
+				{ 'text-foreground hover:text-foreground/80': isActive },
+				className
+			)}
 		>
 			{children}
 		</Link>
