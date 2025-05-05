@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import NavItem from '@/components/custom/nav-item';
 import NavProfileDropdown from '@/components/custom/nav-profile-dropdown';
 import Logo from '@/components/custom/logo';
-import { Inbox, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 
 export default function Navigation() {
 	return (
@@ -28,16 +28,7 @@ export default function Navigation() {
 					<Plus />
 				</Button>
 
-				<Button
-					className="hidden md:inline-flex size-8"
-					variant="outline"
-					size="icon"
-				>
-					<Inbox />
-				</Button>
-
 				<NavProfileDropdown />
-				{/* dropdown with users profile picture */}
 			</ul>
 		</nav>
 	);

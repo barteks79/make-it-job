@@ -16,8 +16,7 @@ import {
 	InboxIcon,
 	UserIcon,
 	SettingsIcon,
-	LogOutIcon,
-	ChevronsUpDownIcon
+	LogOutIcon
 } from 'lucide-react';
 
 import {
@@ -30,9 +29,8 @@ export default function NavProfileDropdown() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="outline" className="h-8 gap-6">
-					<span>noahw_</span>
-					<ChevronsUpDownIcon />
+				<Button variant="outline" size="icon" className="size-8">
+					<UserIcon />
 				</Button>
 			</DropdownMenuTrigger>
 
