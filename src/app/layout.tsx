@@ -19,7 +19,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			className={`${GeistSans.variable} ${flavors.variable}`}
 			suppressHydrationWarning
 		>
-			<body className={`min-h-svh antialiased ${GeistSans.className}`}>
+			<body className={`flex flex-col min-h-svh antialiased ${GeistSans.className}`}>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"
