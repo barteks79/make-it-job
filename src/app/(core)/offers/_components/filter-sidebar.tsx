@@ -13,9 +13,12 @@ export default function FilterSidebar() {
 				</button>
 			</section>
 
-			<section className="flex flex-col px-7 py-4">
-				<DateSelect />
-			</section>
+			<section className="flex flex-col px-7">
+				<div className="flex flex-col gap-1.5 pt-4 pb-6 border-b">
+					<label className="font-medium text-sm">Post date</label>
+					<DateSelect />
+				</div>
+			</section>  
 		</aside>
 	);
 }
