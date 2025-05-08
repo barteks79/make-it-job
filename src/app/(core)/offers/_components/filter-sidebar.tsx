@@ -1,3 +1,5 @@
+import DateSelect from './date-select';
+
 export default function FilterSidebar() {
 	return (
 		<aside className="flex-1 bg-secondary w-64 border-x">
@@ -9,6 +11,10 @@ export default function FilterSidebar() {
 				<button className="text-sm text-secondary-foreground cursor-pointer tracking-tight">
 					Clear
 				</button>
+			</section>
+
+			<section className="flex flex-col px-7 py-4">
+				<DateSelect />
 			</section>
 		</aside>
 	);
