@@ -1,4 +1,5 @@
-import DateSelect from './date-select';
+import CategoryFilter from '@/app/(core)/offers/_components/category-filter';
+import DateSelect from '@/app/(core)/offers/_components/date-select';
 
 export default function FilterSidebar() {
 	return (
@@ -14,11 +15,21 @@ export default function FilterSidebar() {
 			</section>
 
 			<section className="flex flex-col px-7">
-				<div className="flex flex-col gap-1.5 pt-4 pb-6 border-b">
+				<CategoryFilter isCustom>
 					<label className="font-medium text-sm">Post date</label>
 					<DateSelect />
-				</div>
-			</section>  
+				</CategoryFilter>
+
+				<CategoryFilter>Job Type</CategoryFilter>
+
+				<CategoryFilter>Work Type</CategoryFilter>
+
+				<CategoryFilter>Experience</CategoryFilter>
+
+				<CategoryFilter isCustom>
+					<label className="font-medium text-sm">Annual salary</label>
+				</CategoryFilter>
+			</section>
 		</aside>
 	);
 }
