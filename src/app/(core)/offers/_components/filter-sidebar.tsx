@@ -1,9 +1,10 @@
+import { Button } from '@/components/ui/button';
 import CategoryFilter from '@/app/(core)/offers/_components/category-filter';
 import DateSelect from '@/app/(core)/offers/_components/date-select';
 
 export default function FilterSidebar() {
 	return (
-		<aside className="flex-1 bg-secondary w-64 border-x">
+		<aside className="flex flex-col flex-1 bg-secondary w-64 border-x">
 			<section className="flex justify-between items-center px-7 py-4 border-b">
 				<h3 className="text-foreground font-semibold tracking-tight">
 					Filters
@@ -29,6 +30,12 @@ export default function FilterSidebar() {
 				<CategoryFilter isCustom>
 					<label className="font-medium text-sm">Annual salary</label>
 				</CategoryFilter>
+			</section>
+
+			<section className="flex items-end flex-1 px-7 py-4">
+				<Button className="w-full not-disabled:cursor-pointer">
+					Apply (23)
+				</Button>
 			</section>
 		</aside>
 	);
