@@ -1,3 +1,4 @@
+import { mockFilterCategories } from '@/lib/mock-data';
 import { Button } from '@/components/ui/button';
 import CategoryFilter from '@/app/(core)/offers/_components/category-filter';
 import DateSelect from '@/app/(core)/offers/_components/date-select';
@@ -21,11 +22,17 @@ export default function FilterSidebar() {
 					<DateSelect />
 				</CategoryFilter>
 
-				<CategoryFilter>Job Type</CategoryFilter>
+				<CategoryFilter options={mockFilterCategories['jobType']}>
+					Job Type
+				</CategoryFilter>
 
-				<CategoryFilter>Work Type</CategoryFilter>
+				<CategoryFilter options={mockFilterCategories['workType']}>
+					Work Type
+				</CategoryFilter>
 
-				<CategoryFilter>Experience</CategoryFilter>
+				<CategoryFilter options={mockFilterCategories['experience']}>
+					Experience
+				</CategoryFilter>
 
 				<CategoryFilter isCustom>
 					<label className="font-medium text-sm">Annual salary</label>

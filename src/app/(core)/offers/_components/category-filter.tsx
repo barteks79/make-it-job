@@ -7,10 +7,7 @@ import { type ReactNode } from 'react';
 export default function CategoryFilter({
 	children,
 	isCustom = false,
-	options = [
-		{ isChecked: true, name: 'Option 1', quantity: 6 },
-		{ isChecked: false, name: 'Option 2', quantity: 0 }
-	]
+	options
 }: {
 	children: ReactNode;
 	isCustom?: boolean;
