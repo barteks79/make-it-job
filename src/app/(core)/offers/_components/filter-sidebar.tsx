@@ -1,5 +1,6 @@
 import { mockFilterCategories } from '@/lib/mock-data';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import CategoryFilter from '@/app/(core)/offers/_components/category-filter';
 import DateSelect from '@/app/(core)/offers/_components/date-select';
 
@@ -36,6 +37,15 @@ export default function FilterSidebar() {
 
 				<CategoryFilter isCustom>
 					<label className="font-medium text-sm">Annual salary</label>
+
+					<div className="flex flex-col items-center gap-2.5">
+						<Input placeholder="$0" type="number" />
+						<Input placeholder="$50000" type="number" />
+					</div>
+
+					<p className="text-secondary-foreground text-sm">
+						In thousands of US dollars.
+					</p>
 				</CategoryFilter>
 			</section>
 
