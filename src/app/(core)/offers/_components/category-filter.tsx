@@ -1,5 +1,6 @@
 'use client';
 
+import slugify from 'slugify';
 import { useOptimistic, startTransition } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { createFilterQuery } from '@/lib/utils';
@@ -47,7 +48,7 @@ function CategoryOption({ option }: { option: CategoryFilterOption }) {
 		boolean,
 		boolean
 	>(
-		searchParams.get(option.name) === 'true',
+		searchParams.get(slugify(option.name, { lower: true })) === 'true',
 		(state, newIsChecked) => newIsChecked
 	);
 
@@ -57,7 +58,12 @@ function CategoryOption({ option }: { option: CategoryFilterOption }) {
 				checked={optimisticIsChecked}
 				onCheckedChange={(checked: boolean) => {
 					startTransition(() => setOptimisticIsChecked(checked));
-					const newUrl = createFilterQuery(searchParams, option.name);
+
+					const newUrl = createFilterQuery(
+						searchParams,
+						slugify(option.name, { lower: true })
+					);
+
 					router.push(`${pathname}?${newUrl}`);
 				}}
 			/>
