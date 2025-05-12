@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import CategoryFilter from '@/app/(core)/offers/_components/category-filter';
 import DateSelect from '@/app/(core)/offers/_components/date-select';
+import ClearFiltersButton from '@/app/(core)/offers/_components/clear-filters-button';
 
 export default function FilterSidebar() {
 	return (
@@ -12,9 +13,7 @@ export default function FilterSidebar() {
 					Filters
 				</h3>
 
-				<button className="text-sm text-secondary-foreground cursor-pointer tracking-tight">
-					Clear
-				</button>
+				<ClearFiltersButton />
 			</section>
 
 			<section className="flex flex-col px-7">
