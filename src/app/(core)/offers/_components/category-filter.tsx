@@ -1,5 +1,6 @@
 'use client';
 
+import { useOptimistic, startTransition } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { createFilterQuery } from '@/lib/utils';
 
@@ -42,21 +43,28 @@ function CategoryOption({ option }: { option: CategoryFilterOption }) {
 	const pathname = usePathname();
 	const searchParams = useSearchParams();
 
+	const [optimisticIsChecked, setOptimisticIsChecked] = useOptimistic<
+		boolean,
+		boolean
+	>(
+		searchParams.get(option.name) === 'true',
+		(state, newIsChecked) => newIsChecked
+	);
+
 	return (
 		<li className="flex items-center gap-2.5">
 			<Checkbox
-				onCheckedChange={() => {
+				checked={optimisticIsChecked}
+				onCheckedChange={(checked: boolean) => {
+					startTransition(() => setOptimisticIsChecked(checked));
 					const newUrl = createFilterQuery(searchParams, option.name);
 					router.push(`${pathname}?${newUrl}`);
 				}}
-				id={option.name}
-				defaultChecked={option.isChecked}
 			/>
 
 			<label
-				htmlFor={option.name}
 				className={cn('text-sm text-foreground flex-1', {
-					'font-medium': option.isChecked
+					'font-medium': optimisticIsChecked
 				})}
 			>
 				{option.name}
@@ -64,7 +72,7 @@ function CategoryOption({ option }: { option: CategoryFilterOption }) {
 
 			<span
 				className={cn('text-sm text-muted-foreground', {
-					'text-primary font-medium': option.isChecked
+					'text-primary font-medium': optimisticIsChecked
 				})}
 			>
 				{option.quantity}
