@@ -25,20 +25,23 @@ export default function CategoryOption({
 		(state, newIsChecked) => newIsChecked
 	);
 
+	function handleCheckedChange(checked: boolean) {
+		startTransition(() => setOptimisticIsChecked(checked));
+
+		const newUrl = createFilterQuery(
+			searchParams,
+			slugify(option.name, { lower: true }),
+			checked ? 'true' : undefined
+		);
+
+		router.push(`${pathname}?${newUrl}`);
+	}
+
 	return (
 		<li className="flex items-center gap-2.5">
 			<Checkbox
 				checked={optimisticIsChecked}
-				onCheckedChange={(checked: boolean) => {
-					startTransition(() => setOptimisticIsChecked(checked));
-
-					const newUrl = createFilterQuery(
-						searchParams,
-						slugify(option.name, { lower: true })
-					);
-
-					router.push(`${pathname}?${newUrl}`);
-				}}
+				onCheckedChange={handleCheckedChange}
 			/>
 
 			<label
