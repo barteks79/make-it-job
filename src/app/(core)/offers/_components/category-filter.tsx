@@ -1,3 +1,8 @@
+'use client';
+
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { createFilterQuery } from '@/lib/utils';
+
 import { cn } from '@/lib/utils';
 import { Checkbox } from '@/components/ui/checkbox';
 
@@ -33,9 +38,20 @@ export default function CategoryFilter({
 }
 
 function CategoryOption({ option }: { option: CategoryFilterOption }) {
+	const router = useRouter();
+	const pathname = usePathname();
+	const searchParams = useSearchParams();
+
 	return (
 		<li className="flex items-center gap-2.5">
-			<Checkbox id={option.name} defaultChecked={option.isChecked} />
+			<Checkbox
+				onCheckedChange={() => {
+					const newUrl = createFilterQuery(searchParams, option.name);
+					router.push(`${pathname}?${newUrl}`);
+				}}
+				id={option.name}
+				defaultChecked={option.isChecked}
+			/>
 
 			<label
 				htmlFor={option.name}
