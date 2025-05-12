@@ -1,16 +1,13 @@
-import FilterSidebar from './_components/filter-sidebar';
 import { type ReactNode } from 'react';
 
 export default function OffersLayout({
 	children,
-	details
+	details,
+	filters
 }: {
 	children: ReactNode;
 	details: ReactNode;
+	filters: ReactNode;
 }) {
-	return (
-		<>
-			<FilterSidebar />
-		</>
-	);
+	return <>{filters}</>;
 }
