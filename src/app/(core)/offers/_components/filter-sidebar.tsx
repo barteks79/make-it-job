@@ -1,7 +1,7 @@
 import SalaryInputsProvider from '@/store/salary-inputs';
 import { mockFilterCategories } from '@/lib/mock-data';
 
-import { Button } from '@/components/ui/button';
+import ApplySalaryButton from '@/app/(core)/offers/_components/apply-salary-button';
 import SalaryInputs from '@/app/(core)/offers/_components/salary-inputs';
 import CategoryFilter from '@/app/(core)/offers/_components/category-filter';
 import DateSelect from '@/app/(core)/offers/_components/date-select';
@@ -47,9 +47,7 @@ export default function FilterSidebar() {
 				</section>
 
 				<section className="flex items-end flex-1 px-7 py-4">
-					<Button className="w-full not-disabled:cursor-pointer">
-						Apply (23)
-					</Button>
+					<ApplySalaryButton />
 				</section>
 			</SalaryInputsProvider>
 		</aside>
