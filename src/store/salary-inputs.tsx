@@ -10,10 +10,10 @@ import {
 import { useSearchParams } from 'next/navigation';
 
 type SalaryInputsContextType = {
-	salaryMin: number | null;
-	setSalaryMin: (value: number | null) => void;
-	salaryMax: number | null;
-	setSalaryMax: (value: number | null) => void;
+	salaryMin: number | undefined;
+	setSalaryMin: (value: number | undefined) => void;
+	salaryMax: number | undefined;
+	setSalaryMax: (value: number | undefined) => void;
 };
 
 const SalaryInputsContext = createContext<
@@ -39,8 +39,8 @@ export default function SalaryInputsProvider({
 
 	function getInitialValue(param: string) {
 		const value = searchParams.get(param);
-		const parsed = value !== null ? parseInt(value, 10) : null;
-		return isNaN(parsed!) ? null : parsed;
+		const parsed = value !== null ? parseInt(value, 10) : undefined;
+		return isNaN(parsed!) ? undefined : parsed;
 	}
 
 	const [salaryMin, setSalaryMin] = useState(

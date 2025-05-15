@@ -10,14 +10,14 @@ export default function SalaryInputs() {
 	return (
 		<div className="flex flex-col items-center gap-2.5">
 			<Input
-				value={salaryMin ?? 0}
+				value={salaryMin}
 				onChange={value => setSalaryMin(+value)}
 				placeholder="$0"
 				type="number"
 			/>
 
 			<Input
-				value={salaryMax ?? 0}
+				value={salaryMax}
 				onChange={value => setSalaryMax(+value)}
 				placeholder="$50000"
 				type="number"
