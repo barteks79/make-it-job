@@ -39,8 +39,10 @@ export default function SalaryInputsProvider({
 
 	function getInitialValue(param: string) {
 		const value = searchParams.get(param);
-		const parsed = value !== null ? parseInt(value, 10) : undefined;
-		return isNaN(parsed!) ? undefined : parsed;
+		if (!value) return undefined;
+
+		const parsed = parseInt(value, 10);
+		return isNaN(parsed) ? undefined : parsed;
 	}
 
 	const [salaryMin, setSalaryMin] = useState(
