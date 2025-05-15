@@ -10,15 +10,15 @@ import ClearFiltersButton from '@/app/(core)/offers/_components/clear-filters-bu
 export default function FilterSidebar() {
 	return (
 		<aside className="flex flex-col flex-1 bg-secondary w-64 border-x">
-			<section className="flex justify-between items-center px-7 py-4 border-b">
-				<h3 className="text-foreground font-semibold tracking-tight">
-					Filters
-				</h3>
-
-				<ClearFiltersButton />
-			</section>
-
 			<SalaryInputsProvider>
+				<section className="flex justify-between items-center px-7 py-4 border-b">
+					<h3 className="text-foreground font-semibold tracking-tight">
+						Filters
+					</h3>
+
+					<ClearFiltersButton />
+				</section>
+
 				<section className="flex flex-col px-7">
 					<CategoryFilter isCustom>
 						<label className="font-medium text-sm">Post date</label>
