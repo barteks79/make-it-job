@@ -14,8 +14,8 @@ export default function SalaryInputs() {
 				placeholder="$0"
 				type="number"
 				onChange={e => {
-					const value = e.target.value;
-					setSalaryMin(+value);
+					const value = +e.target.value;
+					setSalaryMin(value <= 0 ? undefined : +value);
 				}}
 			/>
 
@@ -24,8 +24,8 @@ export default function SalaryInputs() {
 				placeholder="$50000"
 				type="number"
 				onChange={e => {
-					const value = e.target.value;
-					setSalaryMax(+value);
+					const value = +e.target.value;
+					setSalaryMax(value <= 0 ? undefined : +value);
 				}}
 			/>
 		</div>
