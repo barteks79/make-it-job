@@ -7,6 +7,8 @@ import CategoryFilter from './_components/category-filter';
 import DateSelect from './_components/date-select';
 import ClearFiltersButton from './_components/clear-filters-button';
 
+export const dynamic = 'force-dynamic';
+
 export default function SidebarView() {
 	return (
 		<aside className="flex flex-col flex-1 bg-secondary w-64 border-x">

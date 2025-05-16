@@ -10,7 +10,11 @@ import './globals.css';
 
 export const metadata = LAYOUT_METADATA.root;
 
-const flavors = Flavors({ weight: '400', variable: '--font-flavors' });
+const flavors = Flavors({
+	weight: '400',
+	variable: '--font-flavors',
+	subsets: ['latin']
+});
 
 export default function RootLayout({ children }: PropsWithChildren) {
 	return (
@@ -19,7 +23,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			className={`${GeistSans.variable} ${flavors.variable}`}
 			suppressHydrationWarning
 		>
-			<body className={`flex flex-col min-h-svh antialiased ${GeistSans.className}`}>
+			<body
+				className={`flex flex-col min-h-svh antialiased ${GeistSans.className}`}
+			>
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"
