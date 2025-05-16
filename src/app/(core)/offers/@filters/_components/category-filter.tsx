@@ -1,4 +1,4 @@
-import CategoryOption from '@/app/(core)/offers/_components/category-option';
+import CategoryOption from '@/app/(core)/offers/@filters/_components/category-option';
 import type { CategoryFilterOption } from '@/types/sidebar-filters';
 import { type ReactNode } from 'react';
 
