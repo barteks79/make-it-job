@@ -1,11 +1,11 @@
 import SalaryInputsProvider from '@/store/salary-inputs';
 import { mockFilterCategories } from '@/lib/mock-data';
 
-import ApplySalaryButton from '@/app/(core)/offers/@filters/_components/apply-salary-button';
-import SalaryInputs from '@/app/(core)/offers/@filters/_components/salary-inputs';
-import CategoryFilter from '@/app/(core)/offers/@filters/_components/category-filter';
-import DateSelect from '@/app/(core)/offers/@filters/_components/date-select';
-import ClearFiltersButton from '@/app/(core)/offers/@filters/_components/clear-filters-button';
+import ApplySalaryButton from './_components/apply-salary-button';
+import SalaryInputs from './_components/salary-inputs';
+import CategoryFilter from './_components/category-filter';
+import DateSelect from './_components/date-select';
+import ClearFiltersButton from './_components/clear-filters-button';
 
 export default function SidebarView() {
 	return (
