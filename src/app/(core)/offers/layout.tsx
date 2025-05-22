@@ -9,5 +9,15 @@ export default function OffersLayout({
 	details: ReactNode;
 	filters: ReactNode;
 }) {
-	return <>{filters}</>;
+	return (
+		<main className="flex flex-1">
+			{filters}
+			<div className="flex flex-col flex-1">
+				<div className="flex">
+					{children}
+					{details}
+				</div>
+			</div>
+		</main>
+	);
 }
