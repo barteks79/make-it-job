@@ -1,3 +1,4 @@
+import FiltersHeader from './_components/filters-header';
 import { type ReactNode } from 'react';
 
 export default function OffersLayout({
@@ -13,6 +14,7 @@ export default function OffersLayout({
 		<main className="flex flex-1">
 			{filters}
 			<div className="flex flex-col flex-1">
+				<FiltersHeader />
 				<div className="flex">
 					{children}
 					{details}
