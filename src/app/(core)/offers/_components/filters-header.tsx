@@ -1,10 +1,11 @@
+import PositionTag from './position-tag';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 export default function FiltersHeader() {
 	return (
-		<header className="flex items-center px-7 h-28 bg-secondary border-b">
-			<div className="flex flex-1 gap-4">
+		<header className="flex flex-col justify-center gap-2 px-7 py-4 bg-secondary border-b">
+			<div className="flex gap-3">
 				<Input placeholder="Search job" className="flex-1 bg-background" />
 
 				<Input
@@ -12,6 +13,20 @@ export default function FiltersHeader() {
 					className="flex-1 bg-background"
 				/>
 			</div>
+
+			<ul className="flex items-center gap-3">
+				<li>
+					<PositionTag tag="ui-designer" isActive={false}>
+						UI Designer
+					</PositionTag>
+				</li>
+
+				<li>
+					<PositionTag tag="frontend-developer" isActive={true}>
+						Frontend Developer
+					</PositionTag>
+				</li>
+			</ul>
 		</header>
 	);
 }
