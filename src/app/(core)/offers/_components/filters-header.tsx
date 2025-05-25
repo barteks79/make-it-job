@@ -5,27 +5,22 @@ import { jobTags } from '@/config/job-tags';
 
 export default function FiltersHeader() {
 	return (
-		<header className="flex flex-col justify-center gap-2 px-7 py-4 bg-secondary border-b">
+		<header className="flex flex-col gap-2 px-7 py-4 bg-secondary border-b">
 			<QuickFiltersProvider>
 				<div className="flex gap-3">
-					<Input
-						placeholder="Search job"
-						className="flex-1 bg-background"
-					/>
-
-					<Input
-						placeholder="Search location"
-						className="flex-1 bg-background"
-					/>
+					<Input placeholder="Search job" className="bg-background" />
+					<Input placeholder="Search location" className="bg-background" />
 				</div>
 
-				<ul className="flex items-center gap-3">
-					{jobTags.map(tag => (
-						<li key={tag}>
-							<PositionTag tag={tag} />
-						</li>
-					))}
-				</ul>
+				<div className="overflow-x-auto">
+					<ul className="flex w-full gap-3">
+						{jobTags.map(tag => (
+							<li key={tag}>
+								<PositionTag tag={tag} />
+							</li>
+						))}
+					</ul>
+				</div>
 			</QuickFiltersProvider>
 		</header>
 	);
