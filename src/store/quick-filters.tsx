@@ -1,4 +1,9 @@
-import { useContext, createContext, type PropsWithChildren } from 'react';
+import {
+	useState,
+	useContext,
+	createContext,
+	type PropsWithChildren
+} from 'react';
 
 type JobTags =
 	| 'UI Designer'
@@ -11,12 +16,14 @@ type JobTags =
 
 type TQuickFiltersContext = {
 	activeJobTags: JobTags[];
+	toggleJobTag: (tag: JobTags) => void;
 	search: undefined | string;
 	location: undefined | string;
 };
 
 const QuickFiltersContext = createContext<TQuickFiltersContext>({
 	activeJobTags: [],
+	toggleJobTag: () => {},
 	search: undefined,
 	location: undefined
 });
@@ -36,10 +43,23 @@ export function useQuickFilters() {
 export default function QuickFiltersProvider({
 	children
 }: PropsWithChildren) {
+	const [activeJobTags, setActiveJobTags] = useState<JobTags[]>([]);
+
+	function toggleJobTag(tag: JobTags) {
+		setActiveJobTags(prev => {
+			if (prev.includes(tag)) {
+				return prev.filter(t => t !== tag);
+			} else {
+				return [...prev, tag];
+			}
+		});
+	}
+
 	return (
 		<QuickFiltersContext.Provider
 			value={{
-				activeJobTags: [],
+				activeJobTags,
+				toggleJobTag,
 				search: undefined,
 				location: undefined
 			}}
