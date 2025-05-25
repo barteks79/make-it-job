@@ -1,6 +1,7 @@
 import QuickFiltersProvider from '@/store/quick-filters';
 import PositionTag from './position-tag';
 import { Input } from '@/components/ui/input';
+import { jobTags } from '@/config/job-tags';
 
 export default function FiltersHeader() {
 	return (
@@ -19,13 +20,11 @@ export default function FiltersHeader() {
 				</div>
 
 				<ul className="flex items-center gap-3">
-					<li>
-						<PositionTag tag="UI Designer" />
-					</li>
-
-					<li>
-						<PositionTag tag="Frontend Developer" />
-					</li>
+					{jobTags.map(tag => (
+						<li key={tag}>
+							<PositionTag tag={tag} />
+						</li>
+					))}
 				</ul>
 			</QuickFiltersProvider>
 		</header>
