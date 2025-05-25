@@ -7,7 +7,7 @@ import {
 	type PropsWithChildren
 } from 'react';
 
-type JobTag =
+export type JobTag =
 	| 'UI Designer'
 	| 'Frontend Developer'
 	| 'DevOps Engineer'
