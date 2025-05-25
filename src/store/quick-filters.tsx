@@ -5,7 +5,7 @@ import {
 	type PropsWithChildren
 } from 'react';
 
-type JobTags =
+type JobTag =
 	| 'UI Designer'
 	| 'Frontend Developer'
 	| 'DevOps Engineer'
@@ -15,8 +15,8 @@ type JobTags =
 	| 'Cloud Engineer';
 
 type TQuickFiltersContext = {
-	activeJobTags: JobTags[];
-	toggleJobTag: (tag: JobTags) => void;
+	activeJobTags: JobTag[];
+	toggleJobTag: (tag: JobTag) => void;
 	search: undefined | string;
 	location: undefined | string;
 };
@@ -43,9 +43,9 @@ export function useQuickFilters() {
 export default function QuickFiltersProvider({
 	children
 }: PropsWithChildren) {
-	const [activeJobTags, setActiveJobTags] = useState<JobTags[]>([]);
+	const [activeJobTags, setActiveJobTags] = useState<JobTag[]>([]);
 
-	function toggleJobTag(tag: JobTags) {
+	function toggleJobTag(tag: JobTag) {
 		setActiveJobTags(prev => {
 			if (prev.includes(tag)) {
 				return prev.filter(t => t !== tag);
