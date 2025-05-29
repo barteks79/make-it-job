@@ -12,7 +12,7 @@ export default function FiltersHeader() {
 					<Input placeholder="Search location" className="bg-background" />
 				</div>
 
-				<div className="overflow-x-auto">
+				<div className="overflow-x-auto horizontal-scrollbar">
 					<ul className="flex w-full gap-3">
 						{jobTags.map(tag => (
 							<li key={tag}>
