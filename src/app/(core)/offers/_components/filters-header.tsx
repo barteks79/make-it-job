@@ -9,8 +9,8 @@ export default function FiltersHeader() {
 		<header className="flex flex-col gap-2 px-7 py-4 bg-secondary border-b">
 			<QuickFiltersProvider>
 				<div className="flex gap-3">
-					<FilterInput placeholder="Search job" />
-					<FilterInput placeholder="Search location" />
+					<FilterInput variant="search" placeholder="Search job" />
+					<FilterInput variant="location" placeholder="Search location" />
 				</div>
 
 				<div className="overflow-x-auto horizontal-scrollbar">

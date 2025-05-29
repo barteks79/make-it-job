@@ -20,8 +20,8 @@ export default function FilterInput({
 		if (isFocused) inputRef?.current?.focus();
 	}, [isFocused]);
 
-	const value = variant === 'search' ? search : location;
-	const isClearButtonEnabled = value !== '';
+	const isClearButtonEnabled =
+		variant === 'search' ? !!search : !!location;
 
 	return (
 		<div
