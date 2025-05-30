@@ -1,7 +1,7 @@
 import { type PropsWithChildren } from 'react';
 import { Button } from '@/components/ui/button';
 import { BookmarkIcon, DollarSignIcon, MonitorIcon } from 'lucide-react';
-import { Badge }
+import { Badge } from '@/components/ui/badge';
 
 import {
 	Avatar,
@@ -17,7 +17,8 @@ import {
 	CardAction,
 	CardTitle,
 	CardDescription,
-	CardHeader
+	CardHeader,
+	CardFooter
 } from '@/components/ui/card';
 
 export default function JobPostCard() {
@@ -27,13 +28,15 @@ export default function JobPostCard() {
 				<div className="flex justify-between items-center w-full">
 					<p className="text-sm text-muted-foreground">3 days ago</p>
 
-					<Button
-						variant="outline"
-						size="icon"
-						className="size-7 text-muted-foreground"
-					>
-						<BookmarkIcon />
-					</Button>
+					<CardAction>
+						<Button
+							variant="outline"
+							size="icon"
+							className="size-7 text-muted-foreground"
+						>
+							<BookmarkIcon />
+						</Button>
+					</CardAction>
 				</div>
 
 				<figure className="flex items-center gap-3 border-b w-full pb-4">
@@ -71,7 +74,39 @@ export default function JobPostCard() {
 					Build stunning, interactive interfaces that redefine the
 					streaming experience for millions.
 				</p>
+
+				<ul className="flex gap-2 flex-wrap">
+					<JobPostTag>WebDevelopment</JobPostTag>
+					<JobPostTag>ResponsiveDesign</JobPostTag>
+					<JobPostTag>React</JobPostTag>
+					<JobPostTag>Typescript</JobPostTag>
+					<JobPostTag>Remote</JobPostTag>
+				</ul>
 			</CardContent>
+
+			<CardFooter className="flex gap-2">
+				<Button
+					variant="outline"
+					className="flex-1 text-primary border-primary"
+				>
+					Details
+				</Button>
+
+				<Button className="flex-1">Apply</Button>
+			</CardFooter>
 		</Card>
+	);
+}
+
+function JobPostTag({ children }: PropsWithChildren) {
+	return (
+		<li>
+			<Badge
+				variant="outline"
+				className="text-secondary-foreground font-normal"
+			>
+				{children}
+			</Badge>
+		</li>
 	);
 }
