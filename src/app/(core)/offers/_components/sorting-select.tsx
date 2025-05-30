@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import useOptimisticFilter from '@/hooks/use-optimistic-filter';
 
 import {
 	Select,
@@ -10,17 +10,21 @@ import {
 	SelectTrigger
 } from '@/components/ui/select';
 
+type SortOptions = 'latest' | 'relevance' | 'high-low' | 'low-high';
+
 export default function SortingSelect() {
-	const [value, setValue] = useState('relevance');
+	const [optimisticValue, setOptimisticValue] =
+		useOptimisticFilter<SortOptions>('sort', 'relevance');
 
 	return (
-		<Select value={value} onValueChange={setValue}>
+		<Select value={optimisticValue} onValueChange={setOptimisticValue}>
 			<SelectTrigger>
 				<SelectValue>
 					<p className="text-sm text-muted-foreground">
 						Sort by:
 						<span className="ml-2 text-foreground font-medium">
-							{value.at(0)?.toUpperCase() + value.slice(1)}
+							{optimisticValue.at(0)?.toUpperCase() +
+								optimisticValue.slice(1)}
 						</span>
 					</p>
 				</SelectValue>
