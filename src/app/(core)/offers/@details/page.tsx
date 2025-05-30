@@ -1,3 +1,3 @@
 export default function DetailsView() {
-	return;
+	return <div className="border-l xl:w-96"></div>;
 }
