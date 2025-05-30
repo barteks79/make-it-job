@@ -1,3 +1,5 @@
+import SortingSelect from './_components/sorting-select';
+
 export default function JobPosts() {
 	return (
 		<section className="flex flex-col flex-1 px-7 py-4">
@@ -7,7 +9,7 @@ export default function JobPosts() {
 					jobs in total
 				</p>
 
-				<p>Sorting</p>
+				<SortingSelect />
 			</div>
 		</section>
 	);
