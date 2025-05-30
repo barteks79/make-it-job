@@ -13,9 +13,9 @@ export default function OffersLayout({
 	return (
 		<main className="flex flex-1">
 			{filters}
-			<div className="flex-1 overflow-hidden">
+			<div className="flex flex-col flex-1 overflow-hidden">
 				<FiltersHeader />
-				<div className="flex">
+				<div className="flex flex-1">
 					{children}
 					{details}
 				</div>
