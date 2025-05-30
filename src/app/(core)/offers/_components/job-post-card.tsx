@@ -1,15 +1,18 @@
-import { type PropsWithChildren } from 'react';
 import { Button } from '@/components/ui/button';
-import { BookmarkIcon, DollarSignIcon, MonitorIcon } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+
+import {
+	BookmarkIcon,
+	DollarSignIcon,
+	MonitorIcon,
+	UserIcon
+} from 'lucide-react';
 
 import {
 	Avatar,
 	AvatarImage,
 	AvatarFallback
 } from '@/components/ui/avatar';
-
-import { UserIcon } from 'lucide-react';
 
 import {
 	Card,
@@ -84,21 +87,15 @@ export default function JobPostCard() {
 				</ul>
 			</CardContent>
 
-			<CardFooter className="flex gap-2">
-				<Button
-					variant="outline"
-					className="flex-1 text-primary border-primary"
-				>
-					Details
-				</Button>
-
-				<Button className="flex-1">Apply</Button>
+			<CardFooter className="grid grid-cols-2 gap-2">
+				<Button variant="outline">Details</Button>
+				<Button>Apply</Button>
 			</CardFooter>
 		</Card>
 	);
 }
 
-function JobPostTag({ children }: PropsWithChildren) {
+function JobPostTag({ children }: React.PropsWithChildren) {
 	return (
 		<li>
 			<Badge
