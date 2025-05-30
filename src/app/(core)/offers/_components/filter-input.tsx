@@ -37,7 +37,7 @@ export default function FilterInput({
 		<div
 			onClick={() => setIsFocused(true)}
 			className={cn(
-				'flex-1 flex items-center gap-2 px-3 py-1 bg-background border border-input rounded-md cursor-pointer',
+				'flex-1 flex items-center gap-2 px-3 py-1 bg-background border border-input rounded-md cursor-pointer min-w-0',
 				{ 'border-input': isFocused }
 			)}
 		>
@@ -49,7 +49,7 @@ export default function FilterInput({
 				placeholder={placeholder}
 				onBlur={() => setIsFocused(false)}
 				onChange={handleValueChange}
-				className="flex-1 h-6.5 text-foreground text-sm outline-none border-input placeholder:text-muted-foreground pointer-events-none"
+				className="flex-1 h-6.5 text-foreground text-sm outline-none border-input placeholder:text-muted-foreground pointer-events-none min-w-0"
 			/>
 
 			<button

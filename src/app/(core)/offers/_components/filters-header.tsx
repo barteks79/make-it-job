@@ -8,7 +8,7 @@ export default function FiltersHeader() {
 	return (
 		<header className="flex flex-col gap-2 px-7 py-4 bg-secondary border-b">
 			<QuickFiltersProvider>
-				<div className="flex flex-col lg:flex-row gap-3">
+				<div className="flex flex-col md:flex-row gap-2 md:gap-3">
 					<FilterInput variant="search" placeholder="Search job" />
 					<FilterInput variant="location" placeholder="Search location" />
 				</div>
