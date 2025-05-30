@@ -24,7 +24,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 			suppressHydrationWarning
 		>
 			<body
-				className={`flex flex-col min-h-svh antialiased ${GeistSans.className}`}
+				className={`flex flex-col min-h-svh antialiased overflow-hidden ${GeistSans.className}`}
 			>
 				<ThemeProvider
 					attribute="class"

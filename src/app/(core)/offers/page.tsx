@@ -13,10 +13,20 @@ export default function JobPosts() {
 				<SortingSelect />
 			</div>
 
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-				<JobPostCard />
-				<JobPostCard />
-				<JobPostCard />
+			<div className="overflow-y-auto">
+				<ul className="grid grid-cols-1 md:grid-cols-2 gap-5 h-full">
+					<li>
+						<JobPostCard />
+					</li>
+
+					<li>
+						<JobPostCard />
+					</li>
+
+					<li>
+						<JobPostCard />
+					</li>
+				</ul>
 			</div>
 		</section>
 	);

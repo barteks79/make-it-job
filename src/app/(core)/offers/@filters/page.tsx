@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 
 export default function SidebarView() {
 	return (
-		<aside className="flex flex-col min-h-full bg-secondary w-64 border-x">
+		<aside className="flex flex-col bg-secondary w-64 border-x">
 			<SalaryInputsProvider>
 				<section className="flex justify-between items-center px-7 py-4 border-b">
 					<h3 className="text-foreground font-semibold tracking-tight">
@@ -46,9 +46,7 @@ export default function SidebarView() {
 							In thousands of US dollars.
 						</p>
 					</CategoryFilter>
-				</section>
 
-				<section className="flex items-end flex-1 px-7 py-4">
 					<ApplySalaryButton />
 				</section>
 			</SalaryInputsProvider>
