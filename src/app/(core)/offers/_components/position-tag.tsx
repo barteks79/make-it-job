@@ -13,7 +13,7 @@ export default function PositionTag({ tag }: { tag: JobTag }) {
 			variant="outline"
 			onClick={() => toggleJobTag(tag)}
 			className={cn(
-				'text-sm text-muted-foreground/70 font-normal h-7 hover:bg-background hover:text-muted-foreground/70 cursor-pointer',
+				'text-xs md:text-sm text-muted-foreground/70 font-normal h-6 md:h-7 hover:bg-background hover:text-muted-foreground/70 cursor-pointer',
 				{
 					'text-primary border-primary font-medium hover:text-primary':
 						isActive
