@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type ChangeEvent } from 'react';
 import { useQuickFilters } from '@/store/quick-filters';
 import { SearchIcon, TrashIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -12,7 +12,7 @@ export default function FilterInput({
 	variant: 'search' | 'location';
 	placeholder: string;
 }) {
-	const { search, location } = useQuickFilters();
+	const { search, location, setSearch, setLocation } = useQuickFilters();
 	const [isFocused, setIsFocused] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -22,6 +22,16 @@ export default function FilterInput({
 
 	const isClearButtonEnabled =
 		variant === 'search' ? !!search : !!location;
+
+	function handleValueChange(e: ChangeEvent<HTMLInputElement>) {
+		const newValue = e.target.value;
+
+		if (variant === 'search') {
+			setSearch(newValue === '' ? undefined : newValue);
+		} else {
+			setLocation(newValue === '' ? undefined : newValue);
+		}
+	}
 
 	return (
 		<div
@@ -35,13 +45,22 @@ export default function FilterInput({
 
 			<input
 				ref={inputRef}
+				value={variant === 'search' ? search ?? '' : location ?? ''}
 				placeholder={placeholder}
 				onBlur={() => setIsFocused(false)}
+				onChange={handleValueChange}
 				className="flex-1 h-6.5 text-foreground text-sm outline-none border-input placeholder:text-muted-foreground pointer-events-none"
 			/>
 
 			<button
 				disabled={!isClearButtonEnabled}
+				onClick={() => {
+					if (variant === 'search') {
+						setSearch(undefined);
+					} else {
+						setLocation(undefined);
+					}
+				}}
 				className="not-disabled:cursor-pointer h-full"
 			>
 				<TrashIcon className="text-muted-foreground h-4" />
