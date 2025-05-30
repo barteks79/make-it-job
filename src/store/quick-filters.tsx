@@ -20,14 +20,18 @@ type TQuickFiltersContext = {
 	activeJobTags: JobTag[];
 	toggleJobTag: (tag: JobTag) => void;
 	search: undefined | string;
+	setSearch: (newSearch: string | undefined) => void;
 	location: undefined | string;
+	setLocation: (newSearch: string | undefined) => void;
 };
 
 const QuickFiltersContext = createContext<TQuickFiltersContext>({
 	activeJobTags: [],
 	toggleJobTag: () => {},
 	search: undefined,
-	location: undefined
+	setSearch: () => {},
+	location: undefined,
+	setLocation: () => {}
 });
 
 export function useQuickFilters() {
@@ -46,6 +50,8 @@ export default function QuickFiltersProvider({
 	children
 }: PropsWithChildren) {
 	const [activeJobTags, setActiveJobTags] = useState<JobTag[]>([]);
+	const [search, setSearch] = useState<string | undefined>(undefined);
+	const [location, setLocation] = useState<string | undefined>(undefined);
 
 	function toggleJobTag(tag: JobTag) {
 		setActiveJobTags(prev => {
@@ -62,8 +68,10 @@ export default function QuickFiltersProvider({
 			value={{
 				activeJobTags,
 				toggleJobTag,
-				search: undefined,
-				location: undefined
+				search,
+				setSearch,
+				location,
+				setLocation
 			}}
 		>
 			{children}
