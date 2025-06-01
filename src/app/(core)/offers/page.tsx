@@ -13,7 +13,7 @@ export default function JobPosts() {
 				<SortingSelect />
 			</div>
 
-			<div className="overflow-y-auto max-h-[calc(100vh-295px)] md:max-h-[calc(100vh-260px)] pr-2 custom-scrollbar">
+			<div className="overflow-y-auto max-h-[calc(100vh-295px)] md:max-h-[calc(100vh-260px)] pr-2 scrollbar-gutter-stable horizontal-scrollbar">
 				<ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
 					<li>
 						<JobPostCard />

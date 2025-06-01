@@ -13,7 +13,7 @@ export default function FiltersHeader() {
 					<FilterInput variant="location" placeholder="Search location" />
 				</div>
 
-				<div className="overflow-x-auto horizontal-scrollbar">
+				<div className="overflow-x-auto pb-2 scrollbar-gutter-stable horizontal-scrollbar">
 					<ul className="flex w-full gap-3">
 						{jobTags.map(tag => (
 							<li key={tag}>
