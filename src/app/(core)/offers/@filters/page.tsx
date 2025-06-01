@@ -1,5 +1,5 @@
 import SalaryInputsProvider from '@/store/salary-inputs';
-import { mockFilterCategories } from '@/lib/mock-data';
+import { MOCK_FILTER_CATEGORIES } from '@/data/mock/filter-categories';
 
 import ApplySalaryButton from './_components/apply-salary-button';
 import SalaryInputs from './_components/salary-inputs';
@@ -27,15 +27,15 @@ export default function SidebarView() {
 						<DateSelect />
 					</CategoryFilter>
 
-					<CategoryFilter options={mockFilterCategories['jobType']}>
+					<CategoryFilter options={MOCK_FILTER_CATEGORIES['jobType']}>
 						Job Type
 					</CategoryFilter>
 
-					<CategoryFilter options={mockFilterCategories['workType']}>
+					<CategoryFilter options={MOCK_FILTER_CATEGORIES['workType']}>
 						Work Type
 					</CategoryFilter>
 
-					<CategoryFilter options={mockFilterCategories['experience']}>
+					<CategoryFilter options={MOCK_FILTER_CATEGORIES['experience']}>
 						Experience
 					</CategoryFilter>
 
