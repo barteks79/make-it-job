@@ -4,6 +4,7 @@ type JobType = 'Full time' | 'Part-time' | 'Freelance' | 'Internship';
 export type JobPost = {
 	date: Date;
 	isBookmarked: boolean;
+   image: string;
 	title: string;
 	company: string;
 	experience: Exprience;
