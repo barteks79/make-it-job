@@ -24,12 +24,27 @@ import {
 	CardFooter
 } from '@/components/ui/card';
 
-export default function JobPostCard() {
+import { type JobPost } from '@/types/job-post';
+
+export default function JobPostCard({
+	date,
+	company,
+	description,
+	tags,
+	title,
+	type,
+	experience,
+	image,
+	// isBookmarked,
+	salary
+}: JobPost) {
 	return (
 		<Card className="py-4 gap-4">
 			<CardHeader className="flex flex-col gap-2">
 				<div className="flex justify-between items-center w-full">
-					<p className="text-sm text-muted-foreground">3 days ago</p>
+					<p className="text-sm text-muted-foreground">
+						{date.toString()}
+					</p>
 
 					<CardAction>
 						<Button
@@ -44,13 +59,13 @@ export default function JobPostCard() {
 
 				<figure className="flex items-center gap-3 border-b w-full pb-4">
 					<Avatar className="size-9 rounded-md">
-						<AvatarImage src="/netflix-logo.jpg" alt="Netflix logo" />
-						<AvatarFallback>Netflix Logo</AvatarFallback>
+						<AvatarImage src={image} alt={`${company} Logo`} />
+						<AvatarFallback>{company} Logo</AvatarFallback>
 					</Avatar>
 
 					<figcaption className="flex flex-col justify-between">
-						<CardTitle>Frontend Developer</CardTitle>
-						<CardDescription>Netflix</CardDescription>
+						<CardTitle>{title}</CardTitle>
+						<CardDescription>{company}</CardDescription>
 					</figcaption>
 				</figure>
 			</CardHeader>
@@ -59,31 +74,28 @@ export default function JobPostCard() {
 				<ul className="flex justify-between items-center">
 					<li className="flex items-center gap-2">
 						<UserIcon className="size-4 text-secondary-foreground" />
-						<p className="text-sm">Senior</p>
+						<p className="text-sm">{experience}</p>
 					</li>
 
 					<li className="flex items-center gap-1">
 						<DollarSignIcon className="size-4 text-secondary-foreground" />
-						<p className="text-sm">120.000</p>
+						<p className="text-sm">{salary}</p>
 					</li>
 
 					<li className="flex items-center gap-1">
 						<MonitorIcon className="size-4 text-secondary-foreground" />
-						<p className="text-sm">Full time</p>
+						<p className="text-sm">{type}</p>
 					</li>
 				</ul>
 
 				<p className="text-muted-foreground text-sm border-b pb-4">
-					Build stunning, interactive interfaces that redefine the
-					streaming experience for millions.
+					{description}
 				</p>
 
 				<ul className="flex gap-2 flex-wrap">
-					<JobPostTag>WebDevelopment</JobPostTag>
-					<JobPostTag>ResponsiveDesign</JobPostTag>
-					<JobPostTag>React</JobPostTag>
-					<JobPostTag>Typescript</JobPostTag>
-					<JobPostTag>Remote</JobPostTag>
+					{tags.map((tag, idx) => (
+						<JobPostTag key={idx}>{tag}</JobPostTag>
+					))}
 				</ul>
 			</CardContent>
 

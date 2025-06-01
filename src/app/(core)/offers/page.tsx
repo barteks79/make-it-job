@@ -18,7 +18,7 @@ export default function JobPosts() {
 				<ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
 					{MOCK_JOB_POSTS.map((post, idx) => (
 						<li key={idx}>
-							<JobPostCard />
+							<JobPostCard {...post} />
 						</li>
 					))}
 				</ul>
