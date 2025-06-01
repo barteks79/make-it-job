@@ -1,3 +1,4 @@
+import { MOCK_JOB_POSTS } from '@/data/mock/job-posts';
 import SortingSelect from './_components/sorting-select';
 import JobPostCard from './_components/job-post-card';
 
@@ -15,25 +16,11 @@ export default function JobPosts() {
 
 			<div className="overflow-y-auto max-h-[calc(100vh-295px)] md:max-h-[calc(100vh-260px)] pr-2 scrollbar-gutter-stable horizontal-scrollbar">
 				<ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
-					<li>
-						<JobPostCard />
-					</li>
-
-					<li>
-						<JobPostCard />
-					</li>
-
-					<li>
-						<JobPostCard />
-					</li>
-
-					<li>
-						<JobPostCard />
-					</li>
-
-					<li>
-						<JobPostCard />
-					</li>
+					{MOCK_JOB_POSTS.map((post, idx) => (
+						<li key={idx}>
+							<JobPostCard />
+						</li>
+					))}
 				</ul>
 			</div>
 		</section>
