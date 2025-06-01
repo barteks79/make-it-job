@@ -23,7 +23,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
 	{
 		date: new Date('2025-05-25'),
 		isBookmarked: false,
-		image: '/images/meta.jpg',
+		image: '/images/meta.png',
 		title: 'Cloud Engineer',
 		company: 'Meta',
 		experience: 'Senior',
@@ -36,7 +36,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
 	{
 		date: new Date('2025-05-28'),
 		isBookmarked: false,
-		image: '/images/uber.jpg',
+		image: '/images/uber.png',
 		title: 'UI Designer',
 		company: 'Uber',
 		experience: 'Mid',
@@ -49,7 +49,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
 	{
 		date: new Date('2025-05-20'),
 		isBookmarked: false,
-		image: '/images/google.jpg',
+		image: '/images/google.png',
 		title: 'Software Enginner',
 		company: 'Google',
 		experience: 'Junior',
@@ -68,7 +68,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
 	{
 		date: new Date('2025-05-31'),
 		isBookmarked: false,
-		image: '/images/amazon.jpg',
+		image: '/images/amazon.png',
 		title: 'Frontend Developer',
 		company: 'Amazon',
 		experience: 'Junior',
