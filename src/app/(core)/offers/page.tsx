@@ -15,7 +15,7 @@ export default function JobPosts() {
 			</div>
 
 			<div className="overflow-y-auto max-h-[calc(100vh-295px)] md:max-h-[calc(100vh-260px)] pr-2 scrollbar-gutter-stable horizontal-scrollbar">
-				<ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
+				<ul className="grid grid-cols-1 md:grid-cols-2 gap-5 items-stretch">
 					{MOCK_JOB_POSTS.map((post, idx) => (
 						<li key={idx}>
 							<JobPostCard {...post} />

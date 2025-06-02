@@ -40,7 +40,7 @@ export default function JobPostCard({
 	salary
 }: JobPost) {
 	return (
-		<Card className="py-4 gap-4">
+		<Card className="py-4 gap-4 h-full relative">
 			<CardHeader className="flex flex-col gap-2">
 				<div className="flex justify-between items-center w-full">
 					<p className="text-sm text-muted-foreground">
@@ -71,7 +71,7 @@ export default function JobPostCard({
 				</figure>
 			</CardHeader>
 
-			<CardContent className="flex flex-col gap-4">
+			<CardContent className="flex flex-col gap-4 flex-1">
 				<ul className="flex justify-between items-center">
 					<li className="flex items-center gap-2">
 						<UserIcon className="size-4 text-secondary-foreground" />
