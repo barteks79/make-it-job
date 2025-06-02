@@ -1,3 +1,4 @@
+import { createRelativeDate } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -43,7 +44,7 @@ export default function JobPostCard({
 			<CardHeader className="flex flex-col gap-2">
 				<div className="flex justify-between items-center w-full">
 					<p className="text-sm text-muted-foreground">
-						{date.toString()}
+						{createRelativeDate(date)}
 					</p>
 
 					<CardAction>
