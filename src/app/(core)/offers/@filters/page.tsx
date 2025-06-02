@@ -11,7 +11,7 @@ export const dynamic = 'force-dynamic';
 
 export default function SidebarView() {
 	return (
-		<div className="overflow-y-scroll bg-secondary h-[calc(100svh-56px)] border-r horizontal-scrollbar">
+		<div className="hidden lg:block overflow-y-scroll bg-secondary h-[calc(100svh-56px)] border-r horizontal-scrollbar">
 			<aside className="flex flex-col w-64 h-full">
 				<SalaryInputsProvider>
 					<section className="flex justify-between items-center px-7 py-4 border-b">

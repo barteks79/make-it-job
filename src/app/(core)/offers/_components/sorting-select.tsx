@@ -18,7 +18,7 @@ export default function SortingSelect() {
 
 	return (
 		<Select value={optimisticValue} onValueChange={setOptimisticValue}>
-			<SelectTrigger>
+			<SelectTrigger className="h-7 md:h-8">
 				<SelectValue>
 					<p className="text-sm text-muted-foreground">
 						Sort by:
