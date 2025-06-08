@@ -1,4 +1,7 @@
-import { createRelativeDate } from '@/lib/utils';
+'use client';
+
+import useOptimisticFilter from '@/hooks/use-optimistic-filter';
+import { createRelativeDate, cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import JobTagBadge from './job-tag-badge';
 
@@ -39,8 +42,18 @@ export default function JobPostCard({
 	// isBookmarked,
 	salary
 }: JobPost) {
+	const [optimisticJobDetails, setOptimisticJobDetails] =
+		useOptimisticFilter<string>('slug', '');
+
+	const isActive = optimisticJobDetails === title;
+
 	return (
-		<Card className="py-4 gap-4 h-full relative">
+		<Card
+			onClick={() => setOptimisticJobDetails(title)}
+			className={cn('py-4 gap-4 h-full relative', {
+				'border-primary/25 bg-primary/3': isActive
+			})}
+		>
 			<CardHeader className="flex flex-col gap-2">
 				<div className="flex justify-between items-center w-full">
 					<p className="text-sm text-muted-foreground">
