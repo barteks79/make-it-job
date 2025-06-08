@@ -31,6 +31,7 @@ import {
 import { type JobPost } from '@/types/job-post';
 
 export default function JobPostCard({
+	id,
 	date,
 	company,
 	description,
@@ -43,13 +44,13 @@ export default function JobPostCard({
 	salary
 }: JobPost) {
 	const [optimisticJobDetails, setOptimisticJobDetails] =
-		useOptimisticFilter<string>('slug', '');
+		useOptimisticFilter<string>('job', '');
 
-	const isActive = optimisticJobDetails === title;
+	const isActive = optimisticJobDetails === id;
 
 	return (
 		<Card
-			onClick={() => setOptimisticJobDetails(title)}
+			onClick={() => setOptimisticJobDetails(id)}
 			className={cn('py-4 gap-4 h-full relative', {
 				'border-primary/25 bg-primary/3': isActive
 			})}

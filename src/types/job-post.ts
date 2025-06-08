@@ -2,9 +2,10 @@ type Exprience = 'Junior' | 'Mid' | 'Senior';
 type JobType = 'Full time' | 'Part-time' | 'Freelance' | 'Internship';
 
 export type JobPost = {
+	id: string;
 	date: Date;
 	isBookmarked: boolean;
-   image: string;
+	image: string;
 	title: string;
 	company: string;
 	experience: Exprience;

@@ -1,7 +1,9 @@
+import { v4 as uuid } from 'uuid';
 import { type JobPost } from '@/types/job-post';
 
 export const MOCK_JOB_POSTS: JobPost[] = [
 	{
+		id: uuid(),
 		date: new Date('2025-05-30'),
 		isBookmarked: false,
 		image: '/images/netflix.jpg',
@@ -21,6 +23,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
 		]
 	},
 	{
+		id: uuid(),
 		date: new Date('2025-05-25'),
 		isBookmarked: false,
 		image: '/images/meta.png',
@@ -34,6 +37,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
 		tags: ['CloudComputing', 'AWS', 'DevOps', 'Kubernetes', 'Hybrid']
 	},
 	{
+		id: uuid(),
 		date: new Date('2025-05-28'),
 		isBookmarked: false,
 		image: '/images/uber.png',
@@ -47,6 +51,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
 		tags: ['UIDesign', 'DesignSystems', 'Figma', 'Prototyping', 'Hybrid']
 	},
 	{
+		id: uuid(),
 		date: new Date('2025-05-20'),
 		isBookmarked: false,
 		image: '/images/google.png',
@@ -66,6 +71,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
 		]
 	},
 	{
+		id: uuid(),
 		date: new Date('2025-05-31'),
 		isBookmarked: false,
 		image: '/images/amazon.png',
