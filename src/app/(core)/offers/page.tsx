@@ -1,6 +1,6 @@
 import { MOCK_JOB_POSTS } from '@/data/mock/job-posts';
 import SortingSelect from './_components/sorting-select';
-import JobPostCard from './_components/job-post-card';
+import JobPostCard from './_components/job-card/job-card';
 
 export default function JobPosts() {
 	return (

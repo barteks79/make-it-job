@@ -1,6 +1,6 @@
 import { createRelativeDate } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+import JobTagBadge from './job-tag-badge';
 
 import {
 	BookmarkIcon,
@@ -95,7 +95,7 @@ export default function JobPostCard({
 
 				<ul className="flex gap-2 flex-wrap">
 					{tags.map((tag, idx) => (
-						<JobPostTag key={idx}>{tag}</JobPostTag>
+						<JobTagBadge key={idx}>{tag}</JobTagBadge>
 					))}
 				</ul>
 			</CardContent>
@@ -105,18 +105,5 @@ export default function JobPostCard({
 				<Button>Apply</Button>
 			</CardFooter>
 		</Card>
-	);
-}
-
-function JobPostTag({ children }: React.PropsWithChildren) {
-	return (
-		<li>
-			<Badge
-				variant="outline"
-				className="text-secondary-foreground font-normal"
-			>
-				{children}
-			</Badge>
-		</li>
 	);
 }
