@@ -37,20 +37,20 @@ export default function NavProfileDropdown() {
 			<DropdownMenuContent className="min-w-60" align="end" sideOffset={6}>
 				<DropdownMenuLabel className="p-0 font-normal">
 					<div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-						<Avatar className="w-10 h-10 rounded-lg">
+						<Avatar className="size-10 rounded-lg">
 							<AvatarImage
 								className="object-cover object-center"
-								src="/mock-profile-picture.jpg"
+								src="/images/user-default1.jpg"
 							/>
 							<AvatarFallback className="rounded-lg">
 								Profile picture
 							</AvatarFallback>
 						</Avatar>
 
-						<div className="grid flex-1 text-left text-sm leading-tight">
-							<span className="truncate font-semibold">Noah Williams</span>
-							<span className="truncate text-xs">
-								noah.williams@gmail.com
+						<div className="grid flex-1 text-sm">
+							<span className="truncate font-semibold">Username</span>
+							<span className="truncate text-foreground/80">
+								user@example.com
 							</span>
 						</div>
 					</div>
