@@ -11,31 +11,31 @@ import './globals.css';
 export const metadata = LAYOUT_METADATA.root;
 
 const flavors = Flavors({
-	weight: '400',
-	variable: '--font-flavors',
-	subsets: ['latin']
+  weight: '400',
+  variable: '--font-flavors',
+  subsets: ['latin']
 });
 
 export default function RootLayout({ children }: PropsWithChildren) {
-	return (
-		<html
-			lang="en"
-			className={`${GeistSans.variable} ${flavors.variable}`}
-			suppressHydrationWarning
-		>
-			<body
-				className={`flex flex-col min-h-svh antialiased overflow-hidden ${GeistSans.className}`}
-			>
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					enableSystem
-					disableTransitionOnChange
-				>
-					<Navigation />
-					{children}
-				</ThemeProvider>
-			</body>
-		</html>
-	);
+  return (
+    <html
+      lang="en"
+      className={`${GeistSans.variable} ${flavors.variable}`}
+      suppressHydrationWarning
+    >
+      <body
+        className={`flex flex-col min-h-svh antialiased overflow-hidden ${GeistSans.className}`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navigation />
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
 }

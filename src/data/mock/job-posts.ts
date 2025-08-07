@@ -1,9 +1,8 @@
-import { v4 as uuid } from 'uuid';
 import { type JobPost } from '@/types/job-post';
 
 export const MOCK_JOB_POSTS: JobPost[] = [
   {
-    id: uuid(),
+    id: 'a3f1b2c4-8d9e-4f7a-9b2e-1c4d5e6f7a8b',
     date: new Date('2025-05-30'),
     isBookmarked: false,
     image: '/images/netflix.jpg',
@@ -17,7 +16,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
     tags: ['WebDevelopment', 'ResponsiveDesign', 'React', 'Typescript', 'Remote']
   },
   {
-    id: uuid(),
+    id: 'b7e2c3d4-5f6a-4b8c-9d0e-2f3a4b5c6d7e',
     date: new Date('2025-05-25'),
     isBookmarked: false,
     image: '/images/meta.png',
@@ -31,7 +30,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
     tags: ['CloudComputing', 'AWS', 'DevOps', 'Kubernetes', 'Hybrid']
   },
   {
-    id: uuid(),
+    id: 'c8d9e0f1-2a3b-4c5d-8e9f-0a1b2c3d4e5f',
     date: new Date('2025-05-28'),
     isBookmarked: false,
     image: '/images/uber.png',
@@ -45,7 +44,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
     tags: ['UIDesign', 'DesignSystems', 'Figma', 'Prototyping', 'Hybrid']
   },
   {
-    id: uuid(),
+    id: 'd1e2f3a4-b5c6-4d7e-8f9a-0b1c2d3e4f5a',
     date: new Date('2025-05-20'),
     isBookmarked: false,
     image: '/images/google.png',
@@ -59,7 +58,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
     tags: ['SoftwareEngineering', 'Python', 'Java', 'DistributedSystems', 'Hybrid']
   },
   {
-    id: uuid(),
+    id: 'e2f3a4b5-c6d7-4e8f-9a0b-1c2d3e4f5a6b',
     date: new Date('2025-05-31'),
     isBookmarked: false,
     image: '/images/amazon.png',
