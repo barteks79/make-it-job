@@ -1,5 +1,5 @@
 export interface CategoryFilterOption {
-	isChecked: boolean;
-	name: string;
-	quantity: number;
+  isChecked: boolean;
+  name: string;
+  quantity: number;
 }

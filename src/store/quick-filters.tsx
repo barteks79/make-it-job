@@ -12,7 +12,7 @@ export type JobTag =
 	| 'Frontend Developer'
 	| 'DevOps Engineer'
 	| 'Data Scientist'
-	| 'Software Enginner'
+	| 'Software Engineer'
 	| 'Backend Developer'
 	| 'Cloud Engineer';
 
