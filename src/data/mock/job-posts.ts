@@ -11,6 +11,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
     experience: 'Senior',
     salary: 120000,
     type: 'Full time',
+    work: 'On-site',
     description:
       'Build stunning, interactive interfaces that redefine the streaming experience for millions.',
     tags: ['WebDevelopment', 'ResponsiveDesign', 'React', 'Typescript', 'Remote']
@@ -25,6 +26,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
     experience: 'Senior',
     salary: 110000,
     type: 'Full time',
+    work: 'Remote',
     description:
       "Design and optimize scalable cloud infrastructure to support billions of users across Meta's ecosystem.",
     tags: ['CloudComputing', 'AWS', 'DevOps', 'Kubernetes', 'Hybrid']
@@ -39,6 +41,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
     experience: 'Mid',
     salary: 92000,
     type: 'Part-time',
+    work: 'Hybrid',
     description:
       'Create intuitive and visually compelling interfaces that enhance the Uber experience for millions of users.',
     tags: ['UIDesign', 'DesignSystems', 'Figma', 'Prototyping', 'Hybrid']
@@ -53,6 +56,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
     experience: 'Junior',
     salary: 90000,
     type: 'Full time',
+    work: 'Remote',
     description:
       "Develop scalable and innovative software solutions that power Google's products and services worldwide.",
     tags: ['SoftwareEngineering', 'Python', 'Java', 'DistributedSystems', 'Hybrid']
@@ -67,6 +71,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
     experience: 'Junior',
     salary: 40000,
     type: 'Internship',
+    work: 'On-site',
     description:
       "Develop interactive web interfaces, enhance user experiences, and contribute to Amazon's ecosystem.",
     tags: ['Frontend', 'React', 'Javascript', 'UX/UI', 'Internship', 'Remote']

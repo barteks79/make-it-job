@@ -1,5 +1,6 @@
 type Experience = 'Junior' | 'Mid' | 'Senior';
 type JobType = 'Full time' | 'Part-time' | 'Freelance' | 'Internship';
+type WorkType = 'On-site' | 'Remote' | 'Hybrid';
 
 export type JobPost = {
   id: string;
@@ -13,4 +14,5 @@ export type JobPost = {
   type: JobType;
   description: string;
   tags: string[];
+  work: WorkType;
 };
