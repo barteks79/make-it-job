@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { MapPin, DollarSignIcon, MonitorIcon, UserIcon, HouseIcon, Calendar } from 'lucide-react';
 import { type JobPost } from '@/types/job-post';
-import type { ComponentType, SVGProps } from 'react';
+import type { ReactNode, ComponentType, SVGProps } from 'react';
 
 export default function JobDetails({ post }: { post: JobPost }) {
   return (
@@ -20,7 +20,7 @@ export default function JobDetails({ post }: { post: JobPost }) {
         </div>
       </header>
 
-      <section className="grid grid-cols-2 gap-y-6 place-content-between py-5 px-3 border-b">
+      <section className="grid grid-cols-2 gap-y-4 place-content-between py-5 px-3 border-b">
         <QuickInfoItem icon={MonitorIcon} label="Job Type" info={post.type} />
 
         <QuickInfoItem icon={HouseIcon} label="Work Type" info={post.work} />
@@ -44,6 +44,60 @@ export default function JobDetails({ post }: { post: JobPost }) {
           label="Post date"
           info={`${post.date.getDate()}/${post.date.getMonth()}/${post.date.getFullYear()}`}
         />
+      </section>
+
+      <section className="flex flex-col gap-1 py-5 border-b">
+        <h3 className="text-lg font-medium">About the Company</h3>
+        <p className="text-sm text-accent-foreground">
+          With over 250 million subscribers in more than 190 countries, Netflix is the world’s
+          leading streaming entertainment service, offering a vast library of award-winning TV
+          series, films, and documentaries. Driven by innovation and a passion for storytelling, we
+          push the boundaries of technology and content to redefine the future of entertainment.
+          Join us to create seamless, immersive experiences that captivate audiences worldwide!
+        </p>
+      </section>
+
+      <section className="flex flex-col gap-1 py-5 border-b">
+        <h3 className="text-lg font-medium">About the Job</h3>
+        <ul className="flex flex-col gap-1 list-disc pl-4">
+          <AboutJobItem>
+            Architect and develop high-performance, scalable web applications for millions of users.
+          </AboutJobItem>
+          <AboutJobItem>Enhance UI/UX for seamless streaming across all devices.</AboutJobItem>
+          <AboutJobItem>
+            Lead technical decisions and collaborate with cross-functional teams.
+          </AboutJobItem>
+          <AboutJobItem>
+            Ensure performance, security, and accessibility best practices.
+          </AboutJobItem>
+          <AboutJobItem>Write clean, maintainable code.</AboutJobItem>
+          <AboutJobItem>Integrate APIs seamlessly with backend teams.</AboutJobItem>
+        </ul>
+      </section>
+
+      <section className="flex flex-col gap-1 py-5">
+        <h3 className="text-lg font-medium">Requirements</h3>
+        <ul className="flex flex-col gap-1 list-disc pl-4">
+          <AboutJobItem>5+ years of experience in frontend development.</AboutJobItem>
+
+          <AboutJobItem>
+            Expertise in React, TypeScript, JavaScript, and modern web frameworks.
+          </AboutJobItem>
+
+          <AboutJobItem>
+            Strong understanding of performance optimization and responsive design.
+          </AboutJobItem>
+
+          <AboutJobItem>Experience with state management libraries (Redux, Zustand).</AboutJobItem>
+
+          <AboutJobItem>
+            Excellent communication skills and experience mentoring developers.
+          </AboutJobItem>
+
+          <AboutJobItem>
+            Strong problem-solving skills and ability to work in a fast-paced environment.
+          </AboutJobItem>
+        </ul>
       </section>
     </>
   );
@@ -69,4 +123,8 @@ function QuickInfoItem({
       </div>
     </div>
   );
+}
+
+function AboutJobItem({ children }: { children: ReactNode }) {
+  return <li className="text-sm text-accent-foreground">{children}</li>;
 }
