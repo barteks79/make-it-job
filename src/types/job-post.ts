@@ -9,10 +9,13 @@ export type JobPost = {
   image: string;
   title: string;
   company: string;
+  companyDescription: string;
   experience: Experience;
   salary: number;
   type: JobType;
   description: string;
   tags: string[];
   work: WorkType;
+  jobInfo: string[];
+  requirements: string[];
 };
