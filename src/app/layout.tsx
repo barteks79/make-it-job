@@ -23,9 +23,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
       className={`${GeistSans.variable} ${flavors.variable}`}
       suppressHydrationWarning
     >
-      <body
-        className={`flex flex-col min-h-svh antialiased overflow-hidden ${GeistSans.className}`}
-      >
+      <body className={`flex flex-col h-svh antialiased overflow-hidden ${GeistSans.className}`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="light"

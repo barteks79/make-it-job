@@ -3,26 +3,24 @@ import SortingSelect from './_components/sorting-select';
 import JobPostCard from './_components/job-card/job-card';
 
 export default function JobPosts() {
-	return (
-		<section className="flex flex-col flex-1 px-5 md:px-7 py-4 gap-3 md:gap-5">
-			<div className="flex justify-between items-center">
-				<p className="text-sm md:text-base text-muted-foreground">
-					Showing <span className="text-foreground font-semibold">5</span>{' '}
-					jobs in total
-				</p>
+  return (
+    <section className="flex flex-col flex-1 pt-4 gap-3 md:gap-5">
+      <div className="flex justify-between items-center px-5 md:px-7">
+        <p className="text-sm md:text-base text-muted-foreground">
+          Showing <span className="text-foreground font-semibold">5</span> jobs in total
+        </p>
+        <SortingSelect />
+      </div>
 
-				<SortingSelect />
-			</div>
-
-			<div className="overflow-y-auto max-h-[calc(100vh-300px)] md:max-h-[calc(100vh-275px)] pr-2 scrollbar-gutter-stable horizontal-scrollbar">
-				<ul className="grid grid-cols-1 md:grid-cols-2 3xl:grid-cols-3 gap-5 items-stretch">
-					{MOCK_JOB_POSTS.map((post, idx) => (
-						<li key={idx}>
-							<JobPostCard {...post} />
-						</li>
-					))}
-				</ul>
-			</div>
-		</section>
-	);
+      <div className="overflow-y-scroll flex-1 pb-4 px-5 md:px-7">
+        <ul className="grid grid-cols-1 md:grid-cols-2 3xl:grid-cols-3 gap-5 items-stretch">
+          {MOCK_JOB_POSTS.map((post, idx) => (
+            <li key={idx}>
+              <JobPostCard {...post} />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
 }
