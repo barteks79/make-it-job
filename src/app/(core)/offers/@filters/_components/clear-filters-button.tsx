@@ -1,7 +1,7 @@
 'use client';
 
-import { useSalaryInputs } from '@/store/salary-inputs';
 import { useState, useEffect } from 'react';
+import { useSalaryInputs } from '@/store/salary-inputs';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
 export default function ClearFiltersButton() {
@@ -13,8 +13,9 @@ export default function ClearFiltersButton() {
   const router = useRouter();
 
   useEffect(() => {
-    const params = searchParams.toString();
-    setIsEnabled(params.length > 0);
+    const isJobSelected = searchParams.get('job') !== null;
+    const searchParamsLength = searchParams.size;
+    setIsEnabled(isJobSelected ? searchParamsLength > 1 : searchParamsLength > 0);
   }, [searchParams]);
 
   function handleClearFilters() {
