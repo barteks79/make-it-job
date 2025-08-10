@@ -13,11 +13,11 @@ import {
 type DateSelectValue = 'anytime' | '3days' | 'week' | 'month';
 
 export default function DateSelect() {
-	const [optimisticValue, setOptimisticeValue] =
+	const [optimisticValue, setOptimisticValue] =
 		useOptimisticFilter<DateSelectValue>('date', 'anytime');
 
 	return (
-		<Select value={optimisticValue} onValueChange={setOptimisticeValue}>
+		<Select value={optimisticValue} onValueChange={setOptimisticValue}>
 			<SelectTrigger className="text-sm bg-background w-full" size="sm">
 				<SelectValue placeholder="Select date" />
 			</SelectTrigger>
