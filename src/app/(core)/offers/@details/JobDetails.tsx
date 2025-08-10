@@ -16,7 +16,7 @@ export default function JobDetails({ post }: { post: JobPost }) {
           <h2 className="tracking-tight font-medium">
             {post.title}, {post.company}
           </h2>
-          <p className="text-sm text-accent-foreground">{post.description}</p>
+          <p className="text-sm text-muted-foreground">{post.description}</p>
         </div>
       </header>
 
@@ -48,7 +48,7 @@ export default function JobDetails({ post }: { post: JobPost }) {
 
       <section className="flex flex-col gap-1 py-5 border-b">
         <h3 className="text-lg font-medium">About the Company</h3>
-        <p className="text-sm text-accent-foreground">{post.companyDescription}</p>
+        <p className="text-sm text-muted-foreground">{post.companyDescription}</p>
       </section>
 
       <section className="flex flex-col gap-1 py-5 border-b">
@@ -87,7 +87,7 @@ function QuickInfoItem({
     <div className="flex items-center gap-2">
       <Icon strokeWidth={1.2} className="size-8 text-secondary-foreground" />
       <div className="flex flex-col">
-        <label className="text-sm text-accent-foreground">{label}</label>
+        <label className="text-sm text-muted-foreground">{label}</label>
         <p className="tracking-tight -mt-1 font-medium">{info}</p>
       </div>
     </div>
@@ -95,5 +95,5 @@ function QuickInfoItem({
 }
 
 function AboutJobItem({ children }: { children: ReactNode }) {
-  return <li className="text-sm text-accent-foreground">{children}</li>;
+  return <li className="text-sm text-muted-foreground">{children}</li>;
 }
