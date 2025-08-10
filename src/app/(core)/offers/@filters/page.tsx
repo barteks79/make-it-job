@@ -37,7 +37,7 @@ export default function SidebarView() {
             <CategoryFilter isCustom>
               <label className="font-medium text-sm">Annual salary</label>
               <SalaryInputs />
-              <p className="text-secondary-foreground text-sm">In thousands of US dollars.</p>
+              <p className="text-muted-foreground text-sm">In thousands of US dollars.</p>
             </CategoryFilter>
 
             <ApplySalaryButton />
