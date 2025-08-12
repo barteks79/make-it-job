@@ -1,12 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import useOptimisticFilter from '@/hooks/use-optimistic-filter';
 import { createRelativeDate, cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import JobTagBadge from './job-tag-badge';
 
 import { BookmarkIcon, DollarSignIcon, MonitorIcon, UserIcon } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
+import JobTagBadge from './job-tag-badge';
 
 import {
   Card,
@@ -24,6 +25,9 @@ export default function JobPostCard({ post }: { post: JobPost }) {
   const [optimisticJobId, setOptimisticJobId] = useOptimisticFilter<string>('job', '');
   const isActive = optimisticJobId === post.id;
 
+  // Change to useOptimistic later
+  const [isBookmarked, setIsBookmarked] = useState<boolean>(post.isBookmarked);
+
   return (
     <Card
       className={cn('py-4 gap-4 h-full relative', {
@@ -39,14 +43,15 @@ export default function JobPostCard({ post }: { post: JobPost }) {
             <Button
               variant="outline"
               size="icon"
+              onClick={() => setIsBookmarked(prev => !prev)}
               className={cn('size-7 cursor-pointer', {
-                'dark:bg-destructive/10 bg-destructive/10 hover:bg-destructive/15 hover:dark:bg-destructive/15':
-                  post.isBookmarked
+                'border-destructive/15 dark:bg-destructive/10 bg-destructive/10 hover:bg-destructive/15 hover:dark:bg-destructive/15':
+                  isBookmarked
               })}
             >
               <BookmarkIcon
                 className={cn('pointer-events-none text-muted-foreground', {
-                  'fill-destructive text-destructive': post.isBookmarked
+                  'fill-destructive text-destructive': isBookmarked
                 })}
               />
             </Button>
@@ -68,14 +73,19 @@ export default function JobPostCard({ post }: { post: JobPost }) {
 
       <CardContent className="flex flex-col gap-4 flex-1">
         <ul className="flex justify-between items-center">
-          <li className="flex items-center gap-2">
+          <li className="flex items-center gap-1">
             <UserIcon className="size-4 text-secondary-foreground" />
             <p className="text-sm">{post.experience}</p>
           </li>
 
           <li className="flex items-center gap-1">
             <DollarSignIcon className="size-4 text-secondary-foreground" />
-            <p className="text-sm">{post.salary}</p>
+            <p className="text-sm">
+              {new Intl.NumberFormat('us-US', {
+                style: 'decimal',
+                maximumFractionDigits: 0
+              }).format(post.salary)}
+            </p>
           </li>
 
           <li className="flex items-center gap-1">
