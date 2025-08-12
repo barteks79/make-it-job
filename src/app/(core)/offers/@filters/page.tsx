@@ -38,9 +38,8 @@ export default function SidebarView() {
               <label className="font-medium text-sm">Annual salary</label>
               <SalaryInputs />
               <p className="text-muted-foreground text-sm">In thousands of US dollars.</p>
+              <ApplySalaryButton />
             </CategoryFilter>
-
-            <ApplySalaryButton />
           </section>
         </SalaryInputsProvider>
       </aside>
