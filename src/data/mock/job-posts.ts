@@ -37,7 +37,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
   {
     id: 'b7e2c3d4-5f6a-4b8c-9d0e-2f3a4b5c6d7e',
     date: new Date('2025-05-25'),
-    isBookmarked: false,
+    isBookmarked: true,
     image: '/images/meta.png',
     title: 'Cloud Engineer',
     company: 'Meta',
@@ -70,7 +70,7 @@ export const MOCK_JOB_POSTS: JobPost[] = [
   {
     id: 'c8d9e0f1-2a3b-4c5d-8e9f-0a1b2c3d4e5f',
     date: new Date('2025-05-28'),
-    isBookmarked: false,
+    isBookmarked: true,
     image: '/images/uber.png',
     title: 'UI Designer',
     company: 'Uber',

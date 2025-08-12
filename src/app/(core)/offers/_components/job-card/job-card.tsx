@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import JobTagBadge from './job-tag-badge';
 
 import { BookmarkIcon, DollarSignIcon, MonitorIcon, UserIcon } from 'lucide-react';
-
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 import {
@@ -21,50 +20,48 @@ import {
 
 import { type JobPost } from '@/types/job-post';
 
-export default function JobPostCard({
-  id,
-  date,
-  company,
-  description,
-  tags,
-  title,
-  type,
-  experience,
-  image,
-  // isBookmarked,
-  salary
-}: JobPost) {
-  const [optimisticJobDetails, setOptimisticJobDetails] = useOptimisticFilter<string>('job', '');
-
-  const isActive = optimisticJobDetails === id;
+export default function JobPostCard({ post }: { post: JobPost }) {
+  const [optimisticJobId, setOptimisticJobId] = useOptimisticFilter<string>('job', '');
+  const isActive = optimisticJobId === post.id;
 
   return (
     <Card
-      onClick={() => setOptimisticJobDetails(id)}
       className={cn('py-4 gap-4 h-full relative', {
-        'border-primary/25 bg-primary/3': isActive
+        'border-primary/15 dark:border-primary/20 bg-primary/1 dark:bg-primary/3 shadow-xs shadow-primary/10':
+          isActive
       })}
     >
       <CardHeader className="flex flex-col gap-2">
         <div className="flex justify-between items-center w-full">
-          <p className="text-sm text-muted-foreground">{createRelativeDate(date)}</p>
+          <p className="text-sm text-muted-foreground">{createRelativeDate(post.date)}</p>
 
           <CardAction>
-            <Button variant="outline" size="icon" className="size-7 text-muted-foreground">
-              <BookmarkIcon />
+            <Button
+              variant="outline"
+              size="icon"
+              className={cn('size-7 cursor-pointer', {
+                'dark:bg-destructive/10 bg-destructive/10 hover:bg-destructive/15 hover:dark:bg-destructive/15':
+                  post.isBookmarked
+              })}
+            >
+              <BookmarkIcon
+                className={cn('pointer-events-none text-muted-foreground', {
+                  'fill-destructive text-destructive': post.isBookmarked
+                })}
+              />
             </Button>
           </CardAction>
         </div>
 
         <figure className="flex items-center gap-3 border-b w-full pb-4">
           <Avatar className="size-9 rounded-md">
-            <AvatarImage src={image} alt={`${company} Logo`} />
-            <AvatarFallback>{company} Logo</AvatarFallback>
+            <AvatarImage src={post.image} alt={`${post.company} Logo`} />
+            <AvatarFallback>{post.company} Logo</AvatarFallback>
           </Avatar>
 
           <figcaption className="flex flex-col justify-between">
-            <CardTitle>{title}</CardTitle>
-            <CardDescription>{company}</CardDescription>
+            <CardTitle>{post.title}</CardTitle>
+            <CardDescription>{post.company}</CardDescription>
           </figcaption>
         </figure>
       </CardHeader>
@@ -73,31 +70,35 @@ export default function JobPostCard({
         <ul className="flex justify-between items-center">
           <li className="flex items-center gap-2">
             <UserIcon className="size-4 text-secondary-foreground" />
-            <p className="text-sm">{experience}</p>
+            <p className="text-sm">{post.experience}</p>
           </li>
 
           <li className="flex items-center gap-1">
             <DollarSignIcon className="size-4 text-secondary-foreground" />
-            <p className="text-sm">{salary}</p>
+            <p className="text-sm">{post.salary}</p>
           </li>
 
           <li className="flex items-center gap-1">
             <MonitorIcon className="size-4 text-secondary-foreground" />
-            <p className="text-sm">{type}</p>
+            <p className="text-sm">{post.type}</p>
           </li>
         </ul>
 
-        <p className="text-muted-foreground text-sm border-b pb-4">{description}</p>
+        <p className="text-muted-foreground text-sm border-b pb-4">{post.description}</p>
 
         <ul className="flex gap-2 flex-wrap">
-          {tags.map((tag, idx) => (
+          {post.tags.map((tag, idx) => (
             <JobTagBadge key={idx}>{tag}</JobTagBadge>
           ))}
         </ul>
       </CardContent>
 
       <CardFooter className="grid grid-cols-2 gap-2">
-        <Button className="cursor-pointer" variant="outline">
+        <Button
+          onClick={() => setOptimisticJobId(post.id)}
+          className="cursor-pointer"
+          variant="outline"
+        >
           Details
         </Button>
         <Button className="cursor-pointer">Apply</Button>
