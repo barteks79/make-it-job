@@ -1,6 +1,7 @@
 import { pgTable, uuid } from 'drizzle-orm/pg-core';
-import { timestamps } from './timestamps.helpers';
+import { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 
+import { timestamps } from './timestamps.helpers';
 import { users } from './users';
 import { posts } from './posts';
 
@@ -14,3 +15,6 @@ export const bookmarks = pgTable('bookmark', {
     .notNull(),
   ...timestamps
 });
+
+export type Bookmark = InferSelectModel<typeof bookmarks>;
+export type NewBookmark = InferInsertModel<typeof bookmarks>;

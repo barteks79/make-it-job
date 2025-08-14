@@ -1,4 +1,6 @@
 import { pgTable, uuid, text, varchar, doublePrecision } from 'drizzle-orm/pg-core';
+import type { InferSelectModel, InferInsertModel } from 'drizzle-orm';
+
 import { timestamps } from './timestamps.helpers';
 import { companies } from './companies';
 
@@ -20,3 +22,6 @@ export const posts = pgTable('post', {
   requirements: text('requirements').array().notNull(),
   ...timestamps
 });
+
+export type JobPost = InferSelectModel<typeof posts>;
+export type NewJobPost = InferInsertModel<typeof posts>;

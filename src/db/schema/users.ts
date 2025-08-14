@@ -1,4 +1,5 @@
 import { pgTable, uuid, varchar, boolean } from 'drizzle-orm/pg-core';
+import type { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 import { timestamps } from './timestamps.helpers';
 
 export const users = pgTable('user', {
@@ -9,3 +10,6 @@ export const users = pgTable('user', {
   image: varchar('image', { length: 50 }).unique(),
   ...timestamps
 });
+
+export type User = InferSelectModel<typeof users>;
+export type NewUser = InferInsertModel<typeof users>;
