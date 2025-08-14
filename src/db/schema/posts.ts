@@ -7,7 +7,7 @@ import { companies } from './companies';
 export const posts = pgTable('post', {
   id: uuid('id').primaryKey(),
   position: varchar('position', { length: 50 }).notNull(),
-  companyIdP: uuid('companyId')
+  companyId: uuid('companyId')
     .references(() => companies.id, { onDelete: 'cascade', onUpdate: 'cascade' })
     .notNull(),
   experience: text('experience', { enum: ['Junior', 'Mid', 'Senior'] }).notNull(),

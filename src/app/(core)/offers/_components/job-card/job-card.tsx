@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
 import useOptimisticFilter from '@/hooks/use-optimistic-filter';
 import { createRelativeDate, cn } from '@/lib/utils';
+import { type JobPost } from '@/db/schema/posts';
+import { type Company } from '@/db/schema/companies';
 
 import { BookmarkIcon, DollarSignIcon, MonitorIcon, UserIcon } from 'lucide-react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
@@ -19,14 +20,15 @@ import {
   CardFooter
 } from '@/components/ui/card';
 
-import { type JobPost } from '@/types/job-post';
-
-export default function JobPostCard({ post }: { post: JobPost }) {
+export default function JobPostCard({
+  post,
+  company
+}: {
+  post: Omit<JobPost, 'companyId'>;
+  company: Pick<Company, 'name' | 'image'>;
+}) {
   const [optimisticJobId, setOptimisticJobId] = useOptimisticFilter<string>('job', '');
   const isActive = optimisticJobId === post.id;
-
-  // Change to useOptimistic later
-  const [isBookmarked, setIsBookmarked] = useState<boolean>(post.isBookmarked);
 
   return (
     <Card
@@ -37,21 +39,20 @@ export default function JobPostCard({ post }: { post: JobPost }) {
     >
       <CardHeader className="flex flex-col gap-2">
         <div className="flex justify-between items-center w-full">
-          <p className="text-sm text-muted-foreground">{createRelativeDate(post.date)}</p>
+          <p className="text-sm text-muted-foreground">{createRelativeDate(post.createdAt)}</p>
 
           <CardAction>
             <Button
               variant="outline"
               size="icon"
-              onClick={() => setIsBookmarked(prev => !prev)}
               className={cn('size-7 cursor-pointer', {
                 'border-destructive/15 dark:bg-destructive/10 bg-destructive/10 hover:bg-destructive/15 hover:dark:bg-destructive/15':
-                  isBookmarked
+                  true
               })}
             >
               <BookmarkIcon
                 className={cn('pointer-events-none text-muted-foreground', {
-                  'fill-destructive text-destructive': isBookmarked
+                  'fill-destructive text-destructive': true
                 })}
               />
             </Button>
@@ -60,13 +61,13 @@ export default function JobPostCard({ post }: { post: JobPost }) {
 
         <figure className="flex items-center gap-3 border-b w-full pb-4">
           <Avatar className="size-9 rounded-md">
-            <AvatarImage src={post.image} alt={`${post.company} Logo`} />
-            <AvatarFallback>{post.company} Logo</AvatarFallback>
+            <AvatarImage src="/images/meta.png" alt={`${company.name} Logo`} />
+            <AvatarFallback>{company.name} Logo</AvatarFallback>
           </Avatar>
 
           <figcaption className="flex flex-col justify-between">
-            <CardTitle>{post.title}</CardTitle>
-            <CardDescription>{post.company}</CardDescription>
+            <CardTitle>{post.position}</CardTitle>
+            <CardDescription>{company.name}</CardDescription>
           </figcaption>
         </figure>
       </CardHeader>
@@ -90,7 +91,7 @@ export default function JobPostCard({ post }: { post: JobPost }) {
 
           <li className="flex items-center gap-1">
             <MonitorIcon className="size-4 text-secondary-foreground" />
-            <p className="text-sm">{post.type}</p>
+            <p className="text-sm">{post.jobType}</p>
           </li>
         </ul>
 
