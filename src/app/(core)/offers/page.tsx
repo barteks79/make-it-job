@@ -10,7 +10,8 @@ export default async function JobPosts() {
     <section className="flex flex-col flex-1 pt-4 gap-3 md:gap-5">
       <div className="flex justify-between items-center px-5 md:px-7">
         <p className="text-sm md:text-base text-muted-foreground">
-          Showing <span className="text-foreground font-semibold">5</span> jobs in total
+          Showing <span className="text-foreground font-semibold">{fetchedPosts.length}</span> jobs
+          in total
         </p>
         <SortingSelect />
       </div>
