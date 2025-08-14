@@ -1,6 +1,6 @@
-type Experience = 'Junior' | 'Mid' | 'Senior';
-type JobType = 'Full time' | 'Part-time' | 'Freelance' | 'Internship';
-type WorkType = 'On-site' | 'Remote' | 'Hybrid';
+export type Experience = 'Junior' | 'Mid' | 'Senior';
+export type JobType = 'Full time' | 'Part-time' | 'Freelance' | 'Internship';
+export type WorkType = 'On-site' | 'Remote' | 'Hybrid';
 
 export type JobPost = {
   id: string;

@@ -1,15 +1,19 @@
 import SalaryInputsProvider from '@/store/salary-inputs';
-import { MOCK_FILTER_CATEGORIES } from '@/data/mock/filter-categories';
+
+import { getFilterCategories } from '@/db/queries/posts/get-filter-categories';
+import FilterOption from './_components/filter-option';
+import FilterGroup from './_components/filter-group';
 
 import ApplySalaryButton from './_components/apply-salary-button';
 import SalaryInputs from './_components/salary-inputs';
-import CategoryFilter from './_components/category-filter';
 import DateSelect from './_components/date-select';
 import ClearFiltersButton from './_components/clear-filters-button';
 
 export const dynamic = 'force-dynamic';
 
-export default function SidebarView() {
+export default async function SidebarView() {
+  const categories = await getFilterCategories();
+
   return (
     <div className="hidden lg:block overflow-y-scroll bg-secondary border-r horizontal-scrollbar">
       <aside className="flex flex-col w-64 h-full">
@@ -21,25 +25,39 @@ export default function SidebarView() {
           </section>
 
           <section className="flex flex-col px-7 pb-6">
-            <CategoryFilter isCustom>
-              <label className="font-medium text-sm">Post date</label>
+            <FilterGroup label="Post Date">
               <DateSelect />
-            </CategoryFilter>
+            </FilterGroup>
 
-            <CategoryFilter options={MOCK_FILTER_CATEGORIES['jobType']}>Job Type</CategoryFilter>
+            <FilterGroup label="Job Type">
+              <ul className="flex flex-col gap-2.5">
+                {categories.jobType.map((option, idx) => (
+                  <FilterOption key={idx} option={option} />
+                ))}
+              </ul>
+            </FilterGroup>
 
-            <CategoryFilter options={MOCK_FILTER_CATEGORIES['workType']}>Work Type</CategoryFilter>
+            <FilterGroup label="Work Type">
+              <ul className="flex flex-col gap-2.5">
+                {categories.workType.map((option, idx) => (
+                  <FilterOption key={idx} option={option} />
+                ))}
+              </ul>
+            </FilterGroup>
 
-            <CategoryFilter options={MOCK_FILTER_CATEGORIES['experience']}>
-              Experience
-            </CategoryFilter>
+            <FilterGroup label="Experience">
+              <ul className="flex flex-col gap-2.5">
+                {categories.experience.map((option, idx) => (
+                  <FilterOption key={idx} option={option} />
+                ))}
+              </ul>
+            </FilterGroup>
 
-            <CategoryFilter isCustom>
-              <label className="font-medium text-sm">Annual salary</label>
+            <FilterGroup label="Annual Salary">
               <SalaryInputs />
-              <p className="text-muted-foreground text-sm">In thousands of US dollars.</p>
+              <p className="text-muted-foreground text-sm">In thousands of USD.</p>
               <ApplySalaryButton />
-            </CategoryFilter>
+            </FilterGroup>
           </section>
         </SalaryInputsProvider>
       </aside>
