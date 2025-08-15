@@ -1,10 +1,14 @@
 import { getPostsWithCompany } from '@/db/queries/posts/get-posts';
+import { getAppliedFilters } from '@/lib/utils';
 
 import SortingSelect from './_components/sorting-select';
 import JobPostCard from './_components/job-card/job-card';
 
-export default async function JobPosts() {
-  const fetchedPosts = await getPostsWithCompany();
+type SearchParams = Promise<{ [key: string]: string }>;
+
+export default async function JobPosts({ searchParams }: { searchParams: SearchParams }) {
+  const appliedFilters = await getAppliedFilters(searchParams);
+  const fetchedPosts = await getPostsWithCompany(appliedFilters);
 
   return (
     <section className="flex flex-col flex-1 pt-4 gap-3 md:gap-5">
