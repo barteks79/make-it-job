@@ -1,12 +1,11 @@
+import { Suspense } from 'react';
 import { getPostsWithCompany } from '@/db/queries/posts/get-posts';
-import { getAppliedFilters } from '@/lib/filter';
+import { getAppliedFilters, type FilterSearchParams } from '@/lib/filter';
 
 import SortingSelect from './_components/sorting-select';
 import JobPostCard from './_components/job-card/job-card';
 
-type SearchParams = Promise<{ [key: string]: string }>;
-
-export default async function JobPosts({ searchParams }: { searchParams: SearchParams }) {
+export default async function JobPosts({ searchParams }: { searchParams: FilterSearchParams }) {
   const appliedFilters = await getAppliedFilters(searchParams);
   const fetchedPosts = await getPostsWithCompany(appliedFilters);
 
@@ -17,7 +16,10 @@ export default async function JobPosts({ searchParams }: { searchParams: SearchP
           Showing <span className="text-foreground font-semibold">{fetchedPosts.length}</span> jobs
           in total
         </p>
-        <SortingSelect />
+
+        <Suspense fallback={<p>Loading...</p>}>
+          <SortingSelect />
+        </Suspense>
       </div>
 
       <div className="overflow-y-scroll flex-1 pb-4 px-5 md:pb-5 md:px-7">

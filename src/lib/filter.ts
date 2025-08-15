@@ -10,6 +10,22 @@ export type Filters = {
   postDate: Date | null;
 };
 
+export type FilterSearchParams = Promise<{
+  ['full-time']?: string;
+  ['part-time']?: string;
+  internship?: string;
+  freelance?: string;
+  ['on-site']?: string;
+  remote?: string;
+  hybrid?: string;
+  junior?: string;
+  mid?: string;
+  senior?: string;
+  date?: string;
+  ['salary-min']?: string;
+  ['salary-max']?: string;
+}>;
+
 // If the filter array is empty, return a clause that is true
 export const arrayToClause = (
   array: JobType[] | WorkType[] | Experience[],
@@ -74,7 +90,7 @@ export const buildWhereClause = (
 };
 
 // Get currently applied filters from searchParams and returns it as a Filters object
-export const getAppliedFilters = async (searchParams: Promise<{ [key: string]: string }>) => {
+export const getAppliedFilters = async (searchParams: FilterSearchParams) => {
   const params = await searchParams;
   const ONE_DAY = 24 * 60 * 60 * 1000;
 
