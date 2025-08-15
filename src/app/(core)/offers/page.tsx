@@ -1,5 +1,5 @@
 import { getPostsWithCompany } from '@/db/queries/posts/get-posts';
-import { getAppliedFilters } from '@/lib/utils';
+import { getAppliedFilters } from '@/lib/filter';
 
 import SortingSelect from './_components/sorting-select';
 import JobPostCard from './_components/job-card/job-card';

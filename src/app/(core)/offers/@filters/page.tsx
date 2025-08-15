@@ -1,6 +1,7 @@
 import SalaryInputsProvider from '@/store/salary-inputs';
 
 import { getFilterCategories } from '@/db/queries/posts/get-filter-categories';
+import { getAppliedFilters } from '@/lib/filter';
 import FilterOption from './_components/filter-option';
 import FilterGroup from './_components/filter-group';
 
@@ -11,8 +12,11 @@ import ClearFiltersButton from './_components/clear-filters-button';
 
 export const dynamic = 'force-dynamic';
 
-export default async function SidebarView() {
-  const categories = await getFilterCategories();
+type SearchParams = Promise<{ [key: string]: string }>;
+
+export default async function SidebarView({ searchParams }: { searchParams: SearchParams }) {
+  const currentFilters = await getAppliedFilters(searchParams);
+  const categories = await getFilterCategories(currentFilters);
 
   return (
     <div className="hidden lg:block overflow-y-scroll bg-secondary border-r horizontal-scrollbar">
@@ -20,7 +24,6 @@ export default async function SidebarView() {
         <SalaryInputsProvider>
           <section className="flex justify-between items-center px-7 py-4 border-b">
             <h3 className="text-foreground font-semibold tracking-tight">Filters</h3>
-
             <ClearFiltersButton />
           </section>
 

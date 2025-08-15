@@ -3,31 +3,40 @@
 import { db } from '@/db';
 import { posts } from '@/db/schema/posts';
 import { companies } from '@/db/schema/companies';
-import { eq, or, sql, and } from 'drizzle-orm';
+import { eq, sql, and, gte, lte } from 'drizzle-orm';
 
-import type { JobType, Experience, WorkType } from '@/types/job-post';
-
-type Filters = {
-  jobType: JobType[];
-  workType: WorkType[];
-  experience: Experience[];
-};
-
-type AllowedColumn = typeof posts.jobType | typeof posts.workType | typeof posts.experience;
+import { arrayToClause, type Filters } from '@/lib/filter';
 
 export const getPostsWithCompany = async (filters: Filters) => {
-  // If the filter array is empty, return a clause that is true
-  const arrayToClause = (array: JobType[] | WorkType[] | Experience[], column: AllowedColumn) =>
-    array.length ? or(...array.map(v => eq(column, v))) : sql`1 = 1`;
-
   // Create the individual clauses for each filter
   const jobTypeClause = arrayToClause(filters.jobType, posts.jobType);
   const workTypeClause = arrayToClause(filters.workType, posts.workType);
   const experienceClause = arrayToClause(filters.experience, posts.experience);
 
+  // Create clauses for annual salary if provided
+  const minSalaryClause = filters.annualSalary?.min
+    ? gte(posts.salary, filters.annualSalary.min)
+    : sql`1 = 1`;
+
+  const maxSalaryClause = filters.annualSalary?.max
+    ? lte(posts.salary, filters.annualSalary.max)
+    : sql`1 = 1`;
+
+  // Create a clause for the post date if provided
+  const postDateClause = filters.postDate ? gte(posts.createdAt, filters.postDate) : sql`1 = 1`;
+
   return db
     .select({ post: posts, company: { name: companies.name, image: companies.image } })
     .from(posts)
     .innerJoin(companies, eq(posts.companyId, companies.id))
-    .where(and(jobTypeClause, workTypeClause, experienceClause));
+    .where(
+      and(
+        jobTypeClause,
+        workTypeClause,
+        experienceClause,
+        minSalaryClause,
+        maxSalaryClause,
+        postDateClause
+      )
+    );
 };
