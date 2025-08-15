@@ -34,7 +34,7 @@ export default function FilterOption({ option }: { option: Option }) {
 
       <span
         className={cn('text-sm text-muted-foreground', {
-          'text-primary font-medium': optimisticValue,
+          'text-primary dark:text-foreground font-medium dark:font-semibold': optimisticValue,
           'text-muted-foreground/75': !isEnabled
         })}
       >

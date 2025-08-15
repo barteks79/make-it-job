@@ -11,7 +11,7 @@ export default async function JobPosts({ searchParams }: { searchParams: SearchP
   const fetchedPosts = await getPostsWithCompany(appliedFilters);
 
   return (
-    <section className="flex flex-col flex-1 pt-4 gap-3 md:gap-5">
+    <section className="flex flex-col flex-1 pt-4 gap-3 md:gap-4">
       <div className="flex justify-between items-center px-5 md:px-7">
         <p className="text-sm md:text-base text-muted-foreground">
           Showing <span className="text-foreground font-semibold">{fetchedPosts.length}</span> jobs
@@ -20,7 +20,7 @@ export default async function JobPosts({ searchParams }: { searchParams: SearchP
         <SortingSelect />
       </div>
 
-      <div className="overflow-y-scroll flex-1 pb-4 px-5 md:px-7">
+      <div className="overflow-y-scroll flex-1 pb-4 px-5 md:pb-5 md:px-7">
         <ul className="grid grid-cols-1 md:grid-cols-2 3xl:grid-cols-3 gap-5 items-stretch">
           {fetchedPosts.map((post, idx) => (
             <li key={idx}>
