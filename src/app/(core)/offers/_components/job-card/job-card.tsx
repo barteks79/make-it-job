@@ -32,7 +32,7 @@ export default function JobPostCard({
 
   return (
     <Card
-      className={cn('py-4 gap-4 h-full relative', {
+      className={cn('py-5 gap-4 h-full relative', {
         'border-primary/15 dark:border-primary/20 bg-primary/1 dark:bg-primary/3 shadow-xs shadow-primary/10':
           isActive
       })}
