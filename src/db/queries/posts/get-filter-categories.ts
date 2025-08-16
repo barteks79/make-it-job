@@ -13,6 +13,8 @@ const WORK_TYPE_VALUES = ['On-site', 'Remote', 'Hybrid'] as const;
 
 export const getFilterCategories = unstable_cache(
   async (currentFilters: Filters) => {
+    console.log('Fetching FILTER CATEGORIES');
+
     const jobTypeWhere = buildWhereClause(currentFilters, { exclude: 'jobType' });
     const workTypeWhere = buildWhereClause(currentFilters, { exclude: 'workType' });
     const experienceWhere = buildWhereClause(currentFilters, { exclude: 'experience' });

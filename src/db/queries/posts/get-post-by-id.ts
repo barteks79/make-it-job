@@ -14,6 +14,7 @@ export type JobPostWithCompany = {
 
 export const getPostById = unstable_cache(
   async (postId: string): Promise<JobPostWithCompany | undefined> => {
+    console.log(`Fetching SINGLE POST: ${postId}`);
     const [jobPost] = await db
       .select()
       .from(posts)

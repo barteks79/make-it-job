@@ -10,6 +10,7 @@ import { arrayToClause, type Filters } from '@/lib/filter';
 
 export const getPostsWithCompany = unstable_cache(
   async (filters: Filters) => {
+    console.log('Fetching POSTS');
     // Create the individual clauses for each filter
     const jobTypeClause = arrayToClause(filters.jobType, posts.jobType);
     const workTypeClause = arrayToClause(filters.workType, posts.workType);
