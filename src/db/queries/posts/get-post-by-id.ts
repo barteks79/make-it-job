@@ -7,7 +7,7 @@ import { companies } from '@/db/schema/companies';
 import { eq, type InferSelectModel } from 'drizzle-orm';
 import { unstable_cache } from 'next/cache';
 
-type JobPostWithCompany = {
+export type JobPostWithCompany = {
   post: InferSelectModel<typeof posts>;
   company: InferSelectModel<typeof companies>;
 };

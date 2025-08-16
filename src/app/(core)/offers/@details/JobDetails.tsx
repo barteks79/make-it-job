@@ -1,29 +1,34 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { MapPin, DollarSignIcon, MonitorIcon, UserIcon, HouseIcon, Calendar } from 'lucide-react';
-import { type JobPost } from '@/types/job-post';
+
+import { type JobPostWithCompany } from '@/db/queries/posts/get-post-by-id';
 import type { ReactNode, ComponentType, SVGProps } from 'react';
 
-export default function JobDetails({ post }: { post: JobPost }) {
+export default function JobDetails({ job }: { job: JobPostWithCompany }) {
+  const createdAtDate = new Date(job.post.createdAt);
+  const dateString = `${createdAtDate.getDate()}/${
+    createdAtDate.getMonth() + 1
+  }/${createdAtDate.getFullYear()}`;
+
   return (
     <>
       <header className="flex items-center gap-5 py-5 border-b">
         <Avatar className="size-14 rounded">
-          <AvatarImage src={post.image} alt={`${post.company} Logo`} />
-          <AvatarFallback>{post.company} Logo</AvatarFallback>
+          <AvatarImage src="" alt={`${job.company.name} Logo`} />
+          <AvatarFallback>{job.company.name} Logo</AvatarFallback>
         </Avatar>
 
         <div className="flex flex-col">
           <h2 className="tracking-tight font-medium">
-            {post.title}, {post.company}
+            {job.post.position}, {job.company.name}
           </h2>
-          <p className="text-sm text-muted-foreground">{post.description}</p>
+          <p className="text-sm text-muted-foreground">{job.post.description}</p>
         </div>
       </header>
 
       <section className="grid grid-cols-2 gap-y-4 place-content-between py-5 px-3 border-b">
-        <QuickInfoItem icon={MonitorIcon} label="Job Type" info={post.type} />
-
-        <QuickInfoItem icon={HouseIcon} label="Work Type" info={post.work} />
+        <QuickInfoItem icon={MonitorIcon} label="Job Type" info={job.post.jobType} />
+        <QuickInfoItem icon={HouseIcon} label="Work Type" info={job.post.workType} />
 
         <QuickInfoItem
           icon={DollarSignIcon}
@@ -32,29 +37,23 @@ export default function JobDetails({ post }: { post: JobPost }) {
             style: 'currency',
             currency: 'USD',
             maximumFractionDigits: 0
-          }).format(post.salary)}
+          }).format(job.post.salary)}
         />
 
-        <QuickInfoItem icon={UserIcon} label="Experience" info={post.experience} />
-
+        <QuickInfoItem icon={UserIcon} label="Experience" info={job.post.experience} />
         <QuickInfoItem icon={MapPin} label="Location" info="Toronto, Canada" />
-
-        <QuickInfoItem
-          icon={Calendar}
-          label="Post date"
-          info={`${post.date.getDate()}/${post.date.getMonth()}/${post.date.getFullYear()}`}
-        />
+        <QuickInfoItem icon={Calendar} label="Post date" info={dateString} />
       </section>
 
       <section className="flex flex-col gap-1 py-5 border-b">
         <h3 className="text-lg font-medium">About the Company</h3>
-        <p className="text-sm text-muted-foreground">{post.companyDescription}</p>
+        <p className="text-sm text-muted-foreground">{job.company.description}</p>
       </section>
 
       <section className="flex flex-col gap-1 py-5 border-b">
         <h3 className="text-lg font-medium">About the Job</h3>
         <ul className="flex flex-col gap-1 list-disc pl-4">
-          {post.jobInfo.map((item, idx) => (
+          {job.post.information.map((item, idx) => (
             <AboutJobItem key={idx}>{item}</AboutJobItem>
           ))}
         </ul>
@@ -63,7 +62,7 @@ export default function JobDetails({ post }: { post: JobPost }) {
       <section className="flex flex-col gap-1 py-5">
         <h3 className="text-lg font-medium">Requirements</h3>
         <ul className="flex flex-col gap-1 list-disc pl-4">
-          {post.requirements.map((item, idx) => (
+          {job.post.requirements.map((item, idx) => (
             <AboutJobItem key={idx}>{item}</AboutJobItem>
           ))}
         </ul>
