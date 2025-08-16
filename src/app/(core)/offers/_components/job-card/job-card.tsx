@@ -1,14 +1,13 @@
-'use client';
-
-import useOptimisticFilter from '@/hooks/use-optimistic-filter';
 import { createRelativeDate, cn } from '@/lib/utils';
 import { type JobPost } from '@/db/schema/posts';
 import { type Company } from '@/db/schema/companies';
 
 import { BookmarkIcon, DollarSignIcon, MonitorIcon, UserIcon } from 'lucide-react';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
+
+import CompanyLogo from '@/components/custom/company-logo';
 import JobTagBadge from './job-tag-badge';
+import DetailsButton from './details-button';
 
 import {
   Card,
@@ -27,16 +26,8 @@ export default function JobPostCard({
   post: Omit<JobPost, 'companyId'>;
   company: Pick<Company, 'name' | 'image'>;
 }) {
-  const [optimisticJobId, setOptimisticJobId] = useOptimisticFilter<string>('job', '');
-  const isActive = optimisticJobId === post.id;
-
   return (
-    <Card
-      className={cn('py-5 gap-4 h-full relative', {
-        'border-primary/15 dark:border-primary/20 bg-primary/1 dark:bg-primary/3 shadow-xs shadow-primary/10':
-          isActive
-      })}
-    >
+    <Card className="py-5 gap-4 h-full relative">
       <CardHeader className="flex flex-col gap-2">
         <div className="flex justify-between items-center w-full">
           <p className="text-sm text-muted-foreground">
@@ -62,10 +53,7 @@ export default function JobPostCard({
         </div>
 
         <figure className="flex items-center gap-3 border-b w-full pb-4">
-          <Avatar className="size-9 rounded-md">
-            <AvatarImage src="/images/meta.png" alt={`${company.name} Logo`} />
-            <AvatarFallback>{company.name} Logo</AvatarFallback>
-          </Avatar>
+          <CompanyLogo image={company.image!} name={company.name} />
 
           <figcaption className="flex flex-col justify-between">
             <CardTitle>{post.position}</CardTitle>
@@ -107,13 +95,7 @@ export default function JobPostCard({
       </CardContent>
 
       <CardFooter className="grid grid-cols-2 gap-2">
-        <Button
-          onClick={() => setOptimisticJobId(post.id)}
-          className="cursor-pointer"
-          variant="outline"
-        >
-          Details
-        </Button>
+        <DetailsButton postId={post.id} />
         <Button className="cursor-pointer">Apply</Button>
       </CardFooter>
     </Card>

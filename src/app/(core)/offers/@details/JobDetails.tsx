@@ -1,22 +1,15 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { createDateString } from '@/lib/date';
+import CompanyLogo from '@/components/custom/company-logo';
 import { MapPin, DollarSignIcon, MonitorIcon, UserIcon, HouseIcon, Calendar } from 'lucide-react';
 
 import { type JobPostWithCompany } from '@/db/queries/posts/get-post-by-id';
 import type { ReactNode, ComponentType, SVGProps } from 'react';
 
 export default function JobDetails({ job }: { job: JobPostWithCompany }) {
-  const createdAtDate = new Date(job.post.createdAt);
-  const dateString = `${createdAtDate.getDate()}/${
-    createdAtDate.getMonth() + 1
-  }/${createdAtDate.getFullYear()}`;
-
   return (
     <>
       <header className="flex items-center gap-5 py-5 border-b">
-        <Avatar className="size-14 rounded">
-          <AvatarImage src="" alt={`${job.company.name} Logo`} />
-          <AvatarFallback>{job.company.name} Logo</AvatarFallback>
-        </Avatar>
+        <CompanyLogo className="size-12" image={job.company.image!} name={job.company.name} />
 
         <div className="flex flex-col">
           <h2 className="tracking-tight font-medium">
@@ -42,7 +35,11 @@ export default function JobDetails({ job }: { job: JobPostWithCompany }) {
 
         <QuickInfoItem icon={UserIcon} label="Experience" info={job.post.experience} />
         <QuickInfoItem icon={MapPin} label="Location" info="Toronto, Canada" />
-        <QuickInfoItem icon={Calendar} label="Post date" info={dateString} />
+        <QuickInfoItem
+          icon={Calendar}
+          label="Post date"
+          info={createDateString(job.post.createdAt)}
+        />
       </section>
 
       <section className="flex flex-col gap-1 py-5 border-b">

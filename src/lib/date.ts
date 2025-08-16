@@ -31,3 +31,8 @@ export function countDaysAgo(date: Date) {
 
   return i;
 }
+
+export const createDateString = (dateString: Date) => {
+  const date = new Date(dateString);
+  return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+};
