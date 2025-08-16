@@ -39,7 +39,9 @@ export default function JobPostCard({
     >
       <CardHeader className="flex flex-col gap-2">
         <div className="flex justify-between items-center w-full">
-          <p className="text-sm text-muted-foreground">{createRelativeDate(post.createdAt)}</p>
+          <p className="text-sm text-muted-foreground">
+            {createRelativeDate(new Date(post.createdAt))}
+          </p>
 
           <CardAction>
             <Button
