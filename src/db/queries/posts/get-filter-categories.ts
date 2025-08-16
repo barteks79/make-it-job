@@ -1,5 +1,7 @@
 'use server';
 
+import { unstable_cache } from 'next/cache';
+
 import { db } from '@/db';
 import { posts } from '@/db/schema/posts';
 import { count, desc, sql } from 'drizzle-orm';
@@ -9,35 +11,39 @@ const EXPERIENCE_VALUES = ['Junior', 'Mid', 'Senior'] as const;
 const JOB_TYPE_VALUES = ['Full time', 'Part-time', 'Freelance', 'Internship'] as const;
 const WORK_TYPE_VALUES = ['On-site', 'Remote', 'Hybrid'] as const;
 
-export const getFilterCategories = async (currentFilters: Filters) => {
-  const jobTypeWhere = buildWhereClause(currentFilters, { exclude: 'jobType' });
-  const workTypeWhere = buildWhereClause(currentFilters, { exclude: 'workType' });
-  const experienceWhere = buildWhereClause(currentFilters, { exclude: 'experience' });
+export const getFilterCategories = unstable_cache(
+  async (currentFilters: Filters) => {
+    const jobTypeWhere = buildWhereClause(currentFilters, { exclude: 'jobType' });
+    const workTypeWhere = buildWhereClause(currentFilters, { exclude: 'workType' });
+    const experienceWhere = buildWhereClause(currentFilters, { exclude: 'experience' });
 
-  const jobTypes = await db
-    .select({ type: posts.jobType, count: count() })
-    .from(posts)
-    .where(jobTypeWhere)
-    .groupBy(posts.jobType)
-    .orderBy(desc(sql`count(*)`));
+    const jobTypes = await db
+      .select({ type: posts.jobType, count: count() })
+      .from(posts)
+      .where(jobTypeWhere)
+      .groupBy(posts.jobType)
+      .orderBy(desc(sql`count(*)`));
 
-  const workTypes = await db
-    .select({ type: posts.workType, count: count() })
-    .from(posts)
-    .where(workTypeWhere)
-    .groupBy(posts.workType)
-    .orderBy(desc(sql`count(*)`));
+    const workTypes = await db
+      .select({ type: posts.workType, count: count() })
+      .from(posts)
+      .where(workTypeWhere)
+      .groupBy(posts.workType)
+      .orderBy(desc(sql`count(*)`));
 
-  const experiences = await db
-    .select({ type: posts.experience, count: count() })
-    .from(posts)
-    .where(experienceWhere)
-    .groupBy(posts.experience)
-    .orderBy(desc(sql`count(*)`));
+    const experiences = await db
+      .select({ type: posts.experience, count: count() })
+      .from(posts)
+      .where(experienceWhere)
+      .groupBy(posts.experience)
+      .orderBy(desc(sql`count(*)`));
 
-  return {
-    jobType: mergeAndSort(JOB_TYPE_VALUES, jobTypes),
-    workType: mergeAndSort(WORK_TYPE_VALUES, workTypes),
-    experience: mergeAndSort(EXPERIENCE_VALUES, experiences)
-  };
-};
+    return {
+      jobType: mergeAndSort(JOB_TYPE_VALUES, jobTypes),
+      workType: mergeAndSort(WORK_TYPE_VALUES, workTypes),
+      experience: mergeAndSort(EXPERIENCE_VALUES, experiences)
+    };
+  },
+  ['getFiltersCategories', 'getPostsWithCompany'],
+  { revalidate: 3600 }
+);
