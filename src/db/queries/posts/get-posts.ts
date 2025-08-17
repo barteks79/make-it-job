@@ -4,9 +4,9 @@ import { unstable_cache } from 'next/cache';
 import { db } from '@/db';
 import { posts } from '@/db/schema/posts';
 import { companies } from '@/db/schema/companies';
-import { eq, sql, and, gte, lte } from 'drizzle-orm';
+import { eq, sql, and, gte, lte, desc, asc, type SQL } from 'drizzle-orm';
 
-import { arrayToClause, type Filters } from '@/lib/filter';
+import { arrayToClause, getSortClause, type Filters } from '@/lib/filter';
 
 export const getPostsWithCompany = unstable_cache(
   async (filters: Filters) => {
@@ -27,6 +27,7 @@ export const getPostsWithCompany = unstable_cache(
 
     // Create a clause for the post date if provided
     const postDateClause = filters.postDate ? gte(posts.createdAt, filters.postDate) : sql`1 = 1`;
+    const orderOptions = getSortClause(filters.sort);
 
     return db
       .select({ post: posts, company: { name: companies.name, image: companies.image } })
@@ -41,7 +42,8 @@ export const getPostsWithCompany = unstable_cache(
           maxSalaryClause,
           postDateClause
         )
-      );
+      )
+      .orderBy(orderOptions);
   },
   ['getPostsWithCompany'],
   { revalidate: 3600 } // 1 hour

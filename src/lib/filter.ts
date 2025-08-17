@@ -1,5 +1,5 @@
-import { inArray, gte, sql, lte, and, eq, or, type SQL } from 'drizzle-orm';
 import { posts } from '@/db/schema/posts';
+import { inArray, gte, sql, lte, and, eq, or, desc, asc, type SQL } from 'drizzle-orm';
 import type { JobType, Experience, WorkType } from '@/types/job-post';
 
 export type Filters = {
@@ -8,6 +8,7 @@ export type Filters = {
   experience: Experience[];
   annualSalary?: { min?: number; max?: number };
   postDate: Date | null;
+  sort: 'relevance' | 'latest' | 'high-low' | 'low-high';
 };
 
 export type FilterSearchParams = Promise<{
@@ -24,6 +25,7 @@ export type FilterSearchParams = Promise<{
   date?: string;
   ['salary-min']?: string;
   ['salary-max']?: string;
+  sort?: 'relevance' | 'latest' | 'high-low' | 'low-high';
 }>;
 
 // If the filter array is empty, return a clause that is true
@@ -90,7 +92,7 @@ export const buildWhereClause = (
 };
 
 // Get currently applied filters from searchParams and returns it as a Filters object
-export const getAppliedFilters = async (searchParams: FilterSearchParams) => {
+export const getAppliedFilters = async (searchParams: FilterSearchParams): Promise<Filters> => {
   const params = await searchParams;
   const ONE_DAY = 24 * 60 * 60 * 1000;
 
@@ -106,6 +108,8 @@ export const getAppliedFilters = async (searchParams: FilterSearchParams) => {
       postDate = new Date(Date.now() - 30 * ONE_DAY);
     }
   }
+
+  const sort = params['sort'] ?? 'latest';
 
   const annualSalary: { min?: number; max?: number } = {};
   if (params['salary-min']) annualSalary.min = Number(params['salary-min']);
@@ -127,5 +131,16 @@ export const getAppliedFilters = async (searchParams: FilterSearchParams) => {
   if (params['mid']) experience.push('Mid');
   if (params['senior']) experience.push('Senior');
 
-  return { annualSalary, jobType, workType, experience, postDate };
+  return { annualSalary, jobType, workType, experience, postDate, sort };
+};
+
+export const getSortClause = (sort: Filters['sort']): SQL => {
+  if (sort === 'high-low') {
+    return desc(posts.salary);
+  }
+  if (sort === 'low-high') {
+    return asc(posts.salary);
+  }
+  // Latest by default
+  return desc(posts.createdAt);
 };
