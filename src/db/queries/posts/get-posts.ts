@@ -55,3 +55,5 @@ export const getPostsWithCompany = unstable_cache(
   ['getPostsWithCompany'],
   { revalidate: 3600 } // 1 hour
 );
+
+export type PostsWithCompanyT = ReturnType<typeof getPostsWithCompany>

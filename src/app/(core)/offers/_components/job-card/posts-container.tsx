@@ -1,17 +1,14 @@
-import { getPostsWithCompany } from '@/db/queries/posts/get-posts';
-import { getAppliedFilters, type FilterSearchParams } from '@/lib/filter';
-
+import { type PostsWithCompanyT } from '@/db/queries/posts/get-posts';
 import JobPostCard, { JobPostCardSkeleton } from './job-card';
 
 export default async function PostsContainer({
-  searchParams
+  postsPromise
 }: {
-  searchParams: FilterSearchParams;
+  postsPromise: PostsWithCompanyT;
 }) {
-  const appliedFilters = await getAppliedFilters(searchParams);
-  const fetchedPosts = await getPostsWithCompany(appliedFilters);
+  const posts = await postsPromise;
 
-  return fetchedPosts.map((post, idx) => (
+  return posts.map((post, idx) => (
     <li key={idx}>
       <JobPostCard post={post.post} company={post.company} />
     </li>
