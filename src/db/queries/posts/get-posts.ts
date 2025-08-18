@@ -8,6 +8,8 @@ import { eq, sql, and, gte, lte } from 'drizzle-orm';
 
 import { arrayToClause, getSortClause, type Filters } from '@/lib/filter';
 
+import { delay } from '@/lib/utils';
+
 export const getPostsWithCompany = unstable_cache(
   async (filters: Filters) => {
     console.log('Fetching POSTS');
@@ -30,7 +32,7 @@ export const getPostsWithCompany = unstable_cache(
     const postDateClause = filters.postDate ? gte(posts.createdAt, filters.postDate) : sql`1 = 1`;
     const orderOptions = getSortClause(filters.sort);
 
-    return db
+    const result = await db
       .select({ post: posts, company: { name: companies.name, image: companies.image } })
       .from(posts)
       .innerJoin(companies, eq(posts.companyId, companies.id))
@@ -45,9 +47,12 @@ export const getPostsWithCompany = unstable_cache(
         )
       )
       .orderBy(orderOptions);
+
+    await delay(2000);
+    return result;
   },
   ['getPostsWithCompany'],
   { revalidate: 3600 } // 1 hour
 );
 
-export type PostsWithCompanyT = ReturnType<typeof getPostsWithCompany>
+export type PostsWithCompanyT = ReturnType<typeof getPostsWithCompany>;
