@@ -23,9 +23,7 @@ export default async function JobPosts({ searchParams }: { searchParams: FilterS
           jobs in total
         </p>
 
-        <Suspense fallback={<p>Loading...</p>}>
-          <SortingSelect />
-        </Suspense>
+        <SortingSelect />
       </div>
 
       <div className="overflow-y-scroll flex-1 pb-4 px-5 md:pb-5 md:px-7">

@@ -1,14 +1,13 @@
 import SalaryInputsProvider from '@/store/salary-inputs';
-import { Suspense } from 'react';
 
 import { getFilterCategories } from '@/db/queries/posts/get-filter-categories';
 import { getAppliedFilters, type FilterSearchParams } from '@/lib/filter';
 import FilterOption from './_components/filter-option';
 import FilterGroup from './_components/filter-group';
 
-import ApplySalaryButton from './_components/apply-salary-button';
 import SalaryInputs from './_components/salary-inputs';
 import DateSelect from './_components/date-select';
+import ApplySalaryButton from './_components/apply-salary-button';
 import ClearFiltersButton from './_components/clear-filters-button';
 
 export default async function SidebarView({ searchParams }: { searchParams: FilterSearchParams }) {
@@ -21,24 +20,18 @@ export default async function SidebarView({ searchParams }: { searchParams: Filt
         <SalaryInputsProvider>
           <section className="flex justify-between items-center px-7 py-4 border-b">
             <h3 className="text-foreground font-semibold tracking-tight">Filters</h3>
-            <Suspense fallback={<p>Loading...</p>}>
-              <ClearFiltersButton />
-            </Suspense>
+            <ClearFiltersButton />
           </section>
 
           <section className="flex flex-col px-7 pb-6">
             <FilterGroup label="Post Date">
-              <Suspense fallback={<p>Loading...</p>}>
-                <DateSelect />
-              </Suspense>
+              <DateSelect />
             </FilterGroup>
 
             <FilterGroup label="Job Type">
               <ul className="flex flex-col gap-2.5">
                 {categories.jobType.map((option, idx) => (
-                  <Suspense key={idx} fallback={<p>Loading...</p>}>
-                    <FilterOption option={option} />
-                  </Suspense>
+                  <FilterOption key={idx} option={option} />
                 ))}
               </ul>
             </FilterGroup>
@@ -46,9 +39,7 @@ export default async function SidebarView({ searchParams }: { searchParams: Filt
             <FilterGroup label="Work Type">
               <ul className="flex flex-col gap-2.5">
                 {categories.workType.map((option, idx) => (
-                  <Suspense key={idx} fallback={<p>Loading...</p>}>
-                    <FilterOption option={option} />
-                  </Suspense>
+                  <FilterOption key={idx} option={option} />
                 ))}
               </ul>
             </FilterGroup>
@@ -56,23 +47,15 @@ export default async function SidebarView({ searchParams }: { searchParams: Filt
             <FilterGroup label="Experience">
               <ul className="flex flex-col gap-2.5">
                 {categories.experience.map((option, idx) => (
-                  <Suspense key={idx} fallback={<p>Loading...</p>}>
-                    <FilterOption option={option} />
-                  </Suspense>
+                  <FilterOption key={idx} option={option} />
                 ))}
               </ul>
             </FilterGroup>
 
             <FilterGroup label="Annual Salary">
-              <Suspense fallback={<p>Loading...</p>}>
-                <SalaryInputs />
-              </Suspense>
-
+              <SalaryInputs />
               <p className="text-muted-foreground text-sm">In thousands of USD.</p>
-
-              <Suspense fallback={<p>Loading...</p>}>
-                <ApplySalaryButton />
-              </Suspense>
+              <ApplySalaryButton />
             </FilterGroup>
           </section>
         </SalaryInputsProvider>
