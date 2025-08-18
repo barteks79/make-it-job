@@ -16,7 +16,13 @@ export default async function CompanyLogo({
   return (
     <Avatar className={cn('size-9 rounded-md', className)}>
       <AvatarImage className="object-contain object-center" src={imageUrl} alt={`${name} Logo`} />
-      <AvatarFallback>{name} Logo</AvatarFallback>
+      <AvatarFallback>
+        <AvatarSkeleton />
+      </AvatarFallback>
     </Avatar>
   );
+}
+
+function AvatarSkeleton() {
+  return <div className="animate-pulse bg-accent w-full h-full"></div>;
 }
