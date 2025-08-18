@@ -39,3 +39,5 @@ export function createRelativeDate(date: Date) {
 
   return 'month ago';
 }
+
+export const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

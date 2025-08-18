@@ -49,3 +49,5 @@ export const getFilterCategories = unstable_cache(
   ['getFiltersCategories', 'getPostsWithCompany'],
   { revalidate: 3600 }
 );
+
+export type FilterCategoriesT = ReturnType<typeof getFilterCategories>;

@@ -1,9 +1,12 @@
+import { Suspense } from 'react';
 import SalaryInputsProvider from '@/store/salary-inputs';
 
 import { getFilterCategories } from '@/db/queries/posts/get-filter-categories';
 import { getAppliedFilters, type FilterSearchParams } from '@/lib/filter';
-import FilterOption from './_components/filter-option';
 import FilterGroup from './_components/filter-group';
+import FilterGroupContainer, {
+  FilterContainerSkeleton
+} from './_components/filter-group-container';
 
 import SalaryInputs from './_components/salary-inputs';
 import DateSelect from './_components/date-select';
@@ -12,7 +15,7 @@ import ClearFiltersButton from './_components/clear-filters-button';
 
 export default async function SidebarView({ searchParams }: { searchParams: FilterSearchParams }) {
   const currentFilters = await getAppliedFilters(searchParams);
-  const categories = await getFilterCategories(currentFilters);
+  const categories = getFilterCategories(currentFilters);
 
   return (
     <div className="hidden lg:block overflow-y-scroll bg-secondary border-r horizontal-scrollbar">
@@ -28,29 +31,9 @@ export default async function SidebarView({ searchParams }: { searchParams: Filt
               <DateSelect />
             </FilterGroup>
 
-            <FilterGroup label="Job Type">
-              <ul className="flex flex-col gap-2.5">
-                {categories.jobType.map((option, idx) => (
-                  <FilterOption key={idx} option={option} />
-                ))}
-              </ul>
-            </FilterGroup>
-
-            <FilterGroup label="Work Type">
-              <ul className="flex flex-col gap-2.5">
-                {categories.workType.map((option, idx) => (
-                  <FilterOption key={idx} option={option} />
-                ))}
-              </ul>
-            </FilterGroup>
-
-            <FilterGroup label="Experience">
-              <ul className="flex flex-col gap-2.5">
-                {categories.experience.map((option, idx) => (
-                  <FilterOption key={idx} option={option} />
-                ))}
-              </ul>
-            </FilterGroup>
+            <Suspense fallback={<FilterContainerSkeleton />}>
+              <FilterGroupContainer categoriesPromise={categories} />
+            </Suspense>
 
             <FilterGroup label="Annual Salary">
               <SalaryInputs />
