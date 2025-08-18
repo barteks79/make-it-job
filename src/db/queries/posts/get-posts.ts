@@ -4,13 +4,16 @@ import { unstable_cache } from 'next/cache';
 import { db } from '@/db';
 import { posts } from '@/db/schema/posts';
 import { companies } from '@/db/schema/companies';
-import { eq, sql, and, gte, lte, desc, asc, type SQL } from 'drizzle-orm';
+import { eq, sql, and, gte, lte } from 'drizzle-orm';
 
 import { arrayToClause, getSortClause, type Filters } from '@/lib/filter';
+
+const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export const getPostsWithCompany = unstable_cache(
   async (filters: Filters) => {
     console.log('Fetching POSTS');
+
     // Create the individual clauses for each filter
     const jobTypeClause = arrayToClause(filters.jobType, posts.jobType);
     const workTypeClause = arrayToClause(filters.workType, posts.workType);
@@ -29,7 +32,7 @@ export const getPostsWithCompany = unstable_cache(
     const postDateClause = filters.postDate ? gte(posts.createdAt, filters.postDate) : sql`1 = 1`;
     const orderOptions = getSortClause(filters.sort);
 
-    return db
+    const result = await db
       .select({ post: posts, company: { name: companies.name, image: companies.image } })
       .from(posts)
       .innerJoin(companies, eq(posts.companyId, companies.id))
@@ -44,6 +47,10 @@ export const getPostsWithCompany = unstable_cache(
         )
       )
       .orderBy(orderOptions);
+
+    await delay(3000);
+
+    return result;
   },
   ['getPostsWithCompany'],
   { revalidate: 3600 } // 1 hour

@@ -4,6 +4,7 @@ import { type Company } from '@/db/schema/companies';
 
 import { BookmarkIcon, DollarSignIcon, MonitorIcon, UserIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 
 import CompanyLogo from '@/components/custom/company-logo';
 import JobTagBadge from './job-tag-badge';
@@ -19,13 +20,12 @@ import {
   CardFooter
 } from '@/components/ui/card';
 
-export default function JobPostCard({
-  post,
-  company
-}: {
+type JobPostCardProps = {
   post: Omit<JobPost, 'companyId'>;
   company: Pick<Company, 'name' | 'image'>;
-}) {
+};
+
+export default function JobPostCard({ post, company }: JobPostCardProps) {
   return (
     <Card className="py-5 gap-4 h-full relative">
       <CardHeader className="flex flex-col gap-2">
@@ -97,6 +97,61 @@ export default function JobPostCard({
       <CardFooter className="grid grid-cols-2 gap-2">
         <DetailsButton postId={post.id} />
         <Button className="cursor-pointer">Apply</Button>
+      </CardFooter>
+    </Card>
+  );
+}
+
+export function JobPostCardSkeleton() {
+  return (
+    <Card className="py-5 gap-4 h-full relative animate-pulse bg-muted border-border/50 shadow-xs">
+      <CardHeader className="flex flex-col gap-2">
+        <div className="flex justify-between items-center w-full">
+          <Skeleton className="w-36 h-4 rounded-md bg-muted-foreground/20" /> {/* date text */}
+          <Skeleton className="size-7 rounded-md bg-muted-foreground/20" /> {/* bookmark button */}
+        </div>
+
+        <figure className="flex items-center gap-3 border-b border-border/50 w-full pb-4">
+          <Skeleton className="size-9 rounded-md bg-muted-foreground/20" /> {/* company logo */}
+          <figcaption className="flex flex-col justify-between h-full">
+            <Skeleton className="w-36 h-4 rounded-md bg-muted-foreground/20" /> {/* job title */}
+            <Skeleton className="w-24 h-4 rounded-md bg-muted-foreground/20" /> {/* company name */}
+          </figcaption>
+        </figure>
+      </CardHeader>
+
+      <CardContent className="flex flex-col gap-4 flex-1">
+        <ul className="flex justify-between items-center">
+          <li className="flex items-center gap-1">
+            <Skeleton className="size-5 rounded-md bg-muted-foreground/20" /> {/* user icon */}
+            <Skeleton className="w-16 h-5 rounded-md bg-muted-foreground/20" />{' '}
+          </li>
+
+          <li className="flex items-center gap-1">
+            <Skeleton className="size-5 rounded-md bg-muted-foreground/20" /> {/* user icon */}
+            <Skeleton className="w-16 h-5 rounded-md bg-muted-foreground/20" />{' '}
+          </li>
+
+          <li className="flex items-center gap-1">
+            <Skeleton className="size-5 rounded-md bg-muted-foreground/20" /> {/* user icon */}
+            <Skeleton className="w-16 h-5 rounded-md bg-muted-foreground/20" />{' '}
+          </li>
+        </ul>
+        <Skeleton className="h-14 rounded-md bg-muted-foreground/20" /> {/* job description */}
+        <ul className="flex gap-2 flex-wrap">
+          <Skeleton className="h-4 w-16 rounded-md bg-muted-foreground/20" /> {/* job tags */}
+          <Skeleton className="h-4 w-12 rounded-md bg-muted-foreground/20" />
+          <Skeleton className="h-4 w-24 rounded-md bg-muted-foreground/20" />
+          <Skeleton className="h-4 w-16 rounded-md bg-muted-foreground/20" />
+          <Skeleton className="h-4 w-12.5 rounded-md bg-muted-foreground/20" />
+          <Skeleton className="h-4 w-20 rounded-md bg-muted-foreground/20" />
+          <Skeleton className="h-4 w-16 rounded-md bg-muted-foreground/20" />
+        </ul>
+      </CardContent>
+
+      <CardFooter className="grid grid-cols-2 gap-2">
+        <Skeleton className="flex-1 h-9 rounded-md bg-muted-foreground/20" />
+        <Skeleton className="flex-1 h-9 rounded-md bg-muted-foreground/20" />
       </CardFooter>
     </Card>
   );
