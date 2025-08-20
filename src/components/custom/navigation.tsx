@@ -6,30 +6,38 @@ import Logo from '@/components/custom/logo';
 import { Plus } from 'lucide-react';
 
 export default function Navigation() {
-	return (
-		<nav className="flex justify-between items-center border-b px-3 md:px-8 h-14">
-			<div className="flex items-center gap-4 md:gap-8">
-				<div className="md:hidden">
-					<MobileNav />
-				</div>
+  const isAuthenticated = false;
 
-				<Logo />
+  return (
+    <nav className="flex justify-between items-center border-b px-3 md:px-8 h-14">
+      <div className="flex items-center gap-4 md:gap-8">
+        <div className="md:hidden">
+          <MobileNav />
+        </div>
 
-				<ul className="hidden md:flex md:items-center gap-6 text-sm">
-					<NavItem href="/dashboard">Dashboard</NavItem>
-					<NavItem href="/offers">Offers</NavItem>
-					<NavItem href="/bookmarks">Bookmarks</NavItem>
-					<NavItem href="/pricing">Pricing</NavItem>
-				</ul>
-			</div>
+        <Logo />
 
-			<ul className="flex items-center gap-2 md:gap-3">
-				<Button className="size-8" variant="outline" size="icon">
-					<Plus />
-				</Button>
+        <ul className="hidden md:flex md:items-center gap-6 ">
+          <NavItem href="/dashboard">Dashboard</NavItem>
+          <NavItem href="/offers">Offers</NavItem>
+          <NavItem href="/bookmarks">Bookmarks</NavItem>
+          <NavItem href="/pricing">Pricing</NavItem>
+        </ul>
+      </div>
 
-				<NavProfileDropdown />
-			</ul>
-		</nav>
-	);
+      <ul className="flex items-center gap-2 md:gap-3">
+        {isAuthenticated ? (
+          <>
+            <Button className="size-8" variant="outline" size="icon">
+              <Plus />
+            </Button>
+
+            <NavProfileDropdown />
+          </>
+        ) : (
+          <NavItem href="/sign-in">Sign In</NavItem>
+        )}
+      </ul>
+    </nav>
+  );
 }
