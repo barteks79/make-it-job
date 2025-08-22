@@ -30,7 +30,6 @@ export default function RootLayout({ children }: PropsWithChildren) {
           enableSystem
           disableTransitionOnChange
         >
-          <Navigation />
           {children}
         </ThemeProvider>
       </body>
