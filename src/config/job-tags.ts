@@ -1,6 +1,6 @@
 import { type JobTag } from '@/store/quick-filters';
 
-export const jobTags: JobTag[] = [
+export const jobTags = [
   'Backend Developer',
   'Frontend Developer',
   'Data Scientist',
@@ -8,4 +8,4 @@ export const jobTags: JobTag[] = [
   'Software Engineer',
   'Cloud Engineer',
   'DevOps Engineer'
-];
+] satisfies JobTag[];

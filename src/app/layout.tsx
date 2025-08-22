@@ -1,4 +1,3 @@
-import Navigation from '@/components/custom/navigation';
 import { ThemeProvider } from '@/store/theme-provider';
 import { LAYOUT_METADATA } from '@/config/metadata';
 

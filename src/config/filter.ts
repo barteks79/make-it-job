@@ -1,6 +1,6 @@
 import { type FilterCategoriesT } from '@/db/queries/posts/get-filter-categories';
 
-export const fallbackCategories: Awaited<FilterCategoriesT> = {
+export const fallbackCategories = {
   jobType: [
     {
       type: 'Full time',
@@ -47,4 +47,4 @@ export const fallbackCategories: Awaited<FilterCategoriesT> = {
       count: 0
     }
   ]
-};
+} satisfies Awaited<FilterCategoriesT>;
