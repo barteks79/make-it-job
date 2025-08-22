@@ -1,11 +1,11 @@
-import Link from 'next/link';
-
 export default function SignInPage() {
   return (
-    <>
-      <Link href="/" className="text-2xl font-flavors">
-        MakeITJob
-      </Link>
-    </>
+    <div>
+      <form>
+        <input type="email" placeholder="Email" />
+        <input type="password" placeholder="Password" />
+        <button type="submit">Sign In</button>
+      </form>
+    </div>
   );
 }
