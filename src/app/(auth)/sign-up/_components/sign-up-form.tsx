@@ -2,7 +2,7 @@
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { SignInSchema } from '@/types/sign-in-schema';
+import { SignUpSchema } from '@/types/sign-up-schema';
 import { z } from 'zod';
 
 import { Input } from '@/components/ui/input';
@@ -17,18 +17,18 @@ import {
 } from '@/components/ui/form';
 
 import ContinueWithSeparator from '../../continue-with-separator';
-import AuthOptions from './auth-options';
 
-export default function SignInForm() {
-  const form = useForm<z.infer<typeof SignInSchema>>({
-    resolver: zodResolver(SignInSchema),
+export default function SignUpForm() {
+  const form = useForm({
+    resolver: zodResolver(SignUpSchema),
     defaultValues: {
       email: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     }
   });
 
-  const onSubmit = async (data: z.infer<typeof SignInSchema>) => {
+  const onSubmit = async (data: z.infer<typeof SignUpSchema>) => {
     console.log(data);
   };
 
@@ -64,14 +64,26 @@ export default function SignInForm() {
                 </FormItem>
               )}
             />
-          </div>
 
-          <AuthOptions />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-lg">Confirm Password</FormLabel>
+                  <FormControl>
+                    <Input className="h-11" placeholder="Confirm the password" {...field} />
+                  </FormControl>
+                  <FormMessage className="text-base" />
+                </FormItem>
+              )}
+            />
+          </div>
         </section>
 
         <section className="flex flex-col gap-4">
           <Button type="submit" className="text-base h-10 cursor-pointer">
-            {form.formState.isSubmitting ? 'Signing In...' : 'Sign In'}
+            {form.formState.isSubmitting ? 'Signing Up...' : 'Sign Up'}
           </Button>
 
           <ContinueWithSeparator />
