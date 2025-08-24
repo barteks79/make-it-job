@@ -1,6 +1,6 @@
 'use client';
 
-import { useSession } from '@/lib/auth-client';
+import { authClient } from '@/lib/auth-client';
 
 import MobileNav from '@/components/custom/mobile-nav';
 import { Button } from '@/components/ui/button';
@@ -10,7 +10,7 @@ import Logo from '@/components/custom/logo';
 import { Plus } from 'lucide-react';
 
 export default function Navigation() {
-  const { data, error } = useSession();
+  const { data } = authClient.useSession();
 
   return (
     <nav className="flex justify-between items-center border-b px-3 md:px-8 h-14">

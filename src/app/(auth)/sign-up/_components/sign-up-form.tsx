@@ -1,7 +1,9 @@
 'use client';
 
-import { signUp } from '@/lib/auth-client';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { authClient } from '@/lib/auth-client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignUpSchema } from '@/types/sign-up-schema';
 import { z } from 'zod';
@@ -20,6 +22,8 @@ import {
 import ContinueWithSeparator from '../../continue-with-separator';
 
 export default function SignUpForm() {
+  const router = useRouter();
+
   const form = useForm({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
@@ -29,21 +33,29 @@ export default function SignUpForm() {
     }
   });
 
-  const onSubmit = async ({ email, password }: z.infer<typeof SignUpSchema>) => {
-    const { data, error } = await signUp.email(
+  const onSubmit = async (data: z.infer<typeof SignUpSchema>) => {
+    await authClient.signUp.email(
       {
-        email,
-        password,
-        name: 'Static Name'
+        email: data.email,
+        password: data.password,
+        name: 'Static Name',
+        callbackURL: '/dashboard'
       },
       {
-        onError: ctx => {
-          console.log(ctx);
+        onSuccess: () => {
+          router.push('/dashboard');
+        },
+        onError: ({ error }) => {
+          if (error.status === 422) {
+            form.setError('email', { message: 'Email already in use.' });
+            return;
+          }
+
+          console.error(error);
+          form.setError('root', { message: 'Unknown error.' });
         }
       }
     );
-
-    console.log(data, error);
   };
 
   return (
@@ -97,7 +109,23 @@ export default function SignUpForm() {
 
         <section className="flex flex-col gap-4">
           <Button type="submit" className="text-base h-10 cursor-pointer">
-            {form.formState.isSubmitting ? 'Signing Up...' : 'Sign Up'}
+            {form.formState.isSubmitting &&
+            (!form.formState.isSubmitted ||
+              (form.formState.isSubmitted && !form.formState.isSubmitSuccessful))
+              ? 'Signing Up...'
+              : undefined}
+
+            {!form.formState.isSubmitting &&
+            (!form.formState.isSubmitted ||
+              (form.formState.isSubmitted && !form.formState.isSubmitSuccessful))
+              ? 'Sign Up'
+              : undefined}
+
+            {form.formState.isSubmitted &&
+            form.formState.isSubmitSuccessful &&
+            !form.formState.isSubmitting
+              ? 'Redirecting...'
+              : undefined}
           </Button>
 
           <ContinueWithSeparator />

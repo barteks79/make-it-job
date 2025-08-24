@@ -1,6 +1,8 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
+import { authClient } from '@/lib/auth-client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignInSchema } from '@/types/sign-in-schema';
 import { z } from 'zod';
@@ -29,7 +31,21 @@ export default function SignInForm() {
   });
 
   const onSubmit = async (data: z.infer<typeof SignInSchema>) => {
-    console.log(data);
+    await authClient.signIn.email(
+      { ...data, callbackURL: '/dashboard' },
+      {
+        onError: ({ error }) => {
+          if (error.status === 401) {
+            form.resetField('password');
+            form.setError('password', { message: 'Invalid email or password.' });
+            return;
+          }
+
+          console.error(error);
+          form.setError('root', { message: 'Unknown error.' });
+        }
+      }
+    );
   };
 
   return (
@@ -71,7 +87,23 @@ export default function SignInForm() {
 
         <section className="flex flex-col gap-4">
           <Button type="submit" className="text-base h-10 cursor-pointer">
-            {form.formState.isSubmitting ? 'Signing In...' : 'Sign In'}
+            {form.formState.isSubmitting &&
+            (!form.formState.isSubmitted ||
+              (form.formState.isSubmitted && !form.formState.isSubmitSuccessful))
+              ? 'Signing In...'
+              : undefined}
+
+            {!form.formState.isSubmitting &&
+            (!form.formState.isSubmitted ||
+              (form.formState.isSubmitted && !form.formState.isSubmitSuccessful))
+              ? 'Sign In'
+              : undefined}
+
+            {form.formState.isSubmitted &&
+            form.formState.isSubmitSuccessful &&
+            !form.formState.isSubmitting
+              ? 'Redirecting...'
+              : undefined}
           </Button>
 
           <ContinueWithSeparator />

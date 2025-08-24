@@ -1,6 +1,6 @@
 import { createAuthClient } from 'better-auth/react';
 
-export type AuthSession = ReturnType<typeof useSession>;
-export type SessionUser = AuthSession extends { data: { user: infer U } | null } ? U : never;
+export const authClient = createAuthClient();
 
-export const { signIn, signUp, signOut, useSession } = createAuthClient();
+export type AuthSession = ReturnType<typeof authClient.useSession>;
+export type SessionUser = AuthSession extends { data: { user: infer U } | null } ? U : never;
