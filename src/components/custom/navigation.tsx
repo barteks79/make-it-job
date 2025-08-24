@@ -1,3 +1,7 @@
+'use client';
+
+import { useSession } from '@/lib/auth-client';
+
 import MobileNav from '@/components/custom/mobile-nav';
 import { Button } from '@/components/ui/button';
 import NavItem from '@/components/custom/nav-item';
@@ -6,7 +10,7 @@ import Logo from '@/components/custom/logo';
 import { Plus } from 'lucide-react';
 
 export default function Navigation() {
-  const isAuthenticated = false;
+  const { data, error } = useSession();
 
   return (
     <nav className="flex justify-between items-center border-b px-3 md:px-8 h-14">
@@ -26,13 +30,13 @@ export default function Navigation() {
       </div>
 
       <ul className="flex items-center gap-2 md:gap-3">
-        {isAuthenticated ? (
+        {data?.session ? (
           <>
             <Button className="size-8" variant="outline" size="icon">
               <Plus />
             </Button>
 
-            <NavProfileDropdown />
+            <NavProfileDropdown user={data!.user} />
           </>
         ) : (
           <NavItem href="/sign-in">Sign In</NavItem>

@@ -1,96 +1,95 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+import { signOut, type SessionUser } from '@/lib/auth-client';
 import { Button } from '@/components/ui/button';
 import DropdownLink from '@/components/custom/dropdown-link';
 
 import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuTrigger,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuGroup,
-	DropdownMenuItem
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuGroup,
+  DropdownMenuItem
 } from '@/components/ui/dropdown-menu';
 
-import {
-	BriefcaseBusinessIcon,
-	InboxIcon,
-	UserIcon,
-	SettingsIcon,
-	LogOutIcon
-} from 'lucide-react';
+import { BriefcaseBusinessIcon, InboxIcon, UserIcon, SettingsIcon, LogOutIcon } from 'lucide-react';
 
-import {
-	Avatar,
-	AvatarImage,
-	AvatarFallback
-} from '@/components/ui/avatar';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
-export default function NavProfileDropdown() {
-	return (
-		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button variant="outline" size="icon" className="size-8">
-					<UserIcon />
-				</Button>
-			</DropdownMenuTrigger>
+export default function NavProfileDropdown({ user }: { user: SessionUser }) {
+  const router = useRouter();
 
-			<DropdownMenuContent className="min-w-60" align="end" sideOffset={6}>
-				<DropdownMenuLabel className="p-0 font-normal">
-					<div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-						<Avatar className="size-10 rounded-lg">
-							<AvatarImage
-								className="object-cover object-center"
-								src="/images/user-default1.jpg"
-							/>
-							<AvatarFallback className="rounded-lg">
-								Profile picture
-							</AvatarFallback>
-						</Avatar>
+  const handleLogout = async () => {
+    await signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.refresh();
+        }
+      }
+    });
+  };
 
-						<div className="grid flex-1 text-sm">
-							<span className="truncate font-semibold">Username</span>
-							<span className="truncate text-foreground/80">
-								user@example.com
-							</span>
-						</div>
-					</div>
-				</DropdownMenuLabel>
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="icon" className="size-8">
+          <UserIcon />
+        </Button>
+      </DropdownMenuTrigger>
 
-				<DropdownMenuSeparator />
+      <DropdownMenuContent className="min-w-60" align="end" sideOffset={6}>
+        <DropdownMenuLabel className="p-0 font-normal">
+          <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+            <Avatar className="size-10 rounded-lg">
+              <AvatarImage className="object-cover object-center" src="/images/user-default1.jpg" />
+              <AvatarFallback className="rounded-lg">Profile picture</AvatarFallback>
+            </Avatar>
 
-				<DropdownMenuGroup>
-					<DropdownLink href="/applications">
-						<BriefcaseBusinessIcon />
-						Applications
-					</DropdownLink>
+            <div className="grid flex-1 text-sm">
+              <span className="truncate font-semibold">{user.name}</span>
+              <span className="truncate text-foreground/80">{user.email}</span>
+            </div>
+          </div>
+        </DropdownMenuLabel>
 
-					<DropdownLink href="/inbox">
-						<InboxIcon />
-						Inbox
-					</DropdownLink>
-				</DropdownMenuGroup>
+        <DropdownMenuSeparator />
 
-				<DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownLink href="/applications">
+            <BriefcaseBusinessIcon />
+            Applications
+          </DropdownLink>
 
-				<DropdownMenuGroup>
-					<DropdownLink href="/profile">
-						<UserIcon />
-						Profile
-					</DropdownLink>
+          <DropdownLink href="/inbox">
+            <InboxIcon />
+            Inbox
+          </DropdownLink>
+        </DropdownMenuGroup>
 
-					<DropdownLink href="/settings">
-						<SettingsIcon />
-						Settings
-					</DropdownLink>
-				</DropdownMenuGroup>
+        <DropdownMenuSeparator />
 
-				<DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownLink href="/profile">
+            <UserIcon />
+            Profile
+          </DropdownLink>
 
-				<DropdownMenuItem>
-					<LogOutIcon />
-					Logout
-				</DropdownMenuItem>
-			</DropdownMenuContent>
-		</DropdownMenu>
-	);
+          <DropdownLink href="/settings">
+            <SettingsIcon />
+            Settings
+          </DropdownLink>
+        </DropdownMenuGroup>
+
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem onClick={handleLogout}>
+          <LogOutIcon />
+          Logout
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
 }
