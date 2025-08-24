@@ -1,5 +1,6 @@
 'use client';
 
+import { signUp } from '@/lib/auth-client';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignUpSchema } from '@/types/sign-up-schema';
@@ -28,8 +29,21 @@ export default function SignUpForm() {
     }
   });
 
-  const onSubmit = async (data: z.infer<typeof SignUpSchema>) => {
-    console.log(data);
+  const onSubmit = async ({ email, password }: z.infer<typeof SignUpSchema>) => {
+    const { data, error } = await signUp.email(
+      {
+        email,
+        password,
+        name: 'Static Name'
+      },
+      {
+        onError: ctx => {
+          console.log(ctx);
+        }
+      }
+    );
+
+    console.log(data, error);
   };
 
   return (
