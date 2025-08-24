@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { authClient, type SessionUser } from '@/lib/auth-client';
+import { authClient, type SessionUser } from '@/lib/auth/client';
 import { Button } from '@/components/ui/button';
 import DropdownLink from '@/components/custom/dropdown-link';
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { authClient } from '@/lib/auth-client';
+import { authClient } from '@/lib/auth/client';
 
 import MobileNav from '@/components/custom/mobile-nav';
 import { Button } from '@/components/ui/button';

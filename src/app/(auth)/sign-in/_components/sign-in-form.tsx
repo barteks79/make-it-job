@@ -1,7 +1,7 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { authClient } from '@/lib/auth-client';
+import { authClient } from '@/lib/auth/client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SignInSchema } from '@/types/sign-in-schema';
