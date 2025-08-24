@@ -22,7 +22,11 @@ export default async function JobDetails({ postId }: { postId: string }) {
   return (
     <>
       <header className="flex items-center gap-5 py-5 border-b">
-        <CompanyLogo className="size-12" image={job.company.image!} name={job.company.name} />
+        <CompanyLogo
+          className="size-12"
+          image={job.company.image}
+          alt={`${job.company.name} Logo`}
+        />
 
         <div className="flex flex-col">
           <h2 className="tracking-tight font-medium">

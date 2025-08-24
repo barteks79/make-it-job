@@ -5,17 +5,27 @@ import { cn } from '@/lib/utils';
 export default async function CompanyLogo({
   className,
   image,
-  name
+  providerImage,
+  alt
 }: {
   className?: string;
-  image: string;
-  name: string;
+  image?: string | null | undefined;
+  providerImage?: string | null | undefined;
+  alt: string;
 }) {
-  const imageUrl = await getImageUrl(image);
+  let imageUrl = '/images/user-default1.jpg';
+
+  if (image) {
+    imageUrl = await getImageUrl(image);
+  }
+
+  if (providerImage && !image) {
+    imageUrl = providerImage;
+  }
 
   return (
     <Avatar className={cn('size-9 rounded-md', className)}>
-      <AvatarImage className="object-contain object-center" src={imageUrl} alt={`${name} Logo`} />
+      <AvatarImage className="object-contain object-center" src={imageUrl} alt={alt} />
       <AvatarFallback>
         <AvatarSkeleton />
       </AvatarFallback>

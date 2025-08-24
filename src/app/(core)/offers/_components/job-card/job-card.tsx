@@ -53,7 +53,7 @@ export default function JobPostCard({ post, company }: JobPostCardProps) {
         </div>
 
         <figure className="flex items-center gap-3 border-b w-full pb-4">
-          <CompanyLogo image={company.image!} name={company.name} />
+          <CompanyLogo image={company.image} alt={`${company.name} Logo`} />
 
           <figcaption className="flex flex-col justify-between">
             <CardTitle>{post.position}</CardTitle>

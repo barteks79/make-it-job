@@ -1,12 +1,7 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
-
-import { authClient } from '@/lib/auth/client';
 import { type SessionUser } from '@/lib/auth';
 
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import CompanyLogo from './company-logo';
 
 import {
   DropdownMenu,
@@ -14,26 +9,14 @@ import {
   DropdownMenuTrigger,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuGroup,
-  DropdownMenuItem
+  DropdownMenuGroup
 } from '@/components/ui/dropdown-menu';
-
-import { BriefcaseBusinessIcon, InboxIcon, UserIcon, SettingsIcon, LogOutIcon } from 'lucide-react';
 import DropdownLink from '@/components/custom/dropdown-link';
+import DropdownLogout from './dropdown-logout';
+
+import { BriefcaseBusinessIcon, InboxIcon, UserIcon, SettingsIcon } from 'lucide-react';
 
 export default function NavProfileDropdown({ user }: { user: SessionUser }) {
-  const router = useRouter();
-
-  const handleLogout = async () => {
-    await authClient.signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          router.refresh();
-        }
-      }
-    });
-  };
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -45,10 +28,12 @@ export default function NavProfileDropdown({ user }: { user: SessionUser }) {
       <DropdownMenuContent className="min-w-60" align="end" sideOffset={6}>
         <DropdownMenuLabel className="p-0 font-normal">
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-            <Avatar className="size-10 rounded-lg">
-              <AvatarImage className="object-cover object-center" src="/images/user-default1.jpg" />
-              <AvatarFallback className="rounded-lg">Profile picture</AvatarFallback>
-            </Avatar>
+            <CompanyLogo
+              image={user.image}
+              providerImage={user.providerImage}
+              className="size-10"
+              alt="Profile Picture"
+            />
 
             <div className="grid flex-1 text-sm">
               <span className="truncate font-semibold">{user.name}</span>
@@ -87,10 +72,7 @@ export default function NavProfileDropdown({ user }: { user: SessionUser }) {
 
         <DropdownMenuSeparator />
 
-        <DropdownMenuItem onClick={handleLogout}>
-          <LogOutIcon />
-          Logout
-        </DropdownMenuItem>
+        <DropdownLogout />
       </DropdownMenuContent>
     </DropdownMenu>
   );
