@@ -1,25 +1,29 @@
-'use client';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
-import { authClient } from '@/lib/auth/client';
-
-import MobileNav from '@/components/custom/mobile-nav';
+import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import NavItem from '@/components/custom/nav-item';
-import NavProfileDropdown from '@/components/custom/nav-profile-dropdown';
-import Logo from '@/components/custom/logo';
 import { Plus } from 'lucide-react';
 
-export default function Navigation() {
-  const { data } = authClient.useSession();
+import NavProfileDropdown from './nav-profile-dropdown';
+import MobileNav from './mobile-nav';
+import NavItem from './nav-item';
+
+export default async function Navigation() {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
 
   return (
     <nav className="flex justify-between items-center border-b px-3 md:px-8 h-14">
       <div className="flex items-center gap-4 md:gap-8">
         <div className="md:hidden">
-          <MobileNav />
+          <MobileNav isAuthenticated={!!session} />
         </div>
 
-        <Logo />
+        <Link href="/" className="font-flavors text-lg tracking-wider uppercase text-foreground">
+          MakeITJob
+        </Link>
 
         <ul className="hidden md:flex md:items-center gap-6 ">
           <NavItem href="/dashboard">Dashboard</NavItem>
@@ -30,13 +34,13 @@ export default function Navigation() {
       </div>
 
       <ul className="flex items-center gap-2 md:gap-3">
-        {data?.session ? (
+        {session ? (
           <>
             <Button className="size-8" variant="outline" size="icon">
               <Plus />
             </Button>
 
-            <NavProfileDropdown user={data!.user} />
+            <NavProfileDropdown user={session.user} />
           </>
         ) : (
           <NavItem href="/sign-in">Sign In</NavItem>
