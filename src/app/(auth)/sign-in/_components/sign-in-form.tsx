@@ -18,6 +18,7 @@ import {
   FormMessage
 } from '@/components/ui/form';
 
+import { GoogleIcon } from './auth-icons';
 import ContinueWithSeparator from '../../continue-with-separator';
 import AuthOptions from './auth-options';
 
@@ -29,6 +30,12 @@ export default function SignInForm() {
       password: ''
     }
   });
+
+  const signInWithGoogle = async () => {
+    await authClient.signIn.social({
+      provider: 'google'
+    });
+  };
 
   const onSubmit = async (data: z.infer<typeof SignInSchema>) => {
     await authClient.signIn.email(
@@ -108,9 +115,17 @@ export default function SignInForm() {
 
           <ContinueWithSeparator />
 
-          <Button variant="secondary" disabled className="text-base h-10 cursor-pointer">
-            Coming soon...
-          </Button>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <Button
+              type="button"
+              variant="outline"
+              className="h-10 cursor-pointer"
+              onClick={signInWithGoogle}
+            >
+              <GoogleIcon className="size-4" />
+              Continue with Google
+            </Button>
+          </div>
         </section>
       </form>
     </Form>

@@ -8,8 +8,10 @@ import { verifications } from '@/db/schema/verifications';
 import { sessions } from '@/db/schema/sessions';
 
 export const auth = betterAuth({
-  secret: process.env.BETTER_AUTH_SECRET,
-  url: process.env.BETTER_AUTH_URL,
+  // secrets
+  secret: process.env.BETTER_AUTH_SECRET as string,
+  url: process.env.BETTER_AUTH_URL as string,
+  // db config
   database: drizzleAdapter(db, {
     provider: 'pg',
     schema: {
@@ -19,12 +21,22 @@ export const auth = betterAuth({
       session: sessions
     }
   }),
+  // email & password config
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: false,
     minPasswordLength: 8,
     maxPasswordLength: 100,
     autoSignIn: true
+  },
+  // social providers config
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      prompt: 'select_account consent',
+      accessType: 'offline'
+    }
   },
   advanced: {
     database: {
