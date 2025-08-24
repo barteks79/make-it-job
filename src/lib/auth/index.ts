@@ -21,6 +21,16 @@ export const auth = betterAuth({
       session: sessions
     }
   }),
+  user: {
+    additionalFields: {
+      providerImage: {
+        type: 'string',
+        required: false,
+        defaultValue: null,
+        input: false
+      }
+    }
+  },
   // email & password config
   emailAndPassword: {
     enabled: true,
@@ -35,7 +45,16 @@ export const auth = betterAuth({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       prompt: 'select_account consent',
-      accessType: 'offline'
+      accessType: 'offline',
+      mapProfileToUser: profile => {
+        return {
+          email: profile.email,
+          emailVerified: profile.email_verified,
+          name: profile.given_name,
+          image: undefined,
+          providerImage: profile.picture
+        };
+      }
     }
   },
   advanced: {
@@ -44,3 +63,6 @@ export const auth = betterAuth({
     }
   }
 });
+
+export type AuthSession = typeof auth.$Infer.Session;
+export type SessionUser = AuthSession['user'];

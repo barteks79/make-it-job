@@ -1,9 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { authClient, type SessionUser } from '@/lib/auth/client';
+
+import { authClient } from '@/lib/auth/client';
+import { type SessionUser } from '@/lib/auth';
+
 import { Button } from '@/components/ui/button';
-import DropdownLink from '@/components/custom/dropdown-link';
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 import {
   DropdownMenu,
@@ -16,8 +19,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 import { BriefcaseBusinessIcon, InboxIcon, UserIcon, SettingsIcon, LogOutIcon } from 'lucide-react';
-
-import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
+import DropdownLink from '@/components/custom/dropdown-link';
 
 export default function NavProfileDropdown({ user }: { user: SessionUser }) {
   const router = useRouter();
