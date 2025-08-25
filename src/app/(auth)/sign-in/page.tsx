@@ -1,3 +1,4 @@
+import SignInOptionsProvider from '@/store/sign-in-options';
 import SignInForm from './_components/sign-in-form';
 
 export default function SignInPage() {
@@ -9,8 +10,10 @@ export default function SignInPage() {
           Enter your credentials to access the account.
         </p>
       </header>
-
-      <SignInForm />
+      
+      <SignInOptionsProvider>
+        <SignInForm />
+      </SignInOptionsProvider>
     </div>
   );
 }

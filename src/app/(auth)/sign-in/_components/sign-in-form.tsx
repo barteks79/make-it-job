@@ -1,5 +1,6 @@
 'use client';
 
+import { useSignInOptions } from '@/store/sign-in-options';
 import { useForm } from 'react-hook-form';
 import { authClient } from '@/lib/auth/client';
 
@@ -23,6 +24,8 @@ import ContinueWithSeparator from '../../continue-with-separator';
 import AuthOptions from './auth-options';
 
 export default function SignInForm() {
+  const { rememberMe } = useSignInOptions();
+
   const form = useForm<z.infer<typeof SignInSchema>>({
     resolver: zodResolver(SignInSchema),
     defaultValues: {
@@ -33,13 +36,14 @@ export default function SignInForm() {
 
   const signInWithGoogle = async () => {
     await authClient.signIn.social({
-      provider: 'google'
+      provider: 'google',
+      callbackURL: '/dashboard'
     });
   };
 
   const onSubmit = async (data: z.infer<typeof SignInSchema>) => {
     await authClient.signIn.email(
-      { ...data, callbackURL: '/dashboard' },
+      { ...data, callbackURL: '/dashboard', rememberMe },
       {
         onError: ({ error }) => {
           if (error.status === 401) {

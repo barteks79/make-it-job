@@ -1,11 +1,16 @@
+'use client';
+
+import { useSignInOptions } from '@/store/sign-in-options';
 import { Checkbox } from '@/components/ui/checkbox';
 import Link from 'next/link';
 
 export default function AuthOptions() {
+  const { rememberMe, setRememberMe } = useSignInOptions();
+
   return (
     <div className="flex justify-between items-center tracking-tight">
       <div className="flex items-center gap-2">
-        <Checkbox id="remember" />
+        <Checkbox id="remember" checked={rememberMe} onCheckedChange={setRememberMe} />
         Remember me
       </div>
 
