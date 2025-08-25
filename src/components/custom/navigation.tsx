@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 
+import MainNavigation from './main-navigation';
 import NavProfileDropdown from './nav-profile-dropdown';
 import MobileNav from './mobile-nav';
 import NavItem from './nav-item';
@@ -25,12 +26,7 @@ export default async function Navigation() {
           MakeITJob
         </Link>
 
-        <ul className="hidden md:flex md:items-center gap-6 ">
-          <NavItem href="/dashboard">Dashboard</NavItem>
-          <NavItem href="/offers">Offers</NavItem>
-          <NavItem href="/bookmarks">Bookmarks</NavItem>
-          <NavItem href="/pricing">Pricing</NavItem>
-        </ul>
+        <MainNavigation isAuthenticated={!!session} />
       </div>
 
       <ul className="flex items-center gap-2 md:gap-3">
