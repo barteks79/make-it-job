@@ -46,15 +46,24 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
       prompt: 'select_account consent',
       accessType: 'offline',
-      mapProfileToUser: profile => {
-        return {
-          email: profile.email,
-          emailVerified: profile.email_verified,
-          name: profile.given_name,
-          image: undefined,
-          providerImage: profile.picture
-        };
-      }
+      mapProfileToUser: profile => ({
+        email: profile.email,
+        emailVerified: profile.email_verified,
+        name: profile.given_name,
+        image: undefined,
+        providerImage: profile.picture
+      })
+    },
+    github: {
+      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
+      mapProfileToUser: profile => ({
+        email: profile.email,
+        emailVerified: profile.two_factor_authentication,
+        name: profile.name,
+        image: undefined,
+        providerImage: profile.avatar_url
+      })
     }
   },
   advanced: {

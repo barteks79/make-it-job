@@ -19,7 +19,7 @@ import {
   FormMessage
 } from '@/components/ui/form';
 
-import { GoogleIcon } from './auth-icons';
+import { GoogleIcon, GithubLogo } from './auth-icons';
 import ContinueWithSeparator from '../../continue-with-separator';
 import AuthOptions from './auth-options';
 
@@ -34,9 +34,9 @@ export default function SignInForm() {
     }
   });
 
-  const signInWithGoogle = async () => {
+  const signInWith = async (provider: 'google' | 'github') => {
     await authClient.signIn.social({
-      provider: 'google',
+      provider,
       callbackURL: '/dashboard'
     });
   };
@@ -119,15 +119,25 @@ export default function SignInForm() {
 
           <ContinueWithSeparator />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             <Button
               type="button"
               variant="outline"
               className="h-10 cursor-pointer"
-              onClick={signInWithGoogle}
+              onClick={() => signInWith('google')}
             >
               <GoogleIcon className="size-4" />
               Continue with Google
+            </Button>
+
+            <Button
+              type="button"
+              variant="outline"
+              className="h-10 cursor-pointer"
+              onClick={() => signInWith('github')}
+            >
+              <GithubLogo className="size-4" />
+              Continue with Github
             </Button>
           </div>
         </section>
