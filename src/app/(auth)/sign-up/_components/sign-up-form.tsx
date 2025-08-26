@@ -39,11 +39,11 @@ export default function SignUpForm() {
         email: data.email,
         password: data.password,
         name: 'Static Name',
-        callbackURL: '/dashboard'
+        callbackURL: '/dashboard/profile'
       },
       {
         onSuccess: () => {
-          router.push('/dashboard');
+          router.push('/dashboard/profile');
         },
         onError: ({ error }) => {
           if (error.status === 422) {

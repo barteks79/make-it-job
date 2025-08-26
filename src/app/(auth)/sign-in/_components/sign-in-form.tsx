@@ -37,13 +37,13 @@ export default function SignInForm() {
   const signInWith = async (provider: 'google' | 'github') => {
     await authClient.signIn.social({
       provider,
-      callbackURL: '/dashboard'
+      callbackURL: '/dashboard/profile'
     });
   };
 
   const onSubmit = async (data: z.infer<typeof SignInSchema>) => {
     await authClient.signIn.email(
-      { ...data, callbackURL: '/dashboard', rememberMe },
+      { ...data, callbackURL: '/dashboard/profile', rememberMe },
       {
         onError: ({ error }) => {
           if (error.status === 401) {

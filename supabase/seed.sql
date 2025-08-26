@@ -26,18 +26,6 @@ VALUES
     ('make-it-job', 'make-it-job', TRUE)
 ON CONFLICT (id) DO NOTHING;
 
-INSERT INTO storage.objects 
-    (id, bucket_id, name, owner, created_at, updated_at, metadata)
-VALUES (
-    gen_random_uuid(),
-    'make-it-job',
-    'company/.keep',        -- object key (creates "company/" folder)
-    null,                   -- owner (null = system)
-    now(),
-    now(),
-    '{"mimetype": "text/plain"}'::jsonb
-);
-
 CREATE POLICY "all 1uiwxqy_0" ON storage.objects FOR SELECT TO public USING (bucket_id = 'make-it-job');
 CREATE POLICY "all 1uiwxqy_1" ON storage.objects FOR INSERT TO public WITH CHECK (bucket_id = 'make-it-job');
 CREATE POLICY "all 1uiwxqy_2" ON storage.objects FOR UPDATE TO public USING (bucket_id = 'make-it-job');

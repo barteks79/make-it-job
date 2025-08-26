@@ -14,7 +14,7 @@ export default async function DashboardLayout({ children }: React.PropsWithChild
 
   return (
     <div className="flex flex-1">
-      <DashboardSidebar user={session.user} />
+      <DashboardSidebar />
       <main className="flex-1">{children}</main>
     </div>
   );
