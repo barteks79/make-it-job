@@ -8,7 +8,11 @@ async function fetchImageUrl(path: string) {
   console.log(`Fetching IMAGE: ${path}`);
   const { data, error } = await client.storage.from('make-it-job').createSignedUrl(path, 3600);
 
-  if (error) throw error;
+  if (error) {
+    console.log(error);
+    return '/images/user-default1.jpg';
+  }
+
   return data.signedUrl;
 }
 

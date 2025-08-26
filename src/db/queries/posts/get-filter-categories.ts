@@ -11,6 +11,8 @@ const EXPERIENCE_VALUES = ['Junior', 'Mid', 'Senior'] as const;
 const JOB_TYPE_VALUES = ['Full time', 'Part-time', 'Freelance', 'Internship'] as const;
 const WORK_TYPE_VALUES = ['On-site', 'Remote', 'Hybrid'] as const;
 
+// import { delay } from '@/lib/utils';
+
 export const getFilterCategories = unstable_cache(
   async (currentFilters: Filters) => {
     console.log('Fetching FILTER CATEGORIES');
@@ -39,6 +41,8 @@ export const getFilterCategories = unstable_cache(
       .where(experienceWhere)
       .groupBy(posts.experience)
       .orderBy(desc(sql`count(*)`));
+
+    // await delay(2000)
 
     return {
       jobType: mergeAndSort(JOB_TYPE_VALUES, jobTypes),

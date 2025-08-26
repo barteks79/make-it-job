@@ -8,7 +8,7 @@ import { eq, sql, and, gte, lte } from 'drizzle-orm';
 
 import { arrayToClause, getSortClause, type Filters } from '@/lib/filter';
 
-import { delay } from '@/lib/utils';
+// import { delay } from '@/lib/utils';
 
 export const getPostsWithCompany = unstable_cache(
   async (filters: Filters) => {
@@ -48,7 +48,8 @@ export const getPostsWithCompany = unstable_cache(
       )
       .orderBy(orderOptions);
 
-    await delay(2000);
+    // await delay(2000);
+    
     return result;
   },
   ['getPostsWithCompany'],
