@@ -1,0 +1,44 @@
+-- database
+
+INSERT INTO "public"."company" 
+    ("id", "name", "ownerId", "description", "image", "updatedAt", "createdAt")
+VALUES 
+    ('202c298f-8b72-474f-be48-d1cacb857400', 'Uber', NULL, 'Uber is a global technology company that connects people and things through mobility and delivery services. We design experiences that make transportation and delivery seamless, reliable, and accessible.', 'company/uber.png', '2025-08-14 10:35:16.434703+00', '2025-08-14 10:35:16.434703+00'),
+    ('26cfa581-630c-4869-a9de-6074436cd57e', 'Amazon', NULL, 'Amazon is a global e-commerce and cloud computing leader, offering a wide range of products and services. We innovate to make customers'' lives easier and more convenient, from online shopping to cloud solutions.', 'company/amazon.png', '2025-08-14 10:44:35.192038+00', '2025-08-14 10:44:35.192038+00'), 
+    ('4d006d07-4e90-4a23-b3f9-4cdc9b049598', 'Netflix', NULL, 'With over 250 million subscribers in more than 190 countries, Netflix is the world''s leading streaming entertainment service, offering a vast library of award-winning TV series, films, and documentaries. Driven by innovation and a passion for storytelling, we push the boundaries of technology and content to redefine the future of entertainment. Join us to create seamless, immersive experiences that captivate audiences worldwide!', 'company/netflix.png', '2025-08-14 10:04:48.684156+00', '2025-08-14 10:04:48.684156+00'),
+    ('9e0fffa9-83f9-4280-b87c-d7908fb6d1b0', 'Meta', NULL, 'Meta builds technologies that help people connect, find communities, and grow businesses. With billions of users worldwide, Meta''s platforms include Facebook, Instagram, WhatsApp, and more, all powered by cutting-edge infrastructure and cloud solutions.', 'company/meta.png', '2025-08-14 10:34:43.316192+00', '2025-08-14 10:34:43.316192+00'),
+    ('a67231a6-5f31-41ee-a4a3-894371cf4562', 'Google', NULL, 'Google is a global leader in technology, specializing in internet-related services and products, including search, cloud computing, software, and hardware. Our mission is to organize the world''s information and make it universally accessible and useful.', 'company/google.png', '2025-08-14 10:34:01.300613+00', '2025-08-14 10:34:01.300613+00');
+
+INSERT INTO "public"."post" 
+    ("id", "position", "experience", "salary", "description", "tags", "information", "requirements", "createdAt", "updatedAt", "companyId", "jobType", "workType") 
+VALUES 
+    ('5d274490-2133-48d7-800e-5f3b3c5a7c22', 'Frontend Developer', 'Junior', 52000, 'Develop interactive web interfaces, enhance user experiences, and contribute to Amazon''s ecosystem.', '{"Frontend", "React","Javascript","UX/UI","Internship","Remote"}', '{"Assist in developing and maintaining web applications.","Collaborate with senior developers to implement features.","Write clean, maintainable, and well-documented code.","Participate in code reviews and team meetings.","Test and debug applications.","Learn and apply best practices in frontend development."}', '{"Currently pursuing or recently completed a degree in Computer Science or related field.","Basic knowledge of HTML, CSS, and JavaScript.","Familiarity with React is a plus.","Eagerness to learn and adapt to new technologies.","Good problem-solving skills.","Ability to work collaboratively in a team environment."}', '2025-08-14 10:45:37.322029+00', '2025-08-14 10:45:37.322029+00', '26cfa581-630c-4869-a9de-6074436cd57e', 'Internship', 'On-site'),
+    ('69d226b8-5091-4e3f-89a1-769c4f5be192', 'Software Engineer', 'Junior', 82000, 'Develop scalable and innovative software solutions that power Google''s products and services worldwide.', '{"SoftwareEngineering","Python","Java","DistributedSystems","Hybrid"}', '{"Develop and maintain scalable backend and frontend systems.","Collaborate with cross-functional teams to deliver high-quality products.","Write clean, efficient, and testable code.","Participate in code reviews and design discussions.","Optimize applications for performance and scalability.","Troubleshoot and debug production issues."}', '{"1-2 years of experience in software development.","Proficiency in Python, Java, or similar languages.","Understanding of distributed systems and cloud platforms.","Familiarity with version control systems (Git).","Strong problem-solving and analytical skills.","Good communication and teamwork abilities."}', '2025-08-14 10:42:18.058354+00', '2025-08-14 10:42:18.058354+00', 'a67231a6-5f31-41ee-a4a3-894371cf4562', 'Full time', 'Remote'),
+    ('86edb0a8-cc4b-4d40-a091-befcb822bcb6', 'Cloud Engineer', 'Senior', 110000, 'Design and optimize scalable cloud infrastructure to support billions of users across Meta''s ecosystem.', '{"CloudComputing","AWS","DevOps","Kubernetes","Hybrid"}', '{"Design and implement scalable cloud infrastructure.","Ensure high availability and fault tolerance for global services.","Collaborate with cross-functional teams to optimize performance.","Automate deployment and monitoring processes.","Maintain security and compliance standards.","Troubleshoot and resolve infrastructure issues."}', '{"5+ years of experience in cloud engineering or related fields.","Expertise in AWS, Kubernetes, and DevOps practices.","Strong scripting skills (Python, Bash, etc.).","Experience with CI/CD pipelines.","Knowledge of networking, security, and distributed systems.","Excellent problem-solving and communication skills."}', '2025-08-03 10:39:25.826304+00', '2025-08-14 10:39:25.826304+00', '9e0fffa9-83f9-4280-b87c-d7908fb6d1b0', 'Full time', 'Remote'),
+    ('8b1cb816-725a-4c84-9d08-2da0c5d9449d', 'Frontend Developer', 'Senior', 120000, 'Build stunning, interactive interfaces that redefine the streaming experience for millions.', '{"WebDevelopment","ResponsiveDesign","React","Typescript","Remote"}', '{"Architect and develop high-performance, scalable web applications for millions of users.","Enhance UI/UX for seamless streaming across all devices.","Lead technical decisions and collaborate with cross-functional teams.","Ensure performance, security, and accessibility best practices.","Write clean, maintainable code.","Integrate APIs seamlessly with backend teams."}', '{"5+ years of experience in frontend development.","Expertise in React, TypeScript, JavaScript, and modern web frameworks.","Strong understanding of performance optimization and responsive design.","Experience with state management libraries (Redux, Zustand).","Excellent communication skills and experience mentoring developers.","Strong problem-solving skills and ability to work in a fast-paced environment."}', '2025-08-14 10:11:16.662238+00', '2025-08-14 10:11:16.662238+00', '4d006d07-4e90-4a23-b3f9-4cdc9b049598', 'Full time', 'On-site'),
+    ('998fe01d-4112-45b6-acd5-1ee5cf81ab43', 'UI Designer', 'Mid', 92000, 'Create intuitive and visually compelling interfaces that enhance the Uber experience for millions of users.', '{"UIDesign","DesignSystems","Figma","Prototyping","Hybrid"}', '{"Design user interfaces for mobile and web applications.","Collaborate with product managers and engineers to define user needs.","Create wireframes, prototypes, and high-fidelity designs.","Ensure design consistency across platforms.","Conduct user research and usability testing.","Iterate designs based on feedback and analytics."}', '{"3+ years of experience in UI/UX design.","Proficiency in Figma and other design tools.","Strong understanding of design systems and accessibility.","Experience with prototyping and user testing.","Excellent visual design skills and attention to detail.","Ability to work in a fast-paced, collaborative environment."}', '2025-08-14 10:41:09.755167+00', '2025-08-14 10:41:09.755167+00', '202c298f-8b72-474f-be48-d1cacb857400', 'Part-time', 'Hybrid');
+
+-- storage
+
+INSERT INTO storage.buckets
+    (id, name, public)
+VALUES
+    ('make-it-job', 'make-it-job', TRUE)
+ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO storage.objects 
+    (id, bucket_id, name, owner, created_at, updated_at, metadata)
+VALUES (
+    gen_random_uuid(),
+    'make-it-job',
+    'company/.keep',        -- object key (creates "company/" folder)
+    null,                   -- owner (null = system)
+    now(),
+    now(),
+    '{"mimetype": "text/plain"}'::jsonb
+);
+
+CREATE POLICY "all 1uiwxqy_0" ON storage.objects FOR SELECT TO public USING (bucket_id = 'make-it-job');
+CREATE POLICY "all 1uiwxqy_1" ON storage.objects FOR INSERT TO public WITH CHECK (bucket_id = 'make-it-job');
+CREATE POLICY "all 1uiwxqy_2" ON storage.objects FOR UPDATE TO public USING (bucket_id = 'make-it-job');
+CREATE POLICY "all 1uiwxqy_3" ON storage.objects FOR DELETE TO public USING (bucket_id = 'make-it-job');
