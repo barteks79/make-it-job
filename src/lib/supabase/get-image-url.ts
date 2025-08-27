@@ -1,7 +1,5 @@
 import { unstable_cache } from 'next/cache';
-import { createClient } from './client';
-
-const client = createClient();
+import { client } from './client';
 
 // low-level fetcher (not cached)
 async function fetchImageUrl(path: string) {
