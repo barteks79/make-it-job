@@ -6,7 +6,7 @@ import { users } from './users';
 import { posts } from './posts';
 
 export const bookmarks = pgTable('bookmark', {
-  id: uuid('id').primaryKey(),
+  id: uuid('id').defaultRandom().primaryKey(),
   userId: uuid('userId')
     .references(() => users.id, { onDelete: 'cascade', onUpdate: 'cascade' })
     .notNull(),
