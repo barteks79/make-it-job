@@ -1,10 +1,13 @@
-import { createRelativeDate, cn } from '@/lib/utils';
+import { getIsBookmarked } from '@/db/queries/bookmarks/get-is-bookmarked';
+
+import { createRelativeDate } from '@/lib/utils';
 import { type JobPost } from '@/db/schema/posts';
 import { type Company } from '@/db/schema/companies';
 
-import { BookmarkIcon, DollarSignIcon, MonitorIcon, UserIcon } from 'lucide-react';
+import { DollarSignIcon, MonitorIcon, UserIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import BookmarkButton from './bookmark-button';
 
 import CompanyLogo from '@/components/custom/company-logo';
 import JobTagBadge from './job-tag-badge';
@@ -21,11 +24,14 @@ import {
 } from '@/components/ui/card';
 
 type JobPostCardProps = {
+  userId: string | undefined;
   post: Omit<JobPost, 'companyId'>;
   company: Pick<Company, 'name' | 'image'>;
 };
 
-export default function JobPostCard({ post, company }: JobPostCardProps) {
+export default async function JobPostCard({ userId, post, company }: JobPostCardProps) {
+  const isBookmarked = await getIsBookmarked(post.id, userId);
+
   return (
     <Card className="py-5 gap-4 h-full relative">
       <CardHeader className="flex flex-col gap-2">
@@ -34,22 +40,11 @@ export default function JobPostCard({ post, company }: JobPostCardProps) {
             {createRelativeDate(new Date(post.createdAt))}
           </p>
 
-          <CardAction>
-            <Button
-              variant="outline"
-              size="icon"
-              className={cn('size-7 cursor-pointer', {
-                'border-destructive/15 dark:bg-destructive/10 bg-destructive/10 hover:bg-destructive/15 hover:dark:bg-destructive/15':
-                  true
-              })}
-            >
-              <BookmarkIcon
-                className={cn('pointer-events-none text-muted-foreground', {
-                  'fill-destructive text-destructive': true
-                })}
-              />
-            </Button>
-          </CardAction>
+          {userId ? (
+            <CardAction>
+              <BookmarkButton userId={userId} postId={post.id} isBookmarked={isBookmarked} />
+            </CardAction>
+          ) : undefined}
         </div>
 
         <figure className="flex items-center gap-3 border-b w-full pb-4">
