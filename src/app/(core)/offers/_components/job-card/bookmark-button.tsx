@@ -10,11 +10,13 @@ import { cn } from '@/lib/utils';
 export default function BookmarkButton({
   userId,
   postId,
-  isBookmarked
+  isBookmarked,
+  className
 }: {
   userId: string;
   postId: string;
   isBookmarked: boolean;
+  className?: string;
 }) {
   const [optimisticBookmarked, setOptimisticBookmarked] = useOptimistic<boolean>(isBookmarked);
 
@@ -31,7 +33,7 @@ export default function BookmarkButton({
       variant="outline"
       size="icon"
       onClick={handleBookmarkPost}
-      className={cn('size-7 cursor-pointer', {
+      className={cn('size-7 cursor-pointer', className, {
         'border-destructive/15 dark:bg-destructive/10 bg-destructive/10 hover:bg-destructive/15 hover:dark:bg-destructive/15':
           optimisticBookmarked
       })}

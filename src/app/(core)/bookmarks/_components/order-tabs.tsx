@@ -3,13 +3,13 @@
 import useOptimisticFilter from '@/hooks/use-optimistic-filter';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-type Option = 'recent' | 'latest';
+type Order = 'recent' | 'latest';
 
 export default function OptionTabs() {
-  const [option, setOption] = useOptimisticFilter<Option>('option', 'recent');
+  const [order, setOrder] = useOptimisticFilter<Order>('order', 'recent');
 
   return (
-    <Tabs className="flex-1" value={option} onValueChange={value => setOption(value as Option)}>
+    <Tabs className="flex-1" value={order} onValueChange={value => setOrder(value as Order)}>
       <TabsList className="w-full">
         <TabsTrigger className="cursor-pointer" value="recent">
           Recently added

@@ -1,11 +1,24 @@
 // import { auth } from '@/lib/auth';
 // import { unauthorized } from 'next/navigation';
 // import { headers } from 'next/headers';
+import { Suspense } from 'react';
+import { getUserBookmarks } from '@/db/queries/bookmarks/get-user-bookmarks';
 
+import BookmarksContainer from './_components/bookmarks-container';
 import Searchbar from './_components/searchbar';
-import OptionTabs from './_components/option-tabs';
+import OptionTabs from './_components/order-tabs';
 
-export default async function BookmarksPage() {
+type SearchParams = { searchParams: Promise<{ q?: string; order?: 'recent' | 'latest' }> };
+
+export default async function BookmarksPage({ searchParams }: SearchParams) {
+  const { order, q } = await searchParams;
+
+  // const bookmarks = getUserBookmarks({
+  //   order: order || 'latest',
+  //   query: q,
+  //   userId: 'a58cfafe-87ec-4397-ad9e-fe522a50b010'
+  // });
+
   // const session = await auth.api.getSession({
   //   headers: await headers()
   // });
@@ -21,6 +34,12 @@ export default async function BookmarksPage() {
           <Searchbar className="flex-1" delay={1000} />
           <OptionTabs />
         </div>
+
+        <ul className="flex flex-col gap-3">
+          <Suspense fallback={<p>Loading...</p>}>
+            <BookmarksContainer />
+          </Suspense>
+        </ul>
       </div>
     </main>
   );
