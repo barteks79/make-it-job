@@ -1,5 +1,3 @@
--- database
-
 INSERT INTO "public"."company" 
     ("id", "name", "ownerId", "description", "image", "updatedAt", "createdAt")
 VALUES 
@@ -17,16 +15,3 @@ VALUES
     ('86edb0a8-cc4b-4d40-a091-befcb822bcb6', 'Cloud Engineer', 'Senior', 110000, 'Design and optimize scalable cloud infrastructure to support billions of users across Meta''s ecosystem.', '{"CloudComputing","AWS","DevOps","Kubernetes","Hybrid"}', '{"Design and implement scalable cloud infrastructure.","Ensure high availability and fault tolerance for global services.","Collaborate with cross-functional teams to optimize performance.","Automate deployment and monitoring processes.","Maintain security and compliance standards.","Troubleshoot and resolve infrastructure issues."}', '{"5+ years of experience in cloud engineering or related fields.","Expertise in AWS, Kubernetes, and DevOps practices.","Strong scripting skills (Python, Bash, etc.).","Experience with CI/CD pipelines.","Knowledge of networking, security, and distributed systems.","Excellent problem-solving and communication skills."}', '2025-08-03 10:39:25.826304+00', '2025-08-14 10:39:25.826304+00', '9e0fffa9-83f9-4280-b87c-d7908fb6d1b0', 'Full time', 'Remote'),
     ('8b1cb816-725a-4c84-9d08-2da0c5d9449d', 'Frontend Developer', 'Senior', 120000, 'Build stunning, interactive interfaces that redefine the streaming experience for millions.', '{"WebDevelopment","ResponsiveDesign","React","Typescript","Remote"}', '{"Architect and develop high-performance, scalable web applications for millions of users.","Enhance UI/UX for seamless streaming across all devices.","Lead technical decisions and collaborate with cross-functional teams.","Ensure performance, security, and accessibility best practices.","Write clean, maintainable code.","Integrate APIs seamlessly with backend teams."}', '{"5+ years of experience in frontend development.","Expertise in React, TypeScript, JavaScript, and modern web frameworks.","Strong understanding of performance optimization and responsive design.","Experience with state management libraries (Redux, Zustand).","Excellent communication skills and experience mentoring developers.","Strong problem-solving skills and ability to work in a fast-paced environment."}', '2025-08-14 10:11:16.662238+00', '2025-08-14 10:11:16.662238+00', '4d006d07-4e90-4a23-b3f9-4cdc9b049598', 'Full time', 'On-site'),
     ('998fe01d-4112-45b6-acd5-1ee5cf81ab43', 'UI Designer', 'Mid', 92000, 'Create intuitive and visually compelling interfaces that enhance the Uber experience for millions of users.', '{"UIDesign","DesignSystems","Figma","Prototyping","Hybrid"}', '{"Design user interfaces for mobile and web applications.","Collaborate with product managers and engineers to define user needs.","Create wireframes, prototypes, and high-fidelity designs.","Ensure design consistency across platforms.","Conduct user research and usability testing.","Iterate designs based on feedback and analytics."}', '{"3+ years of experience in UI/UX design.","Proficiency in Figma and other design tools.","Strong understanding of design systems and accessibility.","Experience with prototyping and user testing.","Excellent visual design skills and attention to detail.","Ability to work in a fast-paced, collaborative environment."}', '2025-08-14 10:41:09.755167+00', '2025-08-14 10:41:09.755167+00', '202c298f-8b72-474f-be48-d1cacb857400', 'Part-time', 'Hybrid');
-
--- storage
-
-INSERT INTO storage.buckets
-    (id, name, public)
-VALUES
-    ('make-it-job', 'make-it-job', TRUE)
-ON CONFLICT (id) DO NOTHING;
-
-CREATE POLICY "all 1uiwxqy_0" ON storage.objects FOR SELECT TO public USING (bucket_id = 'make-it-job');
-CREATE POLICY "all 1uiwxqy_1" ON storage.objects FOR INSERT TO public WITH CHECK (bucket_id = 'make-it-job');
-CREATE POLICY "all 1uiwxqy_2" ON storage.objects FOR UPDATE TO public USING (bucket_id = 'make-it-job');
-CREATE POLICY "all 1uiwxqy_3" ON storage.objects FOR DELETE TO public USING (bucket_id = 'make-it-job');

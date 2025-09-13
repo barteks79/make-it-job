@@ -1,10 +1,12 @@
 import { unstable_cache } from 'next/cache';
-import { client } from './client';
+// import { client } from './client';
 
 // low-level fetcher (not cached)
 async function fetchImageUrl(path: string) {
   console.log(`Fetching IMAGE: ${path}`);
-  const { data, error } = await client.storage.from('make-it-job').createSignedUrl(path, 3600);
+  // const { data, error } = await client.storage.from('make-it-job').createSignedUrl(path, 3600);
+  const error = true;
+  const data = { signedUrl: '/images/user-default1.jpg' };
 
   if (error) {
     console.log(error);
