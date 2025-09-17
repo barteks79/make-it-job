@@ -1,8 +1,14 @@
+'use client';
+
+import { authClient } from '@/lib/auth/client';
+
 import { Drawer, DrawerContent, DrawerTrigger, DrawerTitle } from '@/components/ui/drawer';
 import { MenuIcon } from 'lucide-react';
 import NavItem from './nav-item';
 
-export default function MobileNav({ isAuthenticated }: { isAuthenticated: boolean }) {
+export default function MobileNav() {
+  const { data: auth } = authClient.useSession();
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -21,7 +27,7 @@ export default function MobileNav({ isAuthenticated }: { isAuthenticated: boolea
             Offers
           </NavItem>
 
-          {isAuthenticated ? (
+          {auth ? (
             <NavItem className="text-xl" href="/bookmarks">
               Bookmarks
             </NavItem>
@@ -29,7 +35,7 @@ export default function MobileNav({ isAuthenticated }: { isAuthenticated: boolea
         </div>
 
         <div className="flex flex-col gap-3">
-          {isAuthenticated ? (
+          {auth ? (
             <>
               <DrawerTitle className="text-2xl">Dashboard</DrawerTitle>
 

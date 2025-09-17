@@ -1,7 +1,10 @@
-import { type SessionUser } from '@/lib/auth';
+'use client';
+
+import { authClient } from '@/lib/auth/client';
+import { unauthorized } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
-import CompanyLogo from './company-logo';
+// import CompanyLogo from './company-logo';
 
 import {
   DropdownMenu,
@@ -16,7 +19,12 @@ import DropdownLogout from './dropdown-logout';
 
 import { BriefcaseBusinessIcon, InboxIcon, UserIcon, SettingsIcon } from 'lucide-react';
 
-export default function NavProfileDropdown({ user }: { user: SessionUser }) {
+export default function NavProfileDropdown() {
+  const { data } = authClient.useSession();
+
+  const user = data?.user;
+  if (!user) unauthorized();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -28,12 +36,12 @@ export default function NavProfileDropdown({ user }: { user: SessionUser }) {
       <DropdownMenuContent className="min-w-60" align="end" sideOffset={6}>
         <DropdownMenuLabel className="p-0 font-normal">
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-            <CompanyLogo
+            {/* <CompanyLogo
               image={user.image}
               providerImage={user.providerImage}
               className="size-10"
               alt="Profile Picture"
-            />
+            /> */}
 
             <div className="grid flex-1 text-sm">
               <span className="truncate font-semibold">{user.name}</span>

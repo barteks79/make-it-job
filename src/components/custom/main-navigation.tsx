@@ -1,3 +1,7 @@
+'use client';
+
+import { authClient } from '@/lib/auth/client';
+
 import Link from 'next/link';
 
 import {
@@ -13,11 +17,17 @@ import {
 import { Settings, User, Inbox, BriefcaseBusiness } from 'lucide-react';
 import type { ComponentType, SVGProps } from 'react';
 
-export default function MainNavigation({ isAuthenticated }: { isAuthenticated: boolean }) {
+export default function MainNavigation() {
+  const { data: auth, isPending } = authClient.useSession();
+
   return (
     <NavigationMenu className="hidden md:flex" viewport={false}>
       <NavigationMenuList className="gap-1">
-        {isAuthenticated ? (
+        {isPending ? (
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Dashboard</NavigationMenuTrigger>
+          </NavigationMenuItem>
+        ) : auth ? (
           <NavigationMenuItem>
             <NavigationMenuTrigger>Dashboard</NavigationMenuTrigger>
 
@@ -78,7 +88,13 @@ export default function MainNavigation({ isAuthenticated }: { isAuthenticated: b
           </NavigationMenuContent>
         </NavigationMenuItem>
 
-        {isAuthenticated ? (
+        {isPending ? (
+          <NavigationMenuItem>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              Bookmarks
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+        ) : auth ? (
           <NavigationMenuItem>
             <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
               <Link href="/bookmarks">Bookmarks</Link>
