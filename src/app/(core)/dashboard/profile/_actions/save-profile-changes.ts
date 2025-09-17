@@ -1,24 +1,25 @@
 'use server';
 
+import { auth } from '@/lib/auth';
+import { unauthorized } from 'next/navigation';
+import { headers } from 'next/headers';
+
 import { uploadImage, deleteImage } from './store-image';
 import { updateDatabaseImage, updateDatabaseName, removeDatabaseImage } from './update-db-profile';
-
-type ImageT = File | string | null;
+import { type ProfileFormT } from '@/store/profile-form';
 
 export const saveProfileChanges = async ({
   image,
   initialImage,
   username,
-  initialUsername,
-  userId
-}: {
-  image: ImageT;
-  initialImage: ImageT;
-  username: string;
-  initialUsername: string;
-  userId: string;
-}) => {
-  // update username if it changed
+  initialUsername
+}: ProfileFormT) => {
+  const data = await auth.api.getSession({ headers: await headers() });
+  if (!data) unauthorized();
+
+  const userId = data.session.userId;
+
+  // update username if changed
   if (username !== initialUsername) await updateDatabaseName(username, userId);
 
   // delete the image if not selected

@@ -1,22 +1,23 @@
 'use client';
 
-import { useState, useContext, createContext, type ReactNode } from 'react';
+import { useState, useContext, createContext } from 'react';
+import { authClient } from '@/lib/auth/client';
 
 type ImageT = File | string | null;
 
-type ProfileFormT = {
+export type ProfileFormT = {
   image: ImageT; // Realtime selected image
-  initialImage: ImageT; // Used to check if the image was deleted
   setImage: (file: File | null) => void;
+  initialImage: ImageT; // Custom image or provider
   username: string;
-  initialUsername: string; // Used to check if the username changed
+  initialUsername: string;
   setUsername: (value: string) => void;
 };
 
 export const ProfileFormContext = createContext<ProfileFormT>({
   image: null,
-  initialImage: null,
   setImage: () => {},
+  initialImage: '',
   username: '',
   initialUsername: '',
   setUsername: () => {}
@@ -32,21 +33,23 @@ export function useProfileForm() {
   return context;
 }
 
-export default function ProfileFormProvider({
-  initialImage,
-  initialUsername,
-  children
-}: {
-  initialImage: ImageT;
-  initialUsername: string;
-  children: ReactNode;
-}) {
-  const [image, setImage] = useState<ImageT>(initialImage);
-  const [username, setUsername] = useState<string>(initialUsername);
+export default function ProfileFormProvider({ children }: { children: React.ReactNode }) {
+  const { data: auth } = authClient.useSession();
+  const initialImage = auth!.user.image ?? auth!.user.providerImage as ImageT;
+
+  const [image, setImage] = useState<ImageT>(initialImage ?? '/images/user-default1.jpg');
+  const [username, setUsername] = useState<string>(auth!.user.name);
 
   return (
     <ProfileFormContext.Provider
-      value={{ image, initialImage, setImage, username, initialUsername, setUsername }}
+      value={{
+        image,
+        setImage,
+        initialImage,
+        username,
+        setUsername,
+        initialUsername: auth!.user.name
+      }}
     >
       {children}
     </ProfileFormContext.Provider>

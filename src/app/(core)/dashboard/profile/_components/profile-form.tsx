@@ -9,12 +9,11 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import ImageUploader from '../_components/image-uploader';
 
-export default function ProfileForm({ userId }: { userId: string }) {
-  const { image, initialImage, username, initialUsername, setUsername } = useProfileForm();
+export default function ProfileForm() {
+  const profileData = useProfileForm();
 
   const [, formAction, isPending] = useActionState(
-    async () =>
-      await saveProfileChanges({ image, username, userId, initialImage, initialUsername }),
+    async () => await saveProfileChanges(profileData),
     undefined
   );
 
@@ -31,8 +30,8 @@ export default function ProfileForm({ userId }: { userId: string }) {
         <div className="flex flex-col gap-1.5">
           <Label className="tracking-tight text-muted-foreground text-sm">Username</Label>
           <Input
-            value={username}
-            onChange={e => setUsername(e.target.value)}
+            value={profileData.username}
+            onChange={e => profileData.setUsername(e.target.value)}
             placeholder="Enter your username"
           />
         </div>
