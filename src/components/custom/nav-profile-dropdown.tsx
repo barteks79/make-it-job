@@ -4,7 +4,7 @@ import { authClient } from '@/lib/auth/client';
 import { unauthorized } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
-// import CompanyLogo from './company-logo';
+import CompanyLogo from '@/components/custom/company-logo';
 
 import {
   DropdownMenu,
@@ -36,13 +36,7 @@ export default function NavProfileDropdown() {
       <DropdownMenuContent className="min-w-60" align="end" sideOffset={6}>
         <DropdownMenuLabel className="p-0 font-normal">
           <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-            {/* <CompanyLogo
-              image={user.image}
-              providerImage={user.providerImage}
-              className="size-10"
-              alt="Profile Picture"
-            /> */}
-
+            <CompanyLogo image={user.image} className="size-10" alt="Profile Picture" />
             <div className="grid flex-1 text-sm">
               <span className="truncate font-semibold">{user.name}</span>
               <span className="truncate text-foreground/80">{user.email}</span>

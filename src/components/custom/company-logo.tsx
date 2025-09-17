@@ -1,31 +1,23 @@
-import { getImageUrl } from '@/lib/supabase/get-image-url';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { cn } from '@/lib/utils';
 
-export default async function CompanyLogo({
+export default function CompanyLogo({
   className,
-  image,
-  providerImage,
-  alt
+  alt,
+  ...props
 }: {
+  image: string | null | undefined;
   className?: string;
-  image?: string | null | undefined;
-  providerImage?: string | null | undefined;
   alt: string;
-}) {
-  let imageUrl = '/images/user-default1.jpg';
-
-  if (image) {
-    imageUrl = await getImageUrl(image);
-  }
-
-  if (providerImage && !image) {
-    imageUrl = providerImage;
-  }
-
+} & React.ComponentProps<typeof AvatarImage>) {
   return (
     <Avatar className={cn('size-9 rounded-md', className)}>
-      <AvatarImage className="object-contain object-center" src={imageUrl} alt={alt} />
+      <AvatarImage
+        className="object-contain object-center"
+        src="/images/user-default1.jpg"
+        alt={alt}
+        {...props}
+      />
       <AvatarFallback>
         <AvatarSkeleton />
       </AvatarFallback>
