@@ -7,16 +7,19 @@ import { type GetUserBookmarks } from '@/db/queries/bookmarks/get-user-bookmarks
 
 export default async function BookmarksContainer({
   userId,
+  query,
   bookmarks
 }: {
   userId: string;
+  query: string | undefined;
   bookmarks: GetUserBookmarks;
 }) {
   const resolved = await bookmarks;
+  const filteredBookmarks = resolved.filter(bookmark => filterBookmark(bookmark, query));
 
   return (
     <>
-      {resolved.map(row => (
+      {filteredBookmarks.map(row => (
         <li key={row.post.id}>
           <article className="flex justify-between px-2.5 py-2 border rounded">
             <div className="flex items-center gap-3.5">
@@ -42,7 +45,7 @@ export default async function BookmarksContainer({
               <div className="flex gap-1">
                 <Button className="h-8 px-8">Apply</Button>
                 <BookmarkButton
-                  isBookmarked={false}
+                  isBookmarked={true}
                   postId={row.post.id}
                   userId={userId}
                   className="size-8"
@@ -54,4 +57,10 @@ export default async function BookmarksContainer({
       ))}
     </>
   );
+}
+
+function filterBookmark({ post }: Awaited<GetUserBookmarks>[number], query: string | undefined) {
+  return `${post.position} ${post.experience} ${post.description}`
+    .toLowerCase()
+    .includes(query || '');
 }

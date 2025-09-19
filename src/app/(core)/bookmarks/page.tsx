@@ -29,13 +29,13 @@ export default async function BookmarksPage({ searchParams }: BookmarksProps) {
     <main className="mx-auto w-full max-w-5xl h-full pt-10 px-3">
       <div className="flex flex-col gap-3 h-full">
         <div className="flex items-center gap-3">
-          <Searchbar className="flex-1" delay={500} />
+          <Searchbar placeholder="Search bookmarks..." className="flex-1" delay={500} />
           <OptionTabs />
         </div>
 
         <ul className="flex flex-col gap-3">
           <Suspense fallback={<p>Loading...</p>}>
-            <BookmarksContainer userId={data.user.id} bookmarks={bookmarks} />
+            <BookmarksContainer userId={data.user.id} query={search.q} bookmarks={bookmarks} />
           </Suspense>
         </ul>
       </div>
