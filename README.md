@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MakeITJob - Website for IT developers looking for jobs
 
-## Getting Started
+<img src="/public/images/offers-fullscreen.jpg" />
 
-First, run the development server:
+## 💻 Tech Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<div>
+  
+  ![Next.js Badge](https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=fff&style=flat)
+  ![PostgreSQL Badge](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=fff&style=flat)
+  ![Drizzle Badge](https://img.shields.io/badge/Drizzle-C5F74F?logo=drizzle&logoColor=000&style=flat)
+  ![Better Auth Badge](https://img.shields.io/badge/Better%20Auth-FFF?logo=betterauth&logoColor=000&style=flat)
+  ![Tailwind CSS Badge](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=flat)
+  ![shadcn/ui Badge](https://img.shields.io/badge/shadcn%2Fui-000?logo=shadcnui&logoColor=fff&style=flat)
+  
+</div>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ⚙️ Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+> [!WARNING]  
+> Application is still in **development**. Some features might not be available or might not work as intended.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+#### Follow these steps to run the app on your local environment.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  *You must install* `Node.js`, `Git` *and* `Docker Desktop` *before running scripts below.*
+  
+  1. Clone the Repository 
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+     ```bash
+     
+     git clone https://github.com/barteks79/make-it-job.git
+     
+     ```
+    
+  2. Install Dependencies
 
-## Deploy on Vercel
+     ```bash
+     
+     npm install
+     
+     ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  3. Set up variables in `.env` file
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+     ```env
+
+     # Database
+     DATABASE_URL=
+     POSTGRES_PASSWORD=
+     POSTGRES_DB=
+
+     # Auth
+     BETTER_AUTH_SECRET=
+     BETTER_AUTH_URL=
+
+     # OAuth
+     GOOGLE_CLIENT_ID=
+     GOOGLE_CLIENT_SECRET=
+     GITHUB_CLIENT_ID=
+     GITHUB_CLIENT_SECRET=
+
+     ```
+
+  4. Open `Docker Desktop` and run:
+
+     ```bash
+
+     docker-compose up
+
+     ```
+
+  5. In other terminal, run:
+
+     ```node
+
+     npm run dev
+
+     ```
+     
+  6. Visit <a src="http://localhost:3000">http://localhost:3000</a> in your browser.
+     
+
+
+      
