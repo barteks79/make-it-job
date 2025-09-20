@@ -1,4 +1,5 @@
-import { authClient } from '@/lib/auth/client';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 
 import { Suspense } from 'react';
 import { getPostsWithCompany } from '@/db/queries/posts/get-posts';
@@ -9,7 +10,7 @@ import PostsContainer, { PostsContainerSkeleton } from './_components/job-card/p
 import PostsCount from './_components/job-card/posts-count';
 
 export default async function JobPosts({ searchParams }: { searchParams: FilterSearchParams }) {
-  const { data } = await authClient.getSession();
+  const data = await auth.api.getSession({ headers: await headers() });
 
   const appliedFilters = await getAppliedFilters(searchParams);
   const postsPromise = getPostsWithCompany(appliedFilters);
