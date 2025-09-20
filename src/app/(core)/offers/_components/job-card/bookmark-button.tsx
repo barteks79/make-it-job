@@ -9,18 +9,23 @@ import { cn } from '@/lib/utils';
 
 export default function BookmarkButton({
   postId,
-  isBookmarked,
-  className
+  isBookmarked = true,
+  updatedParentUI,
+  className,
+  ...props
 }: {
   postId: string;
   isBookmarked: boolean;
+  updatedParentUI?: () => void;
   className?: string;
-}) {
+} & React.ComponentProps<typeof Button>) {
   const [optimisticBookmarked, setOptimisticBookmarked] = useOptimistic<boolean>(isBookmarked);
 
-  const handleBookmarkPost = async () => {
+  const handleToggleBookmark = async () => {
     startTransition(() => {
       setOptimisticBookmarked(prev => !prev);
+      // Middleware call to update UI in parent component
+      if (updatedParentUI) updatedParentUI();
     });
 
     await bookmarkPost({ postId, isDelete: isBookmarked });
@@ -28,9 +33,10 @@ export default function BookmarkButton({
 
   return (
     <Button
+      {...props}
       variant="outline"
       size="icon"
-      onClick={handleBookmarkPost}
+      onClick={handleToggleBookmark}
       className={cn('size-7 cursor-pointer', className, {
         'border-destructive/15 dark:bg-destructive/10 bg-destructive/10 hover:bg-destructive/15 hover:dark:bg-destructive/15':
           optimisticBookmarked
