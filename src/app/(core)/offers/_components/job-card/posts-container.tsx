@@ -1,19 +1,20 @@
-import { type SessionUser } from '@/lib/auth';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+
 import { type PostsWithCompanyT } from '@/db/queries/posts/get-posts';
 import JobPostCard, { JobPostCardSkeleton } from './job-card';
 
 export default async function PostsContainer({
-  postsPromise,
-  user
+  postsPromise
 }: {
   postsPromise: PostsWithCompanyT;
-  user: SessionUser | undefined;
 }) {
+  const data = await auth.api.getSession({ headers: await headers() });
   const posts = await postsPromise;
 
   return posts.map((post, idx) => (
     <li key={idx}>
-      <JobPostCard userId={user?.id} post={post.post} company={post.company} />
+      <JobPostCard userId={data?.user.id} post={post.post} company={post.company} />
     </li>
   ));
 }

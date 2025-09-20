@@ -35,7 +35,7 @@ export default async function BookmarksPage({ searchParams }: BookmarksProps) {
 
         <ul className="flex flex-col gap-3">
           <Suspense fallback={<p>Loading...</p>}>
-            <BookmarksContainer userId={data.user.id} query={search.q} bookmarks={bookmarks} />
+            <BookmarksContainer query={search.q} bookmarks={bookmarks} />
           </Suspense>
         </ul>
       </div>

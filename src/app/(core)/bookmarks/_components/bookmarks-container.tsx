@@ -6,11 +6,9 @@ import BookmarkButton from '../../offers/_components/job-card/bookmark-button';
 import { type GetUserBookmarks } from '@/db/queries/bookmarks/get-user-bookmarks';
 
 export default async function BookmarksContainer({
-  userId,
   query,
   bookmarks
 }: {
-  userId: string;
   query: string | undefined;
   bookmarks: GetUserBookmarks;
 }) {
@@ -44,12 +42,7 @@ export default async function BookmarksContainer({
 
               <div className="flex gap-1">
                 <Button className="h-8 px-8">Apply</Button>
-                <BookmarkButton
-                  isBookmarked={true}
-                  postId={row.post.id}
-                  userId={userId}
-                  className="size-8"
-                />
+                <BookmarkButton isBookmarked={true} postId={row.post.id} className="size-8" />
               </div>
             </div>
           </article>

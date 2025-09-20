@@ -42,7 +42,7 @@ export default async function JobPostCard({ userId, post, company }: JobPostCard
 
           {userId ? (
             <CardAction>
-              <BookmarkButton userId={userId} postId={post.id} isBookmarked={isBookmarked} />
+              <BookmarkButton postId={post.id} isBookmarked={isBookmarked} />
             </CardAction>
           ) : undefined}
         </div>

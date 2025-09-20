@@ -8,12 +8,10 @@ import { BookmarkIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function BookmarkButton({
-  userId,
   postId,
   isBookmarked,
   className
 }: {
-  userId: string;
   postId: string;
   isBookmarked: boolean;
   className?: string;
@@ -25,7 +23,7 @@ export default function BookmarkButton({
       setOptimisticBookmarked(prev => !prev);
     });
 
-    await bookmarkPost({ postId, userId, isDelete: isBookmarked });
+    await bookmarkPost({ postId, isDelete: isBookmarked });
   };
 
   return (

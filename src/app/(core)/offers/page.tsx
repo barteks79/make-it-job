@@ -1,6 +1,3 @@
-import { auth } from '@/lib/auth';
-import { headers } from 'next/headers';
-
 import { Suspense } from 'react';
 import { getPostsWithCompany } from '@/db/queries/posts/get-posts';
 import { getAppliedFilters, type FilterSearchParams } from '@/lib/filter';
@@ -10,8 +7,6 @@ import PostsContainer, { PostsContainerSkeleton } from './_components/job-card/p
 import PostsCount from './_components/job-card/posts-count';
 
 export default async function JobPosts({ searchParams }: { searchParams: FilterSearchParams }) {
-  const data = await auth.api.getSession({ headers: await headers() });
-
   const appliedFilters = await getAppliedFilters(searchParams);
   const postsPromise = getPostsWithCompany(appliedFilters);
 
@@ -34,7 +29,7 @@ export default async function JobPosts({ searchParams }: { searchParams: FilterS
       <div className="overflow-y-scroll flex-1 pb-4 px-5 md:pb-5 md:px-7">
         <ul className="grid grid-cols-1 md:grid-cols-2 3xl:grid-cols-3 gap-5 items-stretch">
           <Suspense fallback={<PostsContainerSkeleton />}>
-            <PostsContainer user={data?.user} postsPromise={postsPromise} />
+            <PostsContainer postsPromise={postsPromise} />
           </Suspense>
         </ul>
       </div>
