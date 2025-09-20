@@ -5,6 +5,7 @@ CREATE TABLE "user" (
   "emailVerified" BOOLEAN NOT NULL DEFAULT false,
   image TEXT NULL,
   "providerImage" TEXT NULL,
+  profile JSONB NOT NULL DEFAULT '{}'::JSONB,
   "createdAt" TIMESTAMPTZ NOT NULL DEFAULT now(),
   "updatedAt" TIMESTAMPTZ NOT NULL DEFAULT now(),
 

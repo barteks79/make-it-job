@@ -28,6 +28,12 @@ export const auth = betterAuth({
         required: false,
         defaultValue: null,
         input: false
+      },
+      profile: {
+        type: 'string',
+        required: true,
+        defaultValue: '{}',
+        input: false
       }
     }
   },

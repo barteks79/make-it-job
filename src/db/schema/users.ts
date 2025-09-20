@@ -1,4 +1,4 @@
-import { pgTable, uuid, varchar, text, boolean } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, varchar, text, boolean, jsonb } from 'drizzle-orm/pg-core';
 import type { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 import { timestamps } from './timestamps.helpers';
 
@@ -8,6 +8,7 @@ export const users = pgTable('user', {
   email: varchar('email', { length: 100 }).unique().notNull(),
   emailVerified: boolean('emailVerified').notNull(),
   image: text('image'),
+  profile: jsonb('profile').notNull().default('{}'),
   providerImage: text('providerImage'),
   ...timestamps
 });
