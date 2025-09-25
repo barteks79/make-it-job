@@ -32,7 +32,7 @@ export const auth = betterAuth({
       profile: {
         type: 'string',
         required: true,
-        defaultValue: '{}',
+        defaultValue: JSON.stringify({}),
         input: false
       }
     }

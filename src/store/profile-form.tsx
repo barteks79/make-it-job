@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useContext, createContext } from 'react';
 import { authClient } from '@/lib/auth/client';
+import { type Profile } from '@/db/schema/users';
 
 type ImageT = File | string | null;
 
@@ -12,6 +13,9 @@ export type ProfileFormT = {
   username: string;
   initialUsername: string;
   setUsername: (value: string) => void;
+  profile: Profile;
+  setProfile: (profile: Profile) => void;
+  initialProfile: Profile;
 };
 
 export const ProfileFormContext = createContext<ProfileFormT>({
@@ -20,7 +24,10 @@ export const ProfileFormContext = createContext<ProfileFormT>({
   initialImage: '',
   username: '',
   initialUsername: '',
-  setUsername: () => {}
+  setUsername: () => {},
+  profile: { biography: '' },
+  setProfile: () => {},
+  initialProfile: { biography: '' }
 });
 
 export function useProfileForm() {
@@ -36,12 +43,16 @@ export function useProfileForm() {
 export default function ProfileFormProvider({ children }: { children: React.ReactNode }) {
   const { data: auth, isPending } = authClient.useSession();
 
+  const [profile, setProfile] = useState<Profile>({ biography: '' });
   const [username, setUsername] = useState<string>('');
   const [image, setImage] = useState<ImageT>('/images/user-default1.jpg');
 
   useEffect(() => {
     if (!auth) return;
+
     setUsername(auth.user.name);
+    setProfile(auth.user.profile as Profile);
+
     if (auth.user.image || auth.user.providerImage) {
       setImage((auth.user.image ?? auth.user.providerImage) as ImageT);
     }
@@ -61,7 +72,10 @@ export default function ProfileFormProvider({ children }: { children: React.Reac
         setImage,
         username,
         setUsername,
-        initialUsername: auth.user.name
+        initialUsername: auth.user.name,
+        profile,
+        setProfile,
+        initialProfile: auth.user.profile as Profile
       }}
     >
       {children}

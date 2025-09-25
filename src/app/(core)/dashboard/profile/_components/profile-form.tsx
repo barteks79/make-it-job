@@ -4,6 +4,7 @@ import { useActionState } from 'react';
 import { useProfileForm } from '@/store/profile-form';
 import { saveProfileChanges } from '../_actions/save-profile-changes';
 
+import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -13,20 +14,32 @@ export default function ProfileForm() {
   const profileData = useProfileForm();
 
   const [, formAction, isPending] = useActionState(
-    async () => await saveProfileChanges(profileData),
+    () => saveProfileChanges(profileData),
     undefined
   );
 
   return (
-    <form action={formAction} className="flex flex-col gap-8">
+    <form action={formAction} className="grid grid-cols-3 gap-5">
       <section className="flex flex-col gap-3">
-        <h2 className="text-muted-foreground tracking-tight font-medium">Profile Picture</h2>
+        <Label className="text-muted-foreground">Profile Picture</Label>
         <div className="flex items-center gap-5">
           <ImageUploader />
         </div>
       </section>
 
-      <section className="flex flex-col gap-3">
+      <section className="flex flex-col gap-3 col-span-2">
+        <Label className="text-muted-foreground">Biography</Label>
+        <Textarea
+          className="h-full resize-none"
+          placeholder="Tell us about yourself"
+          value={profileData.profile.biography}
+          onChange={e =>
+            profileData.setProfile({ ...profileData.profile, biography: e.target.value })
+          }
+        ></Textarea>
+      </section>
+
+      <section className="col-span-2 flex flex-col gap-3">
         <div className="flex flex-col gap-1.5">
           <Label className="tracking-tight text-muted-foreground text-sm">Username</Label>
           <Input
