@@ -16,7 +16,7 @@ export default function BookmarksList({ bookmarks }: { bookmarks: Awaited<GetUse
     setOptimisticBookmarks(prev => prev.filter(bookmark => bookmark.post.id !== postId));
   };
 
-  return (
+  return optimisticBookmarks.length > 0 ? (
     <ul className="flex flex-col gap-3">
       {optimisticBookmarks.map(row => (
         <li key={row.post.id}>
@@ -56,5 +56,7 @@ export default function BookmarksList({ bookmarks }: { bookmarks: Awaited<GetUse
         </li>
       ))}
     </ul>
+  ) : (
+    <p className="mt-4 text-center text-xl tracking-tight">Nothing here yet.</p>
   );
 }

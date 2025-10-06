@@ -4,6 +4,8 @@ import { useRef } from 'react';
 import { useProfileForm } from '@/store/profile-form';
 
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { CircleUserRoundIcon } from 'lucide-react';
 import Image from 'next/image';
 
 export default function ImageUploader() {
@@ -15,10 +17,6 @@ export default function ImageUploader() {
     if (file) {
       setImage(file);
     }
-  };
-
-  const handleDeleteImage = () => {
-    setImage(null);
   };
 
   // fallback image by default
@@ -36,23 +34,29 @@ export default function ImageUploader() {
 
   return (
     <>
-      <div onClick={() => inputRef.current?.click()} className="relative size-25 border rounded-md">
-        <Image className="object-cover object-center" src={imageSource} alt="Uploaded Image" fill />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <Button type="button" onClick={() => inputRef.current?.click()} size="sm">
-          Upload Photo
+      <div className="flex flex-col">
+        <Button type="button" variant="outline" className="relative size-25 cursor-pointer">
+          {!image ? (
+            <CircleUserRoundIcon className="size-7 stroke-[1.2] text-muted-foreground" />
+          ) : (
+            <Image
+              src={imageSource}
+              className="object-cover object-center"
+              alt="Uploaded Image"
+              fill
+            />
+          )}
         </Button>
 
         <Button
+          onClick={image ? () => setImage(null) : () => inputRef.current?.click()}
           type="button"
-          onClick={handleDeleteImage}
-          disabled={!image}
-          variant="destructive"
-          size="sm"
+          variant="link"
+          className={cn('text-destructive brightness-90 underline-offset-2 self-center px-4 py-0', {
+            'text-primary': !image
+          })}
         >
-          Delete Photo
+          {image ? 'Remove' : 'Upload'}
         </Button>
       </div>
 
