@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useProfileForm } from '@/store/profile-form';
 
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
@@ -13,8 +13,11 @@ export default function SkillDialog() {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [skill, setSkill] = useState<string>('');
 
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
   const handleSaveSkill = () => {
     setIsDialogOpen(false);
+    setSkill('');
     setProfile(prevProfile => ({
       ...prevProfile,
       skills: prevProfile.skills ? [...prevProfile.skills, skill] : [skill]
@@ -31,8 +34,8 @@ export default function SkillDialog() {
 
       <DialogContent>
         <DialogTitle className="text-start">Add your skill</DialogTitle>
-        <Input value={skill} onChange={e => setSkill(e.target.value)} placeholder="e.g. Docker" />
-        <Button onClick={handleSaveSkill}>Save</Button>
+        <Input onKeyDown={e => {if (e.key === 'Enter') buttonRef.current?.click();}} value={skill} onChange={e => setSkill(e.target.value)} placeholder="e.g. Docker" />
+        <Button ref={buttonRef} onClick={handleSaveSkill}>Save</Button>
       </DialogContent>
     </Dialog>
   );

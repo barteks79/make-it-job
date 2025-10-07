@@ -3,7 +3,6 @@
 import { useActionState } from 'react';
 import { useProfileForm } from '@/store/profile-form';
 import { saveProfileChanges } from '../_actions/save-profile-changes';
-import { authClient } from '@/lib/auth/client';
 
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -66,13 +65,9 @@ export default function ProfileForm() {
               <TooltipTrigger asChild>
                 <Button
                   onClick={() => {
-                    profileData.setProfile(prevProfile => {
-                      const idx = prevProfile.skills?.indexOf(skill);
-                      if (idx === -1 || !idx) return { ...prevProfile };
-
-                      const newSkills = prevProfile.skills!.splice(idx, 1);
-                      return { ...prevProfile, skills: [...newSkills] };
-                    });
+                    const idx = profileData.profile.skills!.indexOf(skill);
+                    profileData.profile.skills?.splice(idx, 1)
+                    profileData.setProfile({ ...profileData.profile, skills: [...profileData.profile.skills!] })
                   }}
                   variant="secondary"
                   className="h-8 px-5"

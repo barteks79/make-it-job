@@ -14,7 +14,6 @@ export type ProfileFormT = {
   initialUsername: string;
   setUsername: (value: string) => void;
   profile: Profile;
-  // setProfile: (profile: Profile) => void;
   setProfile: React.Dispatch<SetStateAction<Profile>>;
   initialProfile: Profile;
   refetch: (query: { query?: { disableCookieCache?: boolean; } }) => void;
