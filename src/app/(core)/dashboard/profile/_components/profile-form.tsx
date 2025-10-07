@@ -20,7 +20,7 @@ export default function ProfileForm() {
   const [, formAction, isPending] = useActionState(
     () => {
       saveProfileChanges(profileData)
-      // authClient.refreshToken()
+      profileData.refetch({ query: { disableCookieCache: true } })
     },
     undefined
   );

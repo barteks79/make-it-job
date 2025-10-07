@@ -17,6 +17,7 @@ export type ProfileFormT = {
   // setProfile: (profile: Profile) => void;
   setProfile: React.Dispatch<SetStateAction<Profile>>;
   initialProfile: Profile;
+  refetch: (query: { query?: { disableCookieCache?: boolean; } }) => void;
 };
 
 export const ProfileFormContext = createContext<ProfileFormT>({
@@ -28,7 +29,8 @@ export const ProfileFormContext = createContext<ProfileFormT>({
   setUsername: () => {},
   profile: { biography: '', skills: [] },
   setProfile: () => {},
-  initialProfile: { biography: '', skills: [] }
+  initialProfile: { biography: '', skills: [] },
+  refetch: () => {}
 });
 
 export function useProfileForm() {
@@ -42,7 +44,7 @@ export function useProfileForm() {
 }
 
 export default function ProfileFormProvider({ children }: { children: React.ReactNode }) {
-  const { data: auth, isPending } = authClient.useSession();
+  const { data: auth, isPending, refetch } = authClient.useSession();
 
   const [profile, setProfile] = useState<Profile>({ biography: '' });
   const [username, setUsername] = useState<string>('');
@@ -76,7 +78,8 @@ export default function ProfileFormProvider({ children }: { children: React.Reac
         initialUsername: auth.user.name,
         profile,
         setProfile,
-        initialProfile: auth.user.profile as Profile
+        initialProfile: auth.user.profile as Profile,
+        refetch
       }}
     >
       {children}
