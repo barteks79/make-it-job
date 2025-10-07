@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useContext, createContext } from 'react';
+import { useState, useEffect, useContext, createContext, SetStateAction } from 'react';
 import { authClient } from '@/lib/auth/client';
 import { type Profile } from '@/db/schema/users';
 
@@ -14,7 +14,8 @@ export type ProfileFormT = {
   initialUsername: string;
   setUsername: (value: string) => void;
   profile: Profile;
-  setProfile: (profile: Profile) => void;
+  // setProfile: (profile: Profile) => void;
+  setProfile: React.Dispatch<SetStateAction<Profile>>;
   initialProfile: Profile;
 };
 
@@ -25,9 +26,9 @@ export const ProfileFormContext = createContext<ProfileFormT>({
   username: '',
   initialUsername: '',
   setUsername: () => {},
-  profile: { biography: '' },
+  profile: { biography: '', skills: [] },
   setProfile: () => {},
-  initialProfile: { biography: '' }
+  initialProfile: { biography: '', skills: [] }
 });
 
 export function useProfileForm() {

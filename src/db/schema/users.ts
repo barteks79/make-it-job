@@ -2,7 +2,7 @@ import { pgTable, uuid, varchar, text, boolean, jsonb } from 'drizzle-orm/pg-cor
 import type { InferInsertModel, InferSelectModel } from 'drizzle-orm';
 import { timestamps } from './timestamps.helpers';
 
-export type Profile = { biography?: string };
+export type Profile = { biography?: string; skills?: string[] };
 
 export const users = pgTable('user', {
   id: uuid('id').primaryKey(),
