@@ -10,19 +10,17 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import ImageUploader from '../_components/image-uploader';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-
+import { toast } from 'sonner';
 import SkillDialog from './skill-dialog';
 
 export default function ProfileForm() {
   const profileData = useProfileForm();
 
-  const [, formAction, isPending] = useActionState(
-    () => {
-      saveProfileChanges(profileData)
-      profileData.refetch({ query: { disableCookieCache: true } })
-    },
-    undefined
-  );
+  const [, formAction, isPending] = useActionState(async () => {
+    await saveProfileChanges(profileData);
+    profileData.refetch({ query: { disableCookieCache: true } });
+    toast('Changes were saved');
+  }, undefined);
 
   return (
     <form action={formAction} className="flex flex-col gap-5">
@@ -66,8 +64,11 @@ export default function ProfileForm() {
                 <Button
                   onClick={() => {
                     const idx = profileData.profile.skills!.indexOf(skill);
-                    profileData.profile.skills?.splice(idx, 1)
-                    profileData.setProfile({ ...profileData.profile, skills: [...profileData.profile.skills!] })
+                    profileData.profile.skills?.splice(idx, 1);
+                    profileData.setProfile({
+                      ...profileData.profile,
+                      skills: [...profileData.profile.skills!]
+                    });
                   }}
                   variant="secondary"
                   className="h-8 px-5"
