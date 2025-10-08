@@ -23,25 +23,27 @@ export default function ProfileForm() {
   }, undefined);
 
   return (
-    <form action={formAction} className="flex flex-col gap-5">
-      <section className="flex flex-col gap-3">
-        <Label className="text-muted-foreground">Profile Picture</Label>
-        <div className="flex items-center gap-5">
-          <ImageUploader />
-        </div>
-      </section>
+    <form action={formAction} className="flex flex-col gap-5 pb-10">
+      <div className="flex gap-8">
+        <section className="flex flex-col gap-3">
+          <Label className="text-muted-foreground">Profile Picture</Label>
+          <div className="flex items-center gap-5">
+            <ImageUploader />
+          </div>
+        </section>
 
-      <section className="flex flex-col gap-3 col-span-2">
-        <Label className="text-muted-foreground">Biography</Label>
-        <Textarea
-          className="h-full resize-none"
-          placeholder="Tell us about yourself"
-          value={profileData.profile.biography}
-          onChange={e =>
-            profileData.setProfile({ ...profileData.profile, biography: e.target.value })
-          }
-        ></Textarea>
-      </section>
+        <section className="flex-1 flex flex-col gap-3 col-span-2">
+          <Label className="text-muted-foreground">Biography</Label>
+          <Textarea
+            className="h-full resize-none"
+            placeholder="Tell us about yourself"
+            value={profileData.profile.biography}
+            onChange={e =>
+              profileData.setProfile({ ...profileData.profile, biography: e.target.value })
+            }
+          ></Textarea>
+        </section>
+      </div>
 
       <section className="col-span-2 flex flex-col gap-3">
         <div className="flex flex-col gap-1.5">
