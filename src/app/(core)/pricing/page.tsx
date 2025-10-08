@@ -1,6 +1,48 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardTitle, CardDescription } from '@/components/ui/card';
-import { CheckIcon } from 'lucide-react';
+import { PricingCard } from './pricing-card';
+
+const pricingPlans = [
+  {
+    title: 'FREE',
+    description: 'Default plan available for everyone. Recommanded for new users.',
+    price: 0,
+    priceSuffix: 'per month',
+    features: [
+      'Unlimited job applications',
+      'One job offer to post',
+      'Sorting mechanisms based on user preferences'
+    ],
+    buttonText: 'Current plan',
+    isCurrentPlan: true,
+    isNotAvailable: false,
+    cardClassName: 'py-4 w-64 mt-4'
+  },
+  {
+    title: 'BUSINESS',
+    description:
+      'Best for businesses and recruiters who need advanced hiring tools, data driven insights, and premium support to find top talent efficiently.',
+    price: 15,
+    priceSuffix: 'per month',
+    includesSubtitle: 'Everything from the PREMIUM plan and...',
+    features: ['100 posts per month', 'Access to analytics', 'Team collaboration tools'],
+    buttonText: 'Not Available',
+    isCurrentPlan: false,
+    isNotAvailable: true,
+    cardClassName: 'py-4 w-64'
+  },
+  {
+    title: 'PREMIUM',
+    description:
+      'Recommended for professionals looking to maximize their job search efficiency with better tools and visibility.',
+    price: 5,
+    priceSuffix: 'per month',
+    includesSubtitle: 'Everything from the FREE plan and...',
+    features: ['10 posts per month', 'Priority customer support', 'Advanced job search filters'],
+    buttonText: 'Not Available',
+    isCurrentPlan: false,
+    isNotAvailable: true,
+    cardClassName: 'py-4 w-64 mt-3'
+  }
+];
 
 export default function PricingPage() {
   return (
@@ -12,41 +54,10 @@ export default function PricingPage() {
         </p>
       </section>
 
-      <section className="flex justify-between">
-        <Card className="py-4 w-64">
-          <CardContent className="px-4">
-            <CardTitle className="text-xl tracking-tight">FREE</CardTitle>
-            <CardDescription>
-              Default plan available for everyone. Recommanded for new users.
-            </CardDescription>
-
-            <span className="inline-block mt-3 text-4xl tracking-tight">
-              $0 <span className="tracking-normal text-muted-foreground text-sm">per month</span>
-            </span>
-
-            <div className="flex flex-col gap-3 my-4">
-              <label className="tracking-tight font-medium">Includes:</label>
-              <ul className="flex flex-col gap-1 text-green-700">
-                <li className="flex items-center gap-1 text-sm tracking-tight">
-                  <CheckIcon className="size-4" />
-                  Unlimited job applications
-                </li>
-
-                <li className="flex items-center gap-1 text-sm tracking-tight">
-                  <CheckIcon className="size-4" />
-                  One job offer to post
-                </li>
-
-                <li className="flex gap-1 text-sm tracking-tight">
-                  <CheckIcon className="size-5.5" />
-                  Sorting mechanisms based on user preferences
-                </li>
-              </ul>
-            </div>
-
-            <Button className="w-full h-8">Current plan</Button>
-          </CardContent>
-        </Card>
+      <section className="flex items-start gap-6 justify-between">
+        {pricingPlans.map((plan, index) => (
+          <PricingCard key={index} {...plan} />
+        ))}
       </section>
     </main>
   );
