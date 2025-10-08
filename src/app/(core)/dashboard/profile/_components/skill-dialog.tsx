@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useProfileForm } from '@/store/profile-form';
 
 import { Dialog, DialogContent, DialogTrigger, DialogTitle } from '@/components/ui/dialog';
@@ -34,8 +34,17 @@ export default function SkillDialog() {
 
       <DialogContent>
         <DialogTitle className="text-start">Add your skill</DialogTitle>
-        <Input onKeyDown={e => {if (e.key === 'Enter') buttonRef.current?.click();}} value={skill} onChange={e => setSkill(e.target.value)} placeholder="e.g. Docker" />
-        <Button ref={buttonRef} onClick={handleSaveSkill}>Save</Button>
+        <Input
+          onKeyDown={e => {
+            if (e.key === 'Enter') buttonRef.current?.click();
+          }}
+          value={skill}
+          onChange={e => setSkill(e.target.value)}
+          placeholder="e.g. Docker"
+        />
+        <Button ref={buttonRef} onClick={handleSaveSkill}>
+          Save
+        </Button>
       </DialogContent>
     </Dialog>
   );

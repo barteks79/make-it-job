@@ -4,13 +4,14 @@ import { useActionState } from 'react';
 import { useProfileForm } from '@/store/profile-form';
 import { saveProfileChanges } from '../_actions/save-profile-changes';
 
+import { toast } from 'sonner';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import ImageUploader from '../_components/image-uploader';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import { toast } from 'sonner';
+
+import ImageUploader from '../_components/image-uploader';
 import SkillDialog from './skill-dialog';
 
 export default function ProfileForm() {
