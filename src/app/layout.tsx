@@ -23,7 +23,12 @@ export default function RootLayout({ children }: PropsWithChildren) {
       suppressHydrationWarning
     >
       <body className={`flex flex-col h-svh antialiased overflow-hidden ${GeistSans.className}`}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          enableSystem
+          disableTransitionOnChange
+        >
           {children}
         </ThemeProvider>
       </body>
