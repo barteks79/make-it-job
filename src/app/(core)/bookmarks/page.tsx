@@ -5,6 +5,7 @@ import { headers } from 'next/headers';
 import { Suspense } from 'react';
 import { getUserBookmarks } from '@/db/queries/bookmarks/get-user-bookmarks';
 
+import { BookmarksFallback } from './_components/bookmarks-fallback';
 import BookmarksContainer from './_components/bookmarks-container';
 import Searchbar from './_components/searchbar';
 import OptionTabs from './_components/order-tabs';
@@ -33,7 +34,7 @@ export default async function BookmarksPage({ searchParams }: BookmarksProps) {
           <OptionTabs />
         </div>
 
-        <Suspense fallback={<p>Loading...</p>}>
+        <Suspense fallback={<BookmarksFallback />}>
           <BookmarksContainer query={search.q} bookmarks={bookmarks} />
         </Suspense>
       </div>
