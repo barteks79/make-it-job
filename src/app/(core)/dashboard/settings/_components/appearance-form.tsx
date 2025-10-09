@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useTheme } from 'next-themes';
 
+import { AppearanceFormSkeleton } from './skeletons';
 import { Card } from '@/components/ui/card';
 import { Sun, Moon, SunMoon } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -34,7 +35,7 @@ export function AppearanceForm() {
   }, []);
 
   if (!mounted) {
-    return <p>Loading...</p>;
+    return <AppearanceFormSkeleton />;
   }
 
   return (
