@@ -14,7 +14,7 @@ const pricingPlans = [
     buttonText: 'Current plan',
     isCurrentPlan: true,
     isNotAvailable: false,
-    cardClassName: 'py-4 w-64 mt-4'
+    cardClassName: 'py-4 mt-4'
   },
   {
     title: 'BUSINESS',
@@ -27,7 +27,7 @@ const pricingPlans = [
     buttonText: 'Not Available',
     isCurrentPlan: false,
     isNotAvailable: true,
-    cardClassName: 'py-4 w-64'
+    cardClassName: 'py-4'
   },
   {
     title: 'PREMIUM',
@@ -40,25 +40,29 @@ const pricingPlans = [
     buttonText: 'Not Available',
     isCurrentPlan: false,
     isNotAvailable: true,
-    cardClassName: 'py-4 w-64 mt-3'
+    cardClassName: 'py-4 mt-3'
   }
 ];
 
 export default function PricingPage() {
   return (
-    <main className="flex flex-col justify-center items-center h-full gap-5 overflow-y-auto py-8">
-      <section className="flex flex-col gap-2">
-        <h2 className="text-center text-3xl font-semibold tracking-tight">Pricing plans</h2>
-        <p className="text-lg text-muted-foreground tracking-tight">
-          One post for every user. Select the right plan for your needs.
-        </p>
-      </section>
+    <main className="overflow-y-auto h-full px-3">
+      <div className="flex flex-col items-center h-full gap-5">
+        <section className="flex flex-col gap-2 pt-5">
+          <h2 className="text-center text-2xl sm:text-3xl font-semibold tracking-tight">
+            Pricing plans
+          </h2>
+          <p className="text-base text-balance text-center sm:text-lg text-muted-foreground tracking-tight">
+            One post for every user. Select the right plan for your needs.
+          </p>
+        </section>
 
-      <section className="flex items-start gap-6 justify-between">
-        {pricingPlans.map((plan, index) => (
-          <PricingCard key={index} {...plan} />
-        ))}
-      </section>
+        <section className="flex flex-wrap items-start gap-6 justify-center pb-5">
+          {pricingPlans.map((plan, index) => (
+            <PricingCard key={index} {...plan} />
+          ))}
+        </section>
+      </div>
     </main>
   );
 }

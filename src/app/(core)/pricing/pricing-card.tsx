@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardTitle, CardDescription } from '@/components/ui/card';
 import { CheckIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 type PricingCardProps = {
   title: string;
@@ -28,7 +29,7 @@ export function PricingCard({
   cardClassName
 }: PricingCardProps) {
   return (
-    <Card className={cardClassName}>
+    <Card className={cn('w-64', cardClassName)}>
       <CardContent className="px-4">
         <CardTitle className="text-xl tracking-tight">{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
