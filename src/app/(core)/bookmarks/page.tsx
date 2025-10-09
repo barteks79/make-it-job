@@ -29,9 +29,9 @@ export default async function BookmarksPage({ searchParams }: BookmarksProps) {
   return (
     <main className="mx-auto w-full max-w-5xl h-full pt-10 px-3">
       <div className="flex flex-col gap-3 h-full">
-        <div className="flex items-center gap-3">
-          <Searchbar placeholder="Search bookmarks..." className="flex-1" delay={500} />
+        <div className="flex flex-col lg:flex-row items-center gap-1 lg:gap-3">
           <OptionTabs />
+          <Searchbar placeholder="Search bookmarks..." className="flex-1 py-1" delay={500} />
         </div>
 
         <Suspense fallback={<BookmarksFallback />}>
