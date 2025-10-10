@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
 import { SettingsFormSkeleton } from './skeletons';
+import { ChangeEmailDialog } from './change-email-dialog';
+import { ChangePasswordDialog } from './change-password-dialog';
 import { InboxIcon, LockKeyholeIcon } from 'lucide-react';
 
 export function SettingsForm() {
@@ -24,18 +26,20 @@ export function SettingsForm() {
 
         <div className="flex items-center gap-2">
           <Input value={auth.user.email} disabled />
-          <Button className="space-x-0.5 cursor-pointer" variant="secondary">
-            <span>Change Email</span>
-            <InboxIcon />
-          </Button>
+          <ChangeEmailDialog>
+            <Button className="space-x-0.5 cursor-pointer" variant="secondary">
+              <span>Change Email</span>
+              <InboxIcon />
+            </Button>
+          </ChangeEmailDialog>
         </div>
 
         {auth.user.emailVerified ? (
+          <Badge className="bg-primary/25 text-primary font-normal cursor-default">Verified</Badge>
+        ) : (
           <Badge className="bg-destructive/25 text-destructive font-normal cursor-default">
             Not verified
           </Badge>
-        ) : (
-          <Badge className="bg-primary/25 text-primary font-normal cursor-default">Verified</Badge>
         )}
       </div>
 
@@ -44,10 +48,12 @@ export function SettingsForm() {
 
         <div className="flex items-center gap-2">
           <Input disabled placeholder="********************" type="password" />
-          <Button className="space-x-0.5 cursor-pointer" variant="secondary">
-            <span>Change Password</span>
-            <LockKeyholeIcon />
-          </Button>
+          <ChangePasswordDialog>
+            <Button className="space-x-0.5 cursor-pointer" variant="secondary">
+              <span>Change Password</span>
+              <LockKeyholeIcon />
+            </Button>
+          </ChangePasswordDialog>
         </div>
       </div>
     </form>
