@@ -12,17 +12,17 @@ const themes = [
   {
     name: 'light',
     label: 'Light',
-    icon: <Sun className="size-6" />
+    icon: <Sun strokeWidth={1.5} className="size-6" />
   },
   {
     name: 'dark',
     label: 'Dark',
-    icon: <Moon className="size-6" />
+    icon: <Moon strokeWidth={1.5} className="size-6" />
   },
   {
     name: 'system',
     label: 'System',
-    icon: <SunMoon className="size-6" />
+    icon: <SunMoon strokeWidth={1.5} className="size-6" />
   }
 ] as const;
 
@@ -45,7 +45,7 @@ export function AppearanceForm() {
           <Card
             onClick={() => setTheme(t.name)}
             className={cn(
-              'flex size-full cursor-pointer items-center justify-center py-10 border',
+              'flex size-full items-center justify-center py-10 cursor-auto hover:bg-accent/50',
               {
                 'text-primary border-primary': theme === t.name
               }
