@@ -1,7 +1,9 @@
 'use client';
 
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { authClient } from '@/lib/auth/client';
 
 import {
   Dialog,
@@ -13,6 +15,7 @@ import {
   DialogTrigger,
   DialogClose
 } from '@/components/ui/dialog';
+
 import {
   Form,
   FormControl,
@@ -21,12 +24,18 @@ import {
   FormLabel,
   FormMessage
 } from '@/components/ui/form';
+
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Spinner } from '@/components/ui/spinner';
+import { AlertCircleIcon } from 'lucide-react';
 
 import { changePasswordSchema, type TChangePassword } from '@/types/change-password-schema';
 
 export function ChangePasswordDialog({ children }: React.PropsWithChildren) {
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+
   const form = useForm<TChangePassword>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
@@ -36,12 +45,35 @@ export function ChangePasswordDialog({ children }: React.PropsWithChildren) {
     }
   });
 
-  function onSubmit(values: TChangePassword) {
-    console.log(values);
-  }
+  const onSubmit = async ({ currentPassword, newPassword }: TChangePassword) => {
+    await authClient.changePassword({
+      currentPassword,
+      newPassword,
+      revokeOtherSessions: true,
+      fetchOptions: {
+        onError: async context => {
+          const { response } = context;
+          if (response.status === 429) {
+            const retryAfter = response.headers.get('X-Retry-After');
+            return form.setError('root', {
+              message: `Rate limit exceeded. Retry after ${retryAfter} seconds.`
+            });
+          }
+          form.setError('root', {
+            message: 'Could not change your password. Please try again later.'
+          });
+        }
+      }
+    });
+  };
+
+  const handleOpenChange = (open: boolean) => {
+    form.reset();
+    setIsDialogOpen(open);
+  };
 
   return (
-    <Dialog onOpenChange={() => form.reset()}>
+    <Dialog open={isDialogOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader className="gap-1">
@@ -95,6 +127,14 @@ export function ChangePasswordDialog({ children }: React.PropsWithChildren) {
               )}
             />
 
+            {form.formState.errors.root && (
+              <Alert variant="destructive">
+                <AlertCircleIcon className="relative top-2" />
+                <AlertTitle>Unexpected error occurred.</AlertTitle>
+                <AlertDescription>{form.formState.errors.root.message}</AlertDescription>
+              </Alert>
+            )}
+
             <DialogFooter>
               <DialogClose asChild>
                 <Button type="button" variant="outline">
@@ -102,7 +142,16 @@ export function ChangePasswordDialog({ children }: React.PropsWithChildren) {
                 </Button>
               </DialogClose>
 
-              <Button type="submit">Change Password</Button>
+              <Button disabled={form.formState.isSubmitting} type="submit">
+                {form.formState.isSubmitting ? (
+                  <>
+                    Changing...
+                    <Spinner />
+                  </>
+                ) : (
+                  'Change Password'
+                )}
+              </Button>
             </DialogFooter>
           </form>
         </Form>

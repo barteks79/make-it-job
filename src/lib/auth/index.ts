@@ -83,6 +83,17 @@ export const auth = betterAuth({
       enabled: true,
       maxAge: 60 // 1 minute
     }
+  },
+  rateLimit: {
+    enabled: true,
+    customRules: {
+      '/api/auth/change-password': async () => {
+        return {
+          max: 3,
+          window: 60
+        };
+      }
+    }
   }
 });
 
