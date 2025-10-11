@@ -6,18 +6,13 @@ import { Spinner } from '@/components/ui/spinner';
 import { Button } from '@/components/ui/button';
 
 export function GithubConnectButton({ accountId }: { accountId: string | undefined }) {
-  const { isLoading, handleToggle } = useOAuthToggle({
+  const { handleToggle, isLoading, isEnabled } = useOAuthToggle({
     provider: 'github',
     accountId
   });
 
   return (
-    <Button
-      onClick={handleToggle}
-      disabled={isLoading}
-      type="button"
-      variant="secondary"
-    >
+    <Button onClick={handleToggle} disabled={!isEnabled} type="button" variant="secondary">
       {accountId ? (
         isLoading ? (
           <>

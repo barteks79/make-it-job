@@ -1,3 +1,4 @@
+import { AccountsContextProvider } from '@/store/accounts-context';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { unauthorized } from 'next/navigation';
@@ -75,9 +76,11 @@ export async function SettingsForm() {
         </section>
 
         <section className="border rounded-md">
-          <EmailPasswordMethodCard email={data.user.email} />
-          <GithubMethodCard accountId={githubAccount?.accountId} />
-          <GoogleMethodCard accountId={googleAccount?.accountId} />
+          <AccountsContextProvider accounts={accounts}>
+            <EmailPasswordMethodCard email={data.user.email} />
+            <GithubMethodCard accountId={githubAccount?.accountId} />
+            <GoogleMethodCard accountId={googleAccount?.accountId} />
+          </AccountsContextProvider>
         </section>
       </div>
     </form>
