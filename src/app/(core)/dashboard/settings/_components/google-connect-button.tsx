@@ -1,46 +1,19 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { authClient } from '@/lib/auth/client';
+import { useOAuthToggle } from '@/hooks/use-oauth-toggle';
 
 import { Spinner } from '@/components/ui/spinner';
 import { Button } from '@/components/ui/button';
 
 export function GoogleConnectButton({ accountId }: { accountId: string | undefined }) {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleGoogleConnect = async () => {
-    await authClient.linkSocial({
-      provider: 'google',
-      callbackURL: '/dashboard/settings',
-      fetchOptions: {
-        onRequest: () => setIsLoading(true),
-        onError: () => setIsLoading(false),
-        onSuccess: () => setIsLoading(false)
-      }
-    });
-  };
-
-  const handleGoogleDisconnect = async () => {
-    await authClient.unlinkAccount({
-      providerId: 'google',
-      accountId,
-      fetchOptions: {
-        onRequest: () => setIsLoading(true),
-        onError: () => setIsLoading(false),
-        onSuccess: () => {
-          setIsLoading(false);
-          router.refresh();
-        }
-      }
-    });
-  };
+  const { isLoading, handleToggle } = useOAuthToggle({
+    provider: 'google',
+    accountId
+  });
 
   return (
     <Button
-      onClick={accountId ? handleGoogleDisconnect : handleGoogleConnect}
+      onClick={handleToggle}
       disabled={isLoading}
       type="button"
       variant="secondary"
