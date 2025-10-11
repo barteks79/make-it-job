@@ -4,6 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --default-border-width: 0.5px;
+
   --breakpoint-xl: 84rem;
   --breakpoint-3xl: 108rem;
 
@@ -52,6 +54,11 @@
 }
 
 :root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   --radius: 0.3rem;
   --background: oklch(0.99 0 0);
   --foreground: oklch(0.1 0.0052 107.35);
