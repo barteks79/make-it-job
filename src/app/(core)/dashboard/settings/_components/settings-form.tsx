@@ -1,23 +1,32 @@
-'use client';
-
-import { authClient } from '@/lib/auth/client';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import { unauthorized } from 'next/navigation';
 
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
-import { SettingsFormSkeleton } from './skeletons';
 import { ChangeEmailDialog } from './change-email-dialog';
 import { ChangePasswordDialog } from './change-password-dialog';
 import { InboxIcon, LockKeyholeIcon } from 'lucide-react';
 
-export function SettingsForm() {
-  const { data: auth, isPending } = authClient.useSession();
+import {
+  GithubMethodCard,
+  GoogleMethodCard,
+  EmailPasswordMethodCard
+} from './sign-in-method-cards';
 
-  if (isPending || !auth) {
-    return <SettingsFormSkeleton />;
-  }
+export async function SettingsForm() {
+  const nextHeaders = await headers();
+
+  const data = await auth.api.getSession({ headers: nextHeaders });
+  if (!data) unauthorized();
+
+  const accounts = await auth.api.listUserAccounts({ headers: nextHeaders });
+
+  const githubAccount = accounts.find(account => account.providerId === 'github');
+  const googleAccount = accounts.find(account => account.providerId === 'google');
 
   return (
     <form className="space-y-4">
@@ -25,7 +34,7 @@ export function SettingsForm() {
         <Label className="text-base">Email</Label>
 
         <div className="flex items-center gap-2">
-          <Input value={auth.user.email} disabled />
+          <Input value={data.user.email} disabled />
           <ChangeEmailDialog>
             <Button className="space-x-0.5 cursor-pointer" variant="secondary">
               <span>Change Email</span>
@@ -34,7 +43,7 @@ export function SettingsForm() {
           </ChangeEmailDialog>
         </div>
 
-        {auth.user.emailVerified ? (
+        {data.user.emailVerified ? (
           <Badge className="bg-primary/25 text-primary font-normal cursor-default">Verified</Badge>
         ) : (
           <Badge className="bg-destructive/25 text-destructive font-normal cursor-default">
@@ -55,6 +64,21 @@ export function SettingsForm() {
             </Button>
           </ChangePasswordDialog>
         </div>
+      </div>
+
+      <div className="space-y-2.5">
+        <section className="space-y-0.5">
+          <Label className="text-base">Sign-in Methods</Label>
+          <p className="text-sm text-muted-foreground">
+            Customize your sign-in methods for better security and time saving.
+          </p>
+        </section>
+
+        <section className="border rounded-md">
+          <EmailPasswordMethodCard email={data.user.email} />
+          <GithubMethodCard isConnected={!!githubAccount} />
+          <GoogleMethodCard isConnected={!!googleAccount} />
+        </section>
       </div>
     </form>
   );

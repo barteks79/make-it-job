@@ -1,8 +1,10 @@
+import { Suspense } from 'react';
 import { Toaster } from '@/components/ui/sonner';
 import { SettingsForm } from './_components/settings-form';
 import { AppearanceForm } from './_components/appearance-form';
+import { SettingsFormSkeleton } from './_components/skeletons';
 
-export default function SettingsPage() {
+export default async function SettingsPage() {
   return (
     <div className="space-y-6 pb-8">
       <section className="space-y-5">
@@ -13,7 +15,9 @@ export default function SettingsPage() {
 
         <div className="h-px w-full bg-border" />
 
-        <SettingsForm />
+        <Suspense fallback={<SettingsFormSkeleton />}>
+          <SettingsForm />
+        </Suspense>
       </section>
 
       <section className="space-y-5">
