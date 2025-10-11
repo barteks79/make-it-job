@@ -1,6 +1,9 @@
 import { Button } from '@/components/ui/button';
-import { GithubLogo, GoogleIcon } from '@/app/(auth)/sign-in/_components/auth-icons';
 import { CheckIcon, XIcon, MailIcon } from 'lucide-react';
+
+import { GithubLogo, GoogleIcon } from '@/app/(auth)/sign-in/_components/auth-icons';
+import { GoogleConnectButton } from './google-connect-button';
+import { GithubConnectButton } from './github-connect-button';
 
 export function EmailPasswordMethodCard({ email }: { email: string }) {
   return (
@@ -29,7 +32,7 @@ export function EmailPasswordMethodCard({ email }: { email: string }) {
   );
 }
 
-export function GithubMethodCard({ isConnected }: { isConnected: boolean }) {
+export function GithubMethodCard({ accountId }: { accountId: string | undefined }) {
   return (
     <div className="flex items-center justify-between py-4 px-5 border-y">
       <div className="flex items-center gap-4">
@@ -37,19 +40,17 @@ export function GithubMethodCard({ isConnected }: { isConnected: boolean }) {
         <div className="flex flex-col">
           <span className="text-sm font-medium">GitHub</span>
           <span className="text-sm text-muted-foreground">
-            {isConnected ? 'Connected' : 'Connect your Github account'}
+            {accountId ? 'Connected' : 'Connect your Github account'}
           </span>
         </div>
       </div>
 
-      <Button disabled={!!isConnected} type="button" variant="secondary">
-        {isConnected ? 'Connected' : 'Connect'}
-      </Button>
+      <GithubConnectButton accountId={accountId} />
     </div>
   );
 }
 
-export function GoogleMethodCard({ isConnected }: { isConnected: boolean }) {
+export function GoogleMethodCard({ accountId }: { accountId: string | undefined }) {
   return (
     <div className="flex items-center justify-between py-4 px-5">
       <div className="flex items-center gap-4">
@@ -57,14 +58,12 @@ export function GoogleMethodCard({ isConnected }: { isConnected: boolean }) {
         <div className="flex flex-col">
           <span className="text-sm font-medium">Google</span>
           <span className="text-sm text-muted-foreground">
-            {isConnected ? 'Connected' : 'Connect your Google account'}
+            {accountId ? 'Connected' : 'Connect your Google account'}
           </span>
         </div>
       </div>
 
-      <Button disabled={!!isConnected} type="button" variant="secondary">
-        {isConnected ? 'Connected' : 'Connect'}
-      </Button>
+      <GoogleConnectButton accountId={accountId} />
     </div>
   );
 }

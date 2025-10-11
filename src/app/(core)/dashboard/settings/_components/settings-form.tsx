@@ -76,8 +76,8 @@ export async function SettingsForm() {
 
         <section className="border rounded-md">
           <EmailPasswordMethodCard email={data.user.email} />
-          <GithubMethodCard isConnected={!!githubAccount} />
-          <GoogleMethodCard isConnected={!!googleAccount} />
+          <GithubMethodCard accountId={githubAccount?.accountId} />
+          <GoogleMethodCard accountId={googleAccount?.accountId} />
         </section>
       </div>
     </form>
