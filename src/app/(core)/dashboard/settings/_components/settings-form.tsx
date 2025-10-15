@@ -26,6 +26,7 @@ export async function SettingsForm() {
 
   const accounts = await auth.api.listUserAccounts({ headers: nextHeaders });
 
+  const passwordAccount = accounts.find(account => account.providerId === 'credential');
   const githubAccount = accounts.find(account => account.providerId === 'github');
   const googleAccount = accounts.find(account => account.providerId === 'google');
 
@@ -57,13 +58,22 @@ export async function SettingsForm() {
         <Label className="text-base">Password</Label>
 
         <div className="flex items-center gap-2">
-          <Input disabled placeholder="********************" type="password" />
-          <ChangePasswordDialog>
-            <Button className="space-x-0.5 cursor-pointer" variant="secondary">
-              <span>Change Password</span>
-              <LockKeyholeIcon />
-            </Button>
-          </ChangePasswordDialog>
+          {passwordAccount ? (
+            <>
+              <Input disabled placeholder="********************" type="password" />
+              <ChangePasswordDialog>
+                <Button className="space-x-0.5 cursor-pointer" variant="secondary">
+                  <span>Change Password</span>
+                  <LockKeyholeIcon />
+                </Button>
+              </ChangePasswordDialog>
+            </>
+          ) : (
+            <Label className="text-base text-muted-foreground">
+              You have no password associated with your account. Manage your sign-in methods in the
+              section below.
+            </Label>
+          )}
         </div>
       </div>
 
