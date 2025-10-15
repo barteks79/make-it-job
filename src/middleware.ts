@@ -1,19 +1,22 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { getSessionCookie } from 'better-auth/cookies';
 
-const authRoutes = ['/sign-in', '/sign-up'];
-const privateRoutes = ['/dashboard/profile', '/bookmarks'];
+import { authClient } from '@/lib/auth/client';
 
-export function middleware(request: NextRequest) {
+const authRoutes = ['/sign-in', '/sign-up'];
+const privateRoutes = ['/dashboard', '/bookmarks'];
+
+export async function middleware(request: NextRequest) {
   const session = getSessionCookie(request);
 
-  // redirect to "/" if already logged in
+  // log out if trying to access auth routes while logged in
   if (session && authRoutes.includes(request.nextUrl.pathname)) {
-    return NextResponse.redirect(new URL('/', request.url));
+    await authClient.revokeSession({ token: session });
+    return NextResponse.next();
   }
 
   // redirect to "/sign-in" if not authorized
-  if (!session && privateRoutes.includes(request.nextUrl.pathname)) {
+  if (!session && privateRoutes.some(route => request.nextUrl.pathname.startsWith(route))) {
     return NextResponse.redirect(new URL('/sign-in', request.url));
   }
 
