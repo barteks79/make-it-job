@@ -4,6 +4,7 @@ import { CheckIcon, XIcon, MailIcon } from 'lucide-react';
 import { GithubLogo, GoogleIcon } from '@/app/(auth)/sign-in/_components/auth-icons';
 import { GoogleConnectButton } from './google-connect-button';
 import { GithubConnectButton } from './github-connect-button';
+import { CredentialManageDropdown } from './credential-manage-dropdown';
 
 export function EmailPasswordMethodCard({ email }: { email: string }) {
   return (
@@ -25,9 +26,11 @@ export function EmailPasswordMethodCard({ email }: { email: string }) {
         </div>
       </div>
 
-      <Button type="button" variant="outline">
-        Manage
-      </Button>
+      <CredentialManageDropdown>
+        <Button type="button" variant="outline">
+          Manage
+        </Button>
+      </CredentialManageDropdown>
     </div>
   );
 }
