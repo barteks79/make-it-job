@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { setPassword } from '../_actions/set-password';
+
 import {
   Dialog,
   DialogContent,
@@ -47,8 +49,12 @@ export function SetupPasswordDialog({
   });
 
   const onSubmit = async ({ password }: TSetupPassword) => {
-    // TODO: Implement password setup logic
-    console.log('Setup password:', password);
+    const success = await setPassword({ password });
+    if (!success) {
+      return form.setError('root', {
+        message: 'Failed to set password. Please try again later.'
+      });
+    }
 
     setIsDialogOpen(false);
     onSetupComplete();

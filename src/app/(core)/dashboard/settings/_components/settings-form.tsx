@@ -87,7 +87,7 @@ export async function SettingsForm() {
 
         <section className="border rounded-md">
           <AccountsContextProvider accounts={accounts}>
-            <EmailPasswordMethodCard email={data.user.email} />
+            <EmailPasswordMethodCard hasPassword={!!passwordAccount} email={data.user.email} />
             <GithubMethodCard accountId={githubAccount?.accountId} />
             <GoogleMethodCard accountId={googleAccount?.accountId} />
           </AccountsContextProvider>

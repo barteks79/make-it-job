@@ -1,26 +1,42 @@
-import { Button } from '@/components/ui/button';
-import { CheckIcon, XIcon, MailIcon } from 'lucide-react';
-
-import { GithubLogo, GoogleIcon } from '@/app/(auth)/sign-in/_components/auth-icons';
 import { GoogleConnectButton } from './google-connect-button';
 import { GithubConnectButton } from './github-connect-button';
 import { CredentialManageDropdown } from './credential-manage-dropdown';
 
-export function EmailPasswordMethodCard({ email }: { email: string }) {
+import { Button } from '@/components/ui/button';
+import { GithubLogo, GoogleIcon } from '@/app/(auth)/sign-in/_components/auth-icons';
+import { CheckIcon, XIcon, MailIcon } from 'lucide-react';
+
+export function EmailPasswordMethodCard({
+  hasPassword,
+  email
+}: {
+  hasPassword: boolean;
+  email: string;
+}) {
   return (
     <div className="flex items-center justify-between py-4 px-5">
       <div className="flex items-center gap-4">
         <MailIcon className="size-5" />
         <div className="flex flex-col">
           <span className="text-sm font-medium space-x-1.5">
-            <span className="inline-flex items-center gap-0.5 text-green-600">
-              Email
-              <CheckIcon className="size-4" />
-            </span>
-            <span className="inline-flex items-center gap-0.5 text-destructive">
-              Password
-              <XIcon className="size-4" />
-            </span>
+            {hasPassword ? (
+              <span className="inline-flex items-center gap-0.5 text-green-600">
+                Email & Password
+                <CheckIcon className="size-4" />
+              </span>
+            ) : (
+              <>
+                <span className="inline-flex items-center gap-0.5 text-green-600">
+                  Email
+                  <XIcon className="size-4" />
+                </span>
+
+                <span className="inline-flex items-center gap-0.5 text-destructive">
+                  Password
+                  <XIcon className="size-4" />
+                </span>
+              </>
+            )}
           </span>
           <span className="text-sm text-muted-foreground">{email}</span>
         </div>
