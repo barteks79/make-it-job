@@ -6,7 +6,7 @@ import { unauthorized } from 'next/navigation';
 
 import { deleteBookmark } from '@/lib/bookmark/delete-bookmark';
 import { createBookmark } from '@/lib/bookmark/create-bookmark';
-import { revalidateTag, revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 
 export const toggleBookmark = async ({
   postId,
@@ -26,7 +26,7 @@ export const toggleBookmark = async ({
     await createBookmark({ postId, userId });
   }
 
-  // Fetches getIsBookmarked again in JobCard & Revalidates /bookmarks page
+  // Revalidates bookmark in JobCard & Revalidates bookmarks page
   revalidateTag(`bookmark:${postId}:${userId}`);
-  revalidatePath('/bookmarks');
+  revalidateTag(`bookmarks:${userId}`);
 };

@@ -10,14 +10,12 @@ export const db = drizzle(client, {
     process.env.NODE_ENV === 'development'
       ? {
           logQuery(query: string, params: unknown[]) {
-            console.log('='.repeat(60));
-
-            console.log('\n\x1b[32m[Drizzle]\x1b[0m\n');
-
-            console.log(`Query: ${query}\n`);
-            if (params && params.length > 0) {
-              console.log(`Params: ${JSON.stringify(params, null, 2)}\n`);
-            }
+            // console.log('='.repeat(25));
+            // console.log('\n\x1b[32m[Drizzle]\x1b[0m\n');
+            console.log(`\nQuery: ${query}\n`);
+            // if (params && params.length > 0) {
+            //   console.log(`Params: ${JSON.stringify(params, null, 2)}\n`);
+            // }
           }
         }
       : undefined

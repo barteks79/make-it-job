@@ -3,9 +3,9 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   // config options here
   experimental: {
-    serverActions: {
-      bodySizeLimit: '5mb'
-    }
+    serverActions: { bodySizeLimit: '5mb' },
+    useCache: true,
+    authInterrupts: true
   },
   images: {
     remotePatterns: [
