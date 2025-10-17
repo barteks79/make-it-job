@@ -1,4 +1,4 @@
-import { type FilterCategoriesT } from '@/db/queries/posts/get-filter-categories';
+import { type FilterCategoriesT } from '@/lib/post/get-filter-categories';
 
 export const fallbackCategories = {
   jobType: [

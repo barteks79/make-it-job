@@ -1,5 +1,5 @@
 import { fallbackCategories } from '@/config/filter';
-import { FilterCategoriesT } from '@/db/queries/posts/get-filter-categories';
+import { FilterCategoriesT } from '@/lib/post/get-filter-categories';
 import FilterGroup from './filter-group';
 import FilterOption from './filter-option';
 

@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import SalaryInputsProvider from '@/store/salary-inputs';
 
-import { getFilterCategories } from '@/db/queries/posts/get-filter-categories';
+import { getFilterCategories } from '@/lib/post/get-filter-categories';
 import { getAppliedFilters, type FilterSearchParams } from '@/lib/filter';
 import FilterGroup from './_components/filter-group';
 import FilterGroupContainer, {

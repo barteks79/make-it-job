@@ -3,7 +3,7 @@ import CompanyLogo from '@/components/custom/company-logo';
 import { MapPin, DollarSignIcon, MonitorIcon, UserIcon, HouseIcon, Calendar } from 'lucide-react';
 
 import { Skeleton } from '@/components/ui/skeleton';
-import { getPostById } from '@/db/queries/posts/get-post-by-id';
+import { getPostById } from '@/lib/post/get-post-by-id';
 import type { ReactNode, ComponentType, SVGProps } from 'react';
 
 export default async function JobDetails({ postId }: { postId: string }) {

@@ -1,5 +1,5 @@
 import BookmarksList from './bookmarks-list';
-import { type GetUserBookmarks } from '@/db/queries/bookmarks/get-user-bookmarks';
+import { type GetUserBookmarks } from '@/lib/bookmark/get-user-bookmarks';
 
 export default async function BookmarksContainer({
   query,

@@ -1,7 +1,7 @@
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 
-import { type PostsWithCompanyT } from '@/db/queries/posts/get-posts';
+import { type PostsWithCompanyT } from '@/lib/post/get-posts';
 import JobPostCard, { JobPostCardSkeleton } from './job-card';
 
 export default async function PostsContainer({

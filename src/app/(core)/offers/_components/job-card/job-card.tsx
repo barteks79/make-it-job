@@ -1,4 +1,4 @@
-import { getIsBookmarked } from '@/db/queries/bookmarks/get-is-bookmarked';
+import { getIsBookmarked } from '@/lib/bookmark/get-is-bookmarked';
 
 import { createRelativeDate } from '@/lib/utils';
 import { type JobPost, type Company } from '@/db/schema';

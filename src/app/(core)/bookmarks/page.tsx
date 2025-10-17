@@ -3,7 +3,7 @@ import { unauthorized } from 'next/navigation';
 import { headers } from 'next/headers';
 
 import { Suspense } from 'react';
-import { getUserBookmarks } from '@/db/queries/bookmarks/get-user-bookmarks';
+import { getUserBookmarks } from '@/lib/bookmark/get-user-bookmarks';
 
 import { BookmarksFallback } from './_components/bookmarks-fallback';
 import BookmarksContainer from './_components/bookmarks-container';

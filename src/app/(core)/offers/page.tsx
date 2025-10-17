@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { getPostsWithCompany } from '@/db/queries/posts/get-posts';
+import { getPostsWithCompany } from '@/lib/post/get-posts';
 import { getAppliedFilters, type FilterSearchParams } from '@/lib/filter';
 
 import SortingSelect from './_components/sorting-select';

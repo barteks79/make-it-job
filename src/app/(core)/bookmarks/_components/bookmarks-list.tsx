@@ -1,7 +1,7 @@
 'use client';
 
 import { useOptimistic } from 'react';
-import { type GetUserBookmarks } from '@/db/queries/bookmarks/get-user-bookmarks';
+import { type GetUserBookmarks } from '@/lib/bookmark/get-user-bookmarks';
 
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
