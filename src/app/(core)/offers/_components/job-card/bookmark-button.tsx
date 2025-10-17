@@ -1,7 +1,7 @@
 'use client';
 
 import { useOptimistic, startTransition } from 'react';
-import { bookmarkPost } from '@/db/actions/bookmark-post';
+import { toggleBookmark } from '@/lib/bookmark/toggle-bookmark';
 
 import { Button } from '@/components/ui/button';
 import { BookmarkIcon } from 'lucide-react';
@@ -28,7 +28,7 @@ export default function BookmarkButton({
       if (updatedParentUI) updatedParentUI();
     });
 
-    await bookmarkPost({ postId, isDelete: isBookmarked });
+    await toggleBookmark({ postId, isDelete: isBookmarked });
   };
 
   return (

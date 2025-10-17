@@ -4,11 +4,17 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import { unauthorized } from 'next/navigation';
 
-import { deleteBookmark } from './delete-bookmark';
-import { addBookmark } from './add-bookmark';
+import { deleteBookmark } from '@/lib/bookmark/delete-bookmark';
+import { createBookmark } from '@/lib/bookmark/create-bookmark';
 import { revalidateTag, revalidatePath } from 'next/cache';
 
-export const bookmarkPost = async ({ postId, isDelete }: { postId: string; isDelete: boolean }) => {
+export const toggleBookmark = async ({
+  postId,
+  isDelete
+}: {
+  postId: string;
+  isDelete: boolean;
+}) => {
   const data = await auth.api.getSession({ headers: await headers() });
   if (!data) unauthorized();
 
@@ -17,7 +23,7 @@ export const bookmarkPost = async ({ postId, isDelete }: { postId: string; isDel
   if (isDelete) {
     await deleteBookmark({ postId, userId });
   } else {
-    await addBookmark({ postId, userId });
+    await createBookmark({ postId, userId });
   }
 
   // Fetches getIsBookmarked again in JobCard & Revalidates /bookmarks page

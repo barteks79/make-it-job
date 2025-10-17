@@ -1,7 +1,7 @@
 import 'server-only';
 
-import { db } from '..';
-import { bookmarks } from '../schema';
+import { db } from '@/db';
+import { bookmarks } from '@/db/schema';
 import { eq, and } from 'drizzle-orm';
 
 export const deleteBookmark = async ({ postId, userId }: { postId: string; userId: string }) => {
