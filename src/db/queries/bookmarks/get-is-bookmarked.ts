@@ -1,7 +1,7 @@
 'use server';
 
 import { db } from '@/db';
-import { bookmarks } from '@/db/schema/bookmarks';
+import { bookmarks } from '@/db/schema';
 import { eq, and } from 'drizzle-orm';
 import { unstable_cache } from 'next/cache';
 

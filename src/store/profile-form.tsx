@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useContext, createContext, SetStateAction } from 'react';
 import { authClient } from '@/lib/auth/client';
-import { type Profile } from '@/db/schema/users';
+import { type Profile } from '@/db/schema';
 
 type ImageT = File | string | null;
 

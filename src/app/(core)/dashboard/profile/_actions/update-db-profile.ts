@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { db } from '@/db';
-import { users, type Profile } from '@/db/schema/users';
+import { users, type Profile } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
 export const updateImagePath = async (imagePath: string, userId: string) => {

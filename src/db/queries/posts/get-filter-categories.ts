@@ -3,7 +3,7 @@
 import { unstable_cache } from 'next/cache';
 
 import { db } from '@/db';
-import { posts } from '@/db/schema/posts';
+import { posts } from '@/db/schema';
 import { count, desc, sql } from 'drizzle-orm';
 import { mergeAndSort, buildWhereClause, type Filters } from '@/lib/filter';
 

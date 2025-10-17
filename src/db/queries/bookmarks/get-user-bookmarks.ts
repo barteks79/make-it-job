@@ -1,8 +1,7 @@
 'use server';
 
 import { db } from '@/db';
-import { posts } from '@/db/schema/posts';
-import { bookmarks } from '@/db/schema/bookmarks';
+import { posts, bookmarks } from '@/db/schema';
 import { eq, asc } from 'drizzle-orm';
 import { unstable_cache } from 'next/cache';
 

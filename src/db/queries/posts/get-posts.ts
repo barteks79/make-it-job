@@ -2,8 +2,7 @@
 
 import { unstable_cache } from 'next/cache';
 import { db } from '@/db';
-import { posts } from '@/db/schema/posts';
-import { companies } from '@/db/schema/companies';
+import { posts, companies } from '@/db/schema';
 import { eq, sql, and, gte, lte } from 'drizzle-orm';
 
 import { arrayToClause, getSortClause, type Filters } from '@/lib/filter';

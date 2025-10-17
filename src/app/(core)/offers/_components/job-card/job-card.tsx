@@ -1,8 +1,7 @@
 import { getIsBookmarked } from '@/db/queries/bookmarks/get-is-bookmarked';
 
 import { createRelativeDate } from '@/lib/utils';
-import { type JobPost } from '@/db/schema/posts';
-import { type Company } from '@/db/schema/companies';
+import { type JobPost, type Company } from '@/db/schema';
 
 import { DollarSignIcon, MonitorIcon, UserIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';

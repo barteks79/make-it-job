@@ -1,8 +1,7 @@
 'use server';
 
 import { db } from '@/db';
-import { posts } from '@/db/schema/posts';
-import { companies } from '@/db/schema/companies';
+import { posts, companies } from '@/db/schema';
 
 import { eq, type InferSelectModel } from 'drizzle-orm';
 import { unstable_cache } from 'next/cache';

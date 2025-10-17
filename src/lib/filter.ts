@@ -1,4 +1,4 @@
-import { posts } from '@/db/schema/posts';
+import { posts } from '@/db/schema';
 import { inArray, gte, sql, lte, and, eq, or, desc, asc, type SQL } from 'drizzle-orm';
 import type { JobType, Experience, WorkType } from '@/types/job-post';
 

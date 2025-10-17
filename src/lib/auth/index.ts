@@ -2,10 +2,7 @@ import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 
 import { db } from '@/db';
-import { users } from '@/db/schema/users';
-import { accounts } from '@/db/schema/accounts';
-import { verifications } from '@/db/schema/verifications';
-import { sessions } from '@/db/schema/sessions';
+import { users, accounts, verifications, sessions } from '@/db/schema';
 
 export const auth = betterAuth({
   // secrets
