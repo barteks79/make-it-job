@@ -6,11 +6,13 @@ import { useRouter } from 'next/navigation';
 import { authClient } from '@/lib/auth/client';
 
 type UseOAuthToggleProps = {
-  provider: 'github' | 'google';
+  provider: 'github' | 'google' | 'credential';
   accountId: string | undefined;
+  onSuccess?: () => unknown;
+  onError?: () => unknown;
 };
 
-export function useOAuthToggle({ provider, accountId }: UseOAuthToggleProps) {
+export function useOAuthToggle({ provider, accountId, onSuccess, onError }: UseOAuthToggleProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { accounts } = useAccountsContext();
   const router = useRouter();
@@ -21,8 +23,33 @@ export function useOAuthToggle({ provider, accountId }: UseOAuthToggleProps) {
       callbackURL: '/dashboard/settings',
       fetchOptions: {
         onRequest: () => setIsLoading(true),
-        onError: () => setIsLoading(false),
-        onSuccess: () => setIsLoading(false)
+        onError: () => {
+          setIsLoading(false);
+          onError?.();
+        },
+        onSuccess: () => {
+          setIsLoading(false);
+          onSuccess?.();
+        }
+      }
+    });
+  }
+
+  async function handleDisconnect() {
+    await authClient.unlinkAccount({
+      providerId: provider,
+      accountId,
+      fetchOptions: {
+        onRequest: () => setIsLoading(true),
+        onError: () => {
+          setIsLoading(false);
+          onError?.();
+        },
+        onSuccess: () => {
+          setIsLoading(false);
+          onSuccess?.();
+          router.refresh();
+        }
       }
     });
   }
@@ -30,23 +57,6 @@ export function useOAuthToggle({ provider, accountId }: UseOAuthToggleProps) {
   // Disabled if loading or if there is only one account
   // Always enabled if there is no account id
   const isEnabled = !accountId || (!isLoading && accounts.length > 1);
-
-  async function handleDisconnect() {
-    if (!accountId || accounts.length <= 1) return;
-
-    await authClient.unlinkAccount({
-      providerId: provider,
-      accountId,
-      fetchOptions: {
-        onRequest: () => setIsLoading(true),
-        onError: () => setIsLoading(false),
-        onSuccess: () => {
-          setIsLoading(false);
-          router.refresh();
-        }
-      }
-    });
-  }
 
   const handleToggle = accountId ? handleDisconnect : handleConnect;
 

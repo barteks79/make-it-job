@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -39,6 +40,7 @@ export function SetupPasswordDialog({
   onSetupComplete
 }: { onSetupComplete: () => void } & React.PropsWithChildren) {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   const form = useForm<TSetupPassword>({
     resolver: zodResolver(setupPasswordSchema),
@@ -58,6 +60,7 @@ export function SetupPasswordDialog({
 
     setIsDialogOpen(false);
     onSetupComplete();
+    router.refresh();
   };
 
   const handleOpenChange = (open: boolean) => {
