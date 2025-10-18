@@ -11,10 +11,10 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 
-import ImageUploader from '../_components/image-uploader';
-import SkillDialog from './skill-dialog';
+import { ImageUploader } from '../_components/image-uploader';
+import { SkillDialog } from './skill-dialog';
 
-export default function ProfileForm() {
+export function ProfileForm() {
   const profileData = useProfileForm();
 
   const [, formAction, isPending] = useActionState(async () => {

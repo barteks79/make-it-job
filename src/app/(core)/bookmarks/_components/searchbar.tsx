@@ -6,7 +6,7 @@ import { useDebouncedCallback } from '@/hooks/use-debounced-callback';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
 
-export default function Searchbar({
+export function Searchbar({
   delay,
   className,
   ...props

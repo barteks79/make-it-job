@@ -1,5 +1,5 @@
-import DashboardBreadcrumb from './dashboard-breadcrumb';
-import DashboardSidebar from './_components/dashboard-sidebar';
+import { DashboardBreadcrumb } from './_components/dashboard-breadcrumb';
+import { DashboardSidebar } from './_components/dashboard-sidebar';
 
 export default async function DashboardLayout({ children }: React.PropsWithChildren) {
   return (

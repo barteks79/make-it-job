@@ -1,4 +1,4 @@
-import ProfileForm from './_components/profile-form';
+import { ProfileForm } from './_components/profile-form';
 import ProfileFormProvider from '@/store/profile-form';
 import { Toaster } from '@/components/ui/sonner';
 

@@ -6,9 +6,9 @@ import { Suspense } from 'react';
 import { getUserBookmarks } from '@/lib/bookmark/get-user-bookmarks';
 
 import { BookmarksFallback } from './_components/bookmarks-fallback';
-import BookmarksContainer from './_components/bookmarks-container';
-import Searchbar from './_components/searchbar';
-import OptionTabs from './_components/order-tabs';
+import { BookmarksContainer } from './_components/bookmarks-container';
+import { Searchbar } from './_components/searchbar';
+import { OptionTabs } from './_components/order-tabs';
 
 type BookmarksProps = { searchParams: Promise<{ order?: 'recent' | 'latest'; q?: string }> };
 

@@ -5,7 +5,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 type Order = 'recent' | 'latest';
 
-export default function OptionTabs() {
+export function OptionTabs() {
   const [order, setOrder] = useOptimisticFilter<Order>('order', 'recent');
 
   return (

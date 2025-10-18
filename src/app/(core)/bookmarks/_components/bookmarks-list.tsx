@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardAction } from '@/components/ui/card';
 import { Send } from 'lucide-react';
-import BookmarkButton from '../../offers/_components/job-card/bookmark-button';
+import { BookmarkButton } from '../../offers/_components/job-card/bookmark-button';
 import { createRelativeDate } from '@/lib/utils';
 
 type BookmarkListItemProps = {
@@ -60,7 +60,7 @@ function BookmarkListItem({ bookmark, onRemove }: BookmarkListItemProps) {
   );
 }
 
-export default function BookmarksList({ bookmarks }: { bookmarks: Awaited<GetUserBookmarks> }) {
+export function BookmarksList({ bookmarks }: { bookmarks: Awaited<GetUserBookmarks> }) {
   const [optimisticBookmarks, setOptimisticBookmarks] =
     useOptimistic<Awaited<GetUserBookmarks>>(bookmarks);
 

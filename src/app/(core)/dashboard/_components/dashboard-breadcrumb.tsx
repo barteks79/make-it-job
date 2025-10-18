@@ -12,7 +12,7 @@ import {
   BreadcrumbSeparator
 } from '@/components/ui/breadcrumb';
 
-export default function DashboardBreadcrumb() {
+export function DashboardBreadcrumb() {
   const pathname = usePathname();
   const dashboardPage = pathname.split('/').at(-1) as string;
 

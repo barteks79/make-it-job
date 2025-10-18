@@ -1,7 +1,7 @@
-import BookmarksList from './bookmarks-list';
+import { BookmarksList } from './bookmarks-list';
 import { type GetUserBookmarks } from '@/lib/bookmark/get-user-bookmarks';
 
-export default async function BookmarksContainer({
+export async function BookmarksContainer({
   query,
   bookmarks
 }: {

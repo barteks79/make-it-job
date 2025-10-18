@@ -1,7 +1,7 @@
 import { BriefcaseBusiness, Inbox, User, Settings } from 'lucide-react';
-import SidebarLink from './sidebar-link';
+import { SidebarLink } from './sidebar-link';
 
-export default function DashboardSidebar() {
+export function DashboardSidebar() {
   return (
     <aside className="sticky left-0 top-0 flex flex-col gap-6 p-4 w-65 bg-secondary border-r h-full">
       <section className="flex flex-col gap-2">

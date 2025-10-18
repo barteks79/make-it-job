@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { PlusIcon } from 'lucide-react';
 
-export default function SkillDialog() {
+export function SkillDialog() {
   const { setProfile } = useProfileForm();
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [skill, setSkill] = useState<string>('');

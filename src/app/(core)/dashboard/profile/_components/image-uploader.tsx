@@ -8,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { CircleUserRoundIcon } from 'lucide-react';
 import Image from 'next/image';
 
-export default function ImageUploader() {
+export function ImageUploader() {
   const { image, setImage } = useProfileForm();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
