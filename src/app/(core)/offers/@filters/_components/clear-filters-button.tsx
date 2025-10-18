@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSalaryInputs } from '@/store/salary-inputs';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
-export default function ClearFiltersButton() {
+export function ClearFiltersButton() {
   const { setSalaryMin, setSalaryMax } = useSalaryInputs();
   const [isEnabled, setIsEnabled] = useState<boolean>(false);
 

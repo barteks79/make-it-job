@@ -9,7 +9,7 @@ import type { JobType, Experience, WorkType } from '@/types/job-post';
 
 type Option = { type: JobType | Experience | WorkType; count: number };
 
-export default function FilterOption({ option }: { option: Option }) {
+export function FilterOption({ option }: { option: Option }) {
   const paramName = slugify(option.type, { lower: true });
   const [optimisticValue, setOptimisticValue] = useOptimisticFilter<boolean>(paramName, false);
   const isEnabled = option.count > 0;

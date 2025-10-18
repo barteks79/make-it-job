@@ -1,9 +1,9 @@
 import { fallbackCategories } from '@/config/filter';
-import { FilterCategoriesT } from '@/lib/post/get-filter-categories';
-import FilterGroup from './filter-group';
-import FilterOption from './filter-option';
+import { FilterGroup } from './filter-group';
+import { FilterOption } from './filter-option';
+import { type FilterCategoriesT } from '@/lib/post/get-filter-categories';
 
-export default async function FilterGroupContainer({
+export async function FilterGroupContainer({
   categoriesPromise
 }: {
   categoriesPromise: FilterCategoriesT;

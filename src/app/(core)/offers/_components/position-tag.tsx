@@ -4,7 +4,7 @@ import { useQuickFilters, type JobTag } from '@/store/quick-filters';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-export default function PositionTag({ tag }: { tag: JobTag }) {
+export function PositionTag({ tag }: { tag: JobTag }) {
 	const { activeJobTags, toggleJobTag } = useQuickFilters();
 	const isActive = activeJobTags.includes(tag);
 

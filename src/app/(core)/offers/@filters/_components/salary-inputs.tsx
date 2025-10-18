@@ -3,7 +3,7 @@
 import { useSalaryInputs } from '@/store/salary-inputs';
 import { Input } from '@/components/ui/input';
 
-export default function SalaryInputs() {
+export function SalaryInputs() {
 	const { salaryMax, salaryMin, setSalaryMax, setSalaryMin } =
 		useSalaryInputs();
 

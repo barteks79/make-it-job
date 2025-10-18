@@ -51,4 +51,4 @@ export async function getFilterCategories(currentFilters: Filters) {
   };
 }
 
-export type FilterCategoriesT = Awaited<ReturnType<typeof getFilterCategories>>;
+export type FilterCategoriesT = ReturnType<typeof getFilterCategories>;

@@ -5,7 +5,7 @@ import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useSalaryInputs } from '@/store/salary-inputs';
 import { Button } from '@/components/ui/button';
 
-export default function ApplySalaryButton() {
+export function ApplySalaryButton() {
   const { salaryMin, salaryMax } = useSalaryInputs();
   const [isEnabled, setIsEnabled] = useState<boolean>(false);
   const searchParams = useSearchParams();

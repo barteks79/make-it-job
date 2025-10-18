@@ -12,7 +12,7 @@ import {
 
 type DateSelectValue = 'anytime' | '3days' | 'week' | 'month';
 
-export default function DateSelect() {
+export function DateSelect() {
   const [optimisticValue, setOptimisticValue] = useOptimisticFilter<DateSelectValue>(
     'date',
     'anytime'

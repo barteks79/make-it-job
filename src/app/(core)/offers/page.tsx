@@ -2,9 +2,9 @@ import { Suspense } from 'react';
 import { getPostsWithCompany } from '@/lib/post/get-posts';
 import { getAppliedFilters, type FilterSearchParams } from '@/lib/filter';
 
-import SortingSelect from './_components/sorting-select';
-import PostsContainer, { PostsContainerSkeleton } from './_components/job-card/posts-container';
-import PostsCount from './_components/job-card/posts-count';
+import { SortingSelect } from './_components/sorting-select';
+import { PostsContainer, PostsContainerSkeleton } from './_components/job-card/posts-container';
+import { PostsCount } from './_components/job-card/posts-count';
 
 export default async function JobPosts({ searchParams }: { searchParams: FilterSearchParams }) {
   const appliedFilters = await getAppliedFilters(searchParams);

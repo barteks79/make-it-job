@@ -1,17 +1,17 @@
 import { Suspense } from 'react';
-import SalaryInputsProvider from '@/store/salary-inputs';
-
 import { getFilterCategories } from '@/lib/post/get-filter-categories';
 import { getAppliedFilters, type FilterSearchParams } from '@/lib/filter';
-import FilterGroup from './_components/filter-group';
-import FilterGroupContainer, {
+import SalaryInputsProvider from '@/store/salary-inputs';
+
+import {
+  FilterGroupContainer,
   FilterContainerSkeleton
 } from './_components/filter-group-container';
-
-import SalaryInputs from './_components/salary-inputs';
-import DateSelect from './_components/date-select';
-import ApplySalaryButton from './_components/apply-salary-button';
-import ClearFiltersButton from './_components/clear-filters-button';
+import { FilterGroup } from './_components/filter-group';
+import { SalaryInputs } from './_components/salary-inputs';
+import { DateSelect } from './_components/date-select';
+import { ApplySalaryButton } from './_components/apply-salary-button';
+import { ClearFiltersButton } from './_components/clear-filters-button';
 
 export default async function SidebarView({ searchParams }: { searchParams: FilterSearchParams }) {
   const currentFilters = await getAppliedFilters(searchParams);

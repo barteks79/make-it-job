@@ -3,7 +3,7 @@
 import useOptimisticFilter from '@/hooks/use-optimistic-filter';
 import { Button } from '@/components/ui/button';
 
-export default function DetailsButton({ postId }: { postId: string }) {
+export function DetailsButton({ postId }: { postId: string }) {
   const [, setOptimisticJobId] = useOptimisticFilter<string>('job', '');
 
   return (

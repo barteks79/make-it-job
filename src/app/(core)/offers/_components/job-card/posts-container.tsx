@@ -2,9 +2,9 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 
 import { type PostsWithCompanyT } from '@/lib/post/get-posts';
-import JobPostCard, { JobPostCardSkeleton } from './job-card';
+import { JobPostCard, JobPostCardSkeleton } from './job-card';
 
-export default async function PostsContainer({
+export async function PostsContainer({
   postsPromise
 }: {
   postsPromise: PostsWithCompanyT;

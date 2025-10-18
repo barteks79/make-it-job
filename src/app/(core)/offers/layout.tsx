@@ -1,14 +1,13 @@
-import FiltersHeader from './_components/filters-header';
-import { type ReactNode } from 'react';
+import { FiltersHeader } from './_components/filters-header';
 
 export default function OffersLayout({
   children,
   details,
   filters
 }: {
-  children: ReactNode;
-  details: ReactNode;
-  filters: ReactNode;
+  children: React.ReactNode;
+  details: React.ReactNode;
+  filters: React.ReactNode;
 }) {
   return (
     <main className="flex flex-1 overflow-hidden">

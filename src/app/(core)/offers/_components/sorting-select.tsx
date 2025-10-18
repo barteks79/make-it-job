@@ -12,7 +12,7 @@ import {
 
 type SortOptions = 'latest' | 'relevance' | 'high-low' | 'low-high';
 
-export default function SortingSelect() {
+export function SortingSelect() {
   const [optimisticValue, setOptimisticValue] = useOptimisticFilter<SortOptions>(
     'sort',
     'relevance'

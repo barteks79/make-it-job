@@ -6,11 +6,11 @@ import { type JobPost, type Company } from '@/db/schema';
 import { DollarSignIcon, MonitorIcon, UserIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import BookmarkButton from './bookmark-button';
+import { BookmarkButton } from './bookmark-button';
 
 import CompanyLogo from '@/components/custom/company-logo';
-import JobTagBadge from './job-tag-badge';
-import DetailsButton from './details-button';
+import { JobTagBadge } from './job-tag-badge';
+import { DetailsButton } from './details-button';
 
 import {
   Card,
@@ -28,7 +28,7 @@ type JobPostCardProps = {
   company: Pick<Company, 'name' | 'image'>;
 };
 
-export default async function JobPostCard({ userId, post, company }: JobPostCardProps) {
+export async function JobPostCard({ userId, post, company }: JobPostCardProps) {
   const isBookmarked = await getIsBookmarked(post.id, userId);
 
   return (

@@ -5,7 +5,7 @@ import { useQuickFilters } from '@/store/quick-filters';
 import { SearchIcon, TrashIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export default function FilterInput({
+export function FilterInput({
 	variant,
 	placeholder
 }: {

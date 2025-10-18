@@ -27,8 +27,7 @@ export async function getPostById(postId: string): Promise<JobPostWithCompany | 
     await delay(2000);
 
     return jobPost;
-  } catch (err) {
-    console.error(err);
+  } catch {
     return undefined;
   }
 }

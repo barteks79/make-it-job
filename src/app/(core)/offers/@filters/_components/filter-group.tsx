@@ -1,4 +1,4 @@
-export default function FilterGroup({
+export function FilterGroup({
   label,
   children
 }: {

@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { BookmarkIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-export default function BookmarkButton({
+export function BookmarkButton({
   postId,
   isBookmarked = true,
   updatedParentUI,
