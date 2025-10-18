@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-export default function SwitchAuthPage() {
+export function SwitchAuthPage() {
   const fullPathname = usePathname();
   const pathname: string = fullPathname.slice(1).split('?')[0];
 

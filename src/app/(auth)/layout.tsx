@@ -1,4 +1,4 @@
-import SwitchAuthPage from './switch-auth-page';
+import { SwitchAuthPage } from './_components/switch-auth-page';
 import Link from 'next/link';
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {

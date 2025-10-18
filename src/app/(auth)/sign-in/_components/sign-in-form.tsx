@@ -20,10 +20,10 @@ import {
 } from '@/components/ui/form';
 
 import { GoogleIcon, GithubLogo } from './auth-icons';
-import ContinueWithSeparator from '../../continue-with-separator';
-import AuthOptions from './auth-options';
+import { ContinueWithSeparator } from '../../_components/continue-with-separator';
+import { AuthOptions } from './auth-options';
 
-export default function SignInForm() {
+export function SignInForm() {
   const { rememberMe } = useSignInOptions();
 
   const form = useForm<z.infer<typeof SignInSchema>>({

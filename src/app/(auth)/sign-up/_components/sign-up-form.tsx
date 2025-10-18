@@ -19,9 +19,9 @@ import {
   FormMessage
 } from '@/components/ui/form';
 
-import ContinueWithSeparator from '../../continue-with-separator';
+import { ContinueWithSeparator } from '../../_components/continue-with-separator';
 
-export default function SignUpForm() {
+export function SignUpForm() {
   const router = useRouter();
 
   const form = useForm({

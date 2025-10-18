@@ -4,7 +4,7 @@ import { useSignInOptions } from '@/store/sign-in-options';
 import { Checkbox } from '@/components/ui/checkbox';
 import Link from 'next/link';
 
-export default function AuthOptions() {
+export function AuthOptions() {
   const { rememberMe, setRememberMe } = useSignInOptions();
 
   return (
