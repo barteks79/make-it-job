@@ -5,7 +5,7 @@ import { posts } from '@/db/schema';
 import { count, desc, sql } from 'drizzle-orm';
 import { mergeAndSort, buildWhereClause, type Filters } from '@/lib/filter';
 
-import { unstable_cacheLife as cacheLife, unstable_cacheTag as cacheTag } from 'next/cache';
+import { cacheLife, cacheTag } from 'next/cache';
 import { delay } from '@/lib/utils';
 
 const EXPERIENCE_VALUES = ['Junior', 'Mid', 'Senior'] as const;

@@ -4,7 +4,7 @@ import { db } from '@/db';
 import { posts, companies } from '@/db/schema';
 import { eq, sql, and, gte, lte } from 'drizzle-orm';
 
-import { unstable_cacheLife as cacheLife, unstable_cacheTag as cacheTag } from 'next/cache';
+import { cacheLife, cacheTag } from 'next/cache';
 import { arrayToClause, getSortClause, type Filters } from '@/lib/filter';
 import { delay } from '@/lib/utils';
 

@@ -4,7 +4,7 @@ import { db } from '@/db';
 import { posts, companies, type JobPost, type Company } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
-import { unstable_cacheLife as cacheLife, unstable_cacheTag as cacheTag } from 'next/cache';
+import { cacheLife, cacheTag } from 'next/cache';
 import { delay } from '@/lib/utils';
 
 export type JobPostWithCompany = {

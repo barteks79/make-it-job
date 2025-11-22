@@ -3,7 +3,7 @@
 import { db } from '@/db';
 import { posts, bookmarks } from '@/db/schema';
 import { eq, asc } from 'drizzle-orm';
-import { unstable_cacheTag as cacheTag, unstable_cacheLife as cacheLife } from 'next/cache';
+import { cacheTag, cacheLife } from 'next/cache';
 
 export const getUserBookmarks = async ({
   userId,

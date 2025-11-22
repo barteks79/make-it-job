@@ -3,7 +3,7 @@ import { getSessionCookie } from 'better-auth/cookies';
 
 const privateRoutes = ['/dashboard', '/bookmarks'];
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const session = getSessionCookie(request);
 
   // redirect to "/sign-in" if not authorized
