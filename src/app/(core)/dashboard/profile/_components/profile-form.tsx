@@ -13,6 +13,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 
 import { ImageUploader } from '../_components/image-uploader';
 import { SkillDialog } from './skill-dialog';
+import { ResumeUploader } from './resume-uploader';
 
 export function ProfileForm() {
   const profileData = useProfileForm();
@@ -25,6 +26,13 @@ export function ProfileForm() {
 
   return (
     <form action={formAction} className="flex flex-col gap-5 pb-10">
+      <section className="grid grid-cols-2 gap-2">
+        <div className="space-y-2">
+          <Label className="text-muted-foreground">Resume</Label>
+          <ResumeUploader />
+        </div>
+      </section>
+
       <div className="flex gap-8">
         <section className="flex flex-col gap-3">
           <Label className="text-muted-foreground">Profile Picture</Label>
