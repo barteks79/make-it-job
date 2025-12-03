@@ -133,18 +133,22 @@ export function ResumeUploader() {
             {/* File Info */}
             <div className="min-w-0 flex-1 space-y-1 py-0.5">
               <div className="flex items-center justify-between">
-                <p className="truncate text-xs font-medium text-gray-900">{uploadFile.file.name}</p>
+                <p className="truncate text-xs font-medium text-foreground/80">
+                  {uploadFile.file.name}
+                </p>
                 {uploadFile.status === 'completed' ? (
                   <span className="flex items-center gap-1 text-xs text-green-600">
                     <CheckCircle className="size-3" strokeWidth={2.5} /> Completed
                   </span>
                 ) : (
-                  <span className="text-xs text-gray-600">{Math.round(uploadFile.progress)}%</span>
+                  <span className="text-xs text-muted-foreground">
+                    {Math.round(uploadFile.progress)}%
+                  </span>
                 )}
               </div>
 
               {/* Progress Bar */}
-              <div className="h-1.5 w-full rounded-full bg-gray-200">
+              <div className="h-1.5 w-full rounded-full bg-accent">
                 <div
                   className={`h-1.5 rounded-md transition-all duration-300 ease-out ${getProgressColor(
                     uploadFile.progress,
@@ -156,11 +160,11 @@ export function ResumeUploader() {
 
               {/* Size Info */}
               {uploadFile.status === 'completed' ? (
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-muted-foreground">
                   {formatBytes(uploadFile.file.size)} of {formatBytes(uploadFile.file.size)}
                 </p>
               ) : (
-                <div className="text-xs text-gray-600">
+                <div className="text-xs text-muted-foreground">
                   <span>
                     {formatBytes(Math.round(uploadFile.file.size * (uploadFile.progress / 100)))} of{' '}
                     {formatBytes(uploadFile.file.size)}
