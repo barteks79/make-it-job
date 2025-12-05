@@ -43,3 +43,16 @@ CREATE TABLE bookmark (
   constraint bookmark_postId_fkey FOREIGN KEY ("postId") REFERENCES post (id) ON UPDATE CASCADE ON DELETE CASCADE,
   constraint bookmark_userId_fkey FOREIGN KEY ("userId") REFERENCES "user" (id) ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+CREATE TABLE application (
+  id UUID NOT NULL DEFAULT gen_random_uuid(),
+  "userId" UUID NOT NULL,
+  "postId" UUID NOT NULL,
+  status "public"."appStatus" NOT NULL,
+  "createdAt" TIMESTAMPTZ NOT NULL DEFAULT now(),
+  "updatedAt" TIMESTAMPTZ NOT NULL DEFAULT now(),
+
+  constraint application_pkey PRIMARY KEY (id),
+  constraint application_postId_fkey FOREIGN KEY ("postId") REFERENCES post (id) ON UPDATE CASCADE ON DELETE CASCADE,
+  constraint application_userId_fkey FOREIGN KEY ("userId") REFERENCES "user" (id) ON UPDATE CASCADE ON DELETE CASCADE
+);

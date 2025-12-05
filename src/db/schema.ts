@@ -106,6 +106,18 @@ export const bookmarks = pgTable('bookmark', {
   ...timestamps
 });
 
+export const applications = pgTable('application', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('userId')
+    .references(() => users.id, { onDelete: 'cascade', onUpdate: 'cascade' })
+    .notNull(),
+  postId: uuid('postId')
+    .references(() => posts.id, { onDelete: 'cascade', onUpdate: 'cascade' })
+    .notNull(),
+  status: text('status', { enum: ['Rejected', 'Pending', 'Accepted'] }).notNull(),
+  ...timestamps
+});
+
 export type User = InferSelectModel<typeof users>;
 export type NewUser = InferInsertModel<typeof users>;
 
@@ -117,3 +129,6 @@ export type NewJobPost = InferInsertModel<typeof posts>;
 
 export type Bookmark = InferSelectModel<typeof bookmarks>;
 export type NewBookmark = InferInsertModel<typeof bookmarks>;
+
+export type Application = InferSelectModel<typeof applications>;
+export type NewApplication = InferInsertModel<typeof applications>;

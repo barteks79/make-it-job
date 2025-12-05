@@ -4,13 +4,13 @@ import { createRelativeDate } from '@/lib/utils';
 import { type JobPost, type Company } from '@/db/schema';
 
 import { DollarSignIcon, MonitorIcon, UserIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { BookmarkButton } from './bookmark-button';
 
 import CompanyLogo from '@/components/custom/company-logo';
 import { JobTagBadge } from './job-tag-badge';
 import { DetailsButton } from './details-button';
+import { JobApplyDialog } from './job-apply-dialog';
 
 import {
   Card,
@@ -90,7 +90,7 @@ export async function JobPostCard({ userId, post, company }: JobPostCardProps) {
 
       <CardFooter className="grid grid-cols-2 gap-2">
         <DetailsButton postId={post.id} />
-        <Button className="cursor-pointer">Apply</Button>
+        <JobApplyDialog post={post} company={company} />
       </CardFooter>
     </Card>
   );
