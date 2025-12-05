@@ -26,32 +26,53 @@ export function ProfileForm() {
 
   return (
     <form action={formAction} className="flex flex-col gap-5 pb-10">
-      <section className="grid grid-cols-2 gap-2">
-        <div className="space-y-2">
-          <Label className="text-muted-foreground">Resume</Label>
-          <ResumeUploader />
-        </div>
-      </section>
-
-      <div className="flex gap-8">
-        <section className="flex flex-col gap-3">
-          <Label className="text-muted-foreground">Profile Picture</Label>
-          <div className="flex items-center gap-5">
-            <ImageUploader />
-          </div>
-        </section>
-
-        <section className="flex-1 flex flex-col gap-3 col-span-2">
+      <section className="grid grid-cols-2 gap-3">
+        <div className="flex flex-col gap-2">
           <Label className="text-muted-foreground">Biography</Label>
           <Textarea
-            className="h-full resize-none"
+            className="h-full resize-none shadow-sm"
             placeholder="Tell us about yourself"
             value={profileData.profile.biography}
             onChange={e =>
               profileData.setProfile({ ...profileData.profile, biography: e.target.value })
             }
           ></Textarea>
+        </div>
+
+        <div className="space-y-2">
+          <Label className="text-muted-foreground">Resume</Label>
+          <ResumeUploader />
+        </div>
+      </section>
+
+      <section className="grid grid-cols-2 gap-3">
+        <section className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
+            <Label className="text-muted-foreground">First Name</Label>
+            <Input className="text-base" placeholder="Enter the first name" />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <Label className="text-muted-foreground">Last Name</Label>
+            <Input className="text-base" placeholder="Enter the last name" />
+          </div>
         </section>
+
+        <section className="flex flex-col gap-2">
+          <Label className="text-muted-foreground">Profile Picture</Label>
+          <div className="flex items-center gap-5">
+            <ImageUploader />
+          </div>
+        </section>
+      </section>
+
+      <div className="flex gap-8">
+        {/* <section className="flex flex-col gap-3">
+          <Label className="text-muted-foreground">Profile Picture</Label>
+          <div className="flex items-center gap-5">
+            <ImageUploader />
+          </div>
+        </section> */}
       </div>
 
       <section className="col-span-2 flex flex-col gap-3">

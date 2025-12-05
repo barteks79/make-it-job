@@ -122,7 +122,7 @@ export function ResumeUploader() {
 
   return (
     <div className="space-y-3">
-      <Card className="p-0 rounded-md shadow-md border">
+      <Card className="p-0 rounded-md shadow-sm border">
         <CardContent className="p-4 space-y-1.5">
           <div className="flex items-start gap-3">
             {/* PDF Icon */}
