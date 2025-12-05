@@ -17,9 +17,7 @@ export const applyForJob = async ({ postId }: { postId: string }) => {
   const existingApplication = await getApplication({ postId, userId });
   if (existingApplication) throw new Error('You already applied for this job.');
 
-  try {
-    await createApplication({ postId, userId });
-  } finally {
-    revalidateTag(`application:${postId}:${userId}`, 'max');
-  }
+  await createApplication({ postId, userId });
+  revalidateTag(`application:${postId}:${userId}`, 'max');
+  revalidateTag(`applications:${userId}`, 'max');
 };
