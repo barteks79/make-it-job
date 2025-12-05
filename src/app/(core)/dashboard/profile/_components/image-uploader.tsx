@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useFileUpload, formatBytes, type FileWithPreview } from '@/hooks/use-file-upload';
 import { useProfileForm } from '@/store/profile-form';
+import { uploadImage } from '../_actions/store-image';
 
 import { User, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardAction } from '@/components/ui/card';
@@ -10,7 +11,7 @@ import { Empty, EmptyContent, EmptyDescription, EmptyTitle } from '@/components/
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 
-interface ImageUploadItem extends FileWithPreview {
+export interface ImageUploadItem extends FileWithPreview {
   progress: number;
   status: 'uploading' | 'completed' | 'error';
   error?: string;
@@ -104,8 +105,12 @@ export function ImageUploader() {
     if (uploadFile) {
       removeFile(uploadFile.id);
       setUploadFile(null);
-      setImage(null);
     }
+    setImage(null);
+  };
+
+  const handleSaveImage = async () => {
+    await uploadImage(uploadFile!);
   };
 
   // Handle existing image from profile
@@ -164,6 +169,7 @@ export function ImageUploader() {
 
               <Button
                 onClick={removeUploadFile}
+                type="button"
                 variant="destructive"
                 className="px-4 h-min py-1 w-min border-none bg-destructive/10 hover:bg-destructive/15"
               >
@@ -266,7 +272,7 @@ export function ImageUploader() {
           {uploadFile.status === 'completed' && (
             <CardAction className="flex gap-2">
               <Button
-                onClick={openFileDialog}
+                onClick={handleSaveImage}
                 variant="default"
                 className="px-4 h-min py-1 w-min border-none bg-primary/10 hover:bg-primary/15"
               >

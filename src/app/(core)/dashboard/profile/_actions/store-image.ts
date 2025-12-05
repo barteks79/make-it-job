@@ -1,23 +1,15 @@
-import { client } from '@/lib/supabase/client';
+'use server';
 
-export const uploadImage = async (image: File, userId: string) => {
-  const imagePath = `user/${userId}.${image.type.split('/')[1]}`;
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
+import { unauthorized } from 'next/navigation';
 
-  const { data, error } = await client.storage
-    .from('make-it-job')
-    .upload(imagePath, image, { upsert: true });
+import { saveDbImage } from './save-db-image';
+import { type ImageUploadItem } from '../_components/image-uploader';
 
-  if (error) {
-    throw new Error('Failed to upload image');
-  }
+export const uploadImage = async (file: ImageUploadItem) => {
+  const data = await auth.api.getSession({ headers: await headers() });
+  if (!data) unauthorized();
 
-  return data.path;
-};
-
-export const deleteImage = async (path: string) => {
-  const { error } = await client.storage.from('make-it-job').remove([path]);
-
-  if (error) {
-    throw new Error('Failed to remove image');
-  }
+  await saveDbImage({ imagePath: file.file.name, userId: data.user.id });
 };
