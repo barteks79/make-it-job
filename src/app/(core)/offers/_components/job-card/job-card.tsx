@@ -21,6 +21,7 @@ import {
   CardHeader,
   CardFooter
 } from '@/components/ui/card';
+import { getApplication } from '@/lib/application/get-application';
 
 type JobPostCardProps = {
   userId: string | undefined;
@@ -30,6 +31,7 @@ type JobPostCardProps = {
 
 export async function JobPostCard({ userId, post, company }: JobPostCardProps) {
   const isBookmarked = await getIsBookmarked(post.id, userId);
+  const application = await getApplication({ userId: userId!, postId: post.id });
 
   return (
     <Card className="py-5 gap-4 h-full relative">
@@ -90,7 +92,7 @@ export async function JobPostCard({ userId, post, company }: JobPostCardProps) {
 
       <CardFooter className="grid grid-cols-2 gap-2">
         <DetailsButton postId={post.id} />
-        <JobApplyDialog post={post} company={company} />
+        <JobApplyDialog isApplication={!!application} post={post} company={company} />
       </CardFooter>
     </Card>
   );

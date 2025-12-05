@@ -1,6 +1,8 @@
 'use client';
 
+import { useOptimistic, startTransition } from 'react';
 import { type JobPost, type Company } from '@/db/schema';
+import { applyForJob } from '@/lib/application/apply-for-job';
 
 import CompanyLogo from '@/components/custom/company-logo';
 import { Button } from '@/components/ui/button';
@@ -15,11 +17,21 @@ import {
 import { DollarSignIcon, MonitorIcon, UserIcon } from 'lucide-react';
 
 type JobApplyDialogProps = {
+  isApplication: boolean;
   post: Omit<JobPost, 'companyId'>;
   company: Pick<Company, 'name' | 'image'>;
 };
 
-export function JobApplyDialog({ post, company }: JobApplyDialogProps) {
+export function JobApplyDialog({ isApplication, post, company }: JobApplyDialogProps) {
+  const [isApplied, setIsApplied] = useOptimistic<boolean>(isApplication);
+
+  const handleApply = () => {
+    startTransition(async () => {
+      setIsApplied(true);
+      await applyForJob({ postId: post.id });
+    });
+  };
+
   const formattedSalary = new Intl.NumberFormat('us-US', {
     style: 'decimal',
     maximumFractionDigits: 0
@@ -28,7 +40,9 @@ export function JobApplyDialog({ post, company }: JobApplyDialogProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button className="cursor-pointer">Apply</Button>
+        <Button disabled={isApplied} className="cursor-pointer">
+          {isApplied ? 'Applied' : 'Apply'}
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="max-w-lg">
@@ -43,7 +57,9 @@ export function JobApplyDialog({ post, company }: JobApplyDialogProps) {
               </figcaption>
             </figure>
 
-            <Button className="cursor-pointer">Apply</Button>
+            <Button onClick={handleApply} className="cursor-pointer">
+              Apply
+            </Button>
           </div>
 
           <section className="grid gap-2 text-sm text-muted-foreground">
