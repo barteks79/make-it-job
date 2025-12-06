@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { authClient } from '@/lib/auth/client';
 
@@ -22,8 +21,6 @@ import {
 import { ContinueWithSeparator } from '../../_components/continue-with-separator';
 
 export function SignUpForm() {
-  const router = useRouter();
-
   const form = useForm({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
@@ -38,12 +35,10 @@ export function SignUpForm() {
       {
         email: data.email,
         password: data.password,
-        name: 'Static Name'
+        name: 'Static Name',
+        callbackURL: '/dashboard/settings'
       },
       {
-        onSuccess: () => {
-          router.push('/sign-up?verify=true');
-        },
         onError: ({ error }) => {
           if (error.status === 422) {
             form.setError('email', { message: 'Email already in use.' });

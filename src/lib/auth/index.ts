@@ -3,11 +3,18 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 
 import { db } from '@/db';
 import { users, accounts, verifications, sessions } from '@/db/schema';
+import { sendVerificationEmail } from '../resend/send-verification-email';
 
 export const auth = betterAuth({
   // secrets
   secret: process.env.BETTER_AUTH_SECRET as string,
   url: process.env.BETTER_AUTH_URL as string,
+  emailVerification: {
+    sendOnSignUp: true,
+    sendVerificationEmail: async ({ user, url }) => {
+      void sendVerificationEmail({ userEmail: user.email, url });
+    }
+  },
   // db config
   database: drizzleAdapter(db, {
     provider: 'pg',
