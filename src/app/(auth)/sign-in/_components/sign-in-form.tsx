@@ -85,7 +85,12 @@ export function SignInForm() {
                 <FormItem>
                   <FormLabel className="text-lg">Password</FormLabel>
                   <FormControl>
-                    <Input className="h-11" placeholder="Enter your password" {...field} />
+                    <Input
+                      type="password"
+                      className="h-11"
+                      placeholder="Enter your password"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage className="text-base" />
                 </FormItem>

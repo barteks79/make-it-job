@@ -38,12 +38,11 @@ export function SignUpForm() {
       {
         email: data.email,
         password: data.password,
-        name: 'Static Name',
-        callbackURL: '/dashboard/profile'
+        name: 'Static Name'
       },
       {
         onSuccess: () => {
-          router.push('/dashboard/profile');
+          router.push('/sign-up?verify=true');
         },
         onError: ({ error }) => {
           if (error.status === 422) {
@@ -84,7 +83,12 @@ export function SignUpForm() {
                 <FormItem>
                   <FormLabel className="text-lg">Password</FormLabel>
                   <FormControl>
-                    <Input className="h-11" placeholder="Enter your password" {...field} />
+                    <Input
+                      type="password"
+                      className="h-11"
+                      placeholder="Enter your password"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage className="text-base" />
                 </FormItem>
@@ -98,7 +102,12 @@ export function SignUpForm() {
                 <FormItem>
                   <FormLabel className="text-lg">Confirm Password</FormLabel>
                   <FormControl>
-                    <Input className="h-11" placeholder="Confirm the password" {...field} />
+                    <Input
+                      type="password"
+                      className="h-11"
+                      placeholder="Confirm the password"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage className="text-base" />
                 </FormItem>

@@ -1,3 +1,4 @@
+import { NuqsAdapter } from 'nuqs/adapters/next';
 import { ThemeProvider } from '@/store/theme-provider';
 import { LAYOUT_METADATA } from '@/config/metadata';
 
@@ -29,7 +30,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <NuqsAdapter>{children}</NuqsAdapter>
         </ThemeProvider>
       </body>
     </html>
