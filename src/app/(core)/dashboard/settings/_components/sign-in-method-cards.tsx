@@ -3,7 +3,7 @@ import { GithubConnectButton } from './github-connect-button';
 import { CredentialManageDropdown } from './credential-manage-dropdown';
 
 import { Button } from '@/components/ui/button';
-import { GithubLogo, GoogleIcon } from '@/app/(auth)/sign-in/_components/auth-icons';
+import { GithubLogo, GoogleIcon } from '@/app/(auth)/(main-pages)/sign-in/_components/auth-icons';
 import { CheckIcon, XIcon, MailIcon } from 'lucide-react';
 
 export function EmailPasswordMethodCard({
