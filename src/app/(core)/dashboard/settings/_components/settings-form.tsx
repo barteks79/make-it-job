@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
+import { VerifyEmailButton } from './verify-email-button';
 import { ChangeEmailDialog } from './change-email-dialog';
 import { ChangePasswordDialog } from './change-password-dialog';
 import { InboxIcon, LockKeyholeIcon } from 'lucide-react';
@@ -37,12 +38,16 @@ export async function SettingsForm() {
 
         <div className="flex items-center gap-2">
           <Input value={data.user.email} disabled />
-          <ChangeEmailDialog>
-            <Button className="space-x-0.5 cursor-pointer" variant="secondary">
-              <span>Change Email</span>
-              <InboxIcon />
-            </Button>
-          </ChangeEmailDialog>
+          {data.user.emailVerified ? (
+            <ChangeEmailDialog>
+              <Button className="space-x-0.5 cursor-pointer" variant="secondary">
+                <span>Change Email</span>
+                <InboxIcon />
+              </Button>
+            </ChangeEmailDialog>
+          ) : (
+            <VerifyEmailButton userEmail={data.user.email} />
+          )}
         </div>
 
         {data.user.emailVerified ? (
