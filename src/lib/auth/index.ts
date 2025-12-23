@@ -3,7 +3,9 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 
 import { db } from '@/db';
 import { users, accounts, verifications, sessions } from '@/db/schema';
+
 import { sendVerificationEmail } from '../resend/send-verification-email';
+import { sendEmailChangeConfirmation } from '../resend/send-email-change-confirmation';
 
 export const auth = betterAuth({
   // secrets
@@ -38,6 +40,12 @@ export const auth = betterAuth({
         required: true,
         defaultValue: JSON.stringify({}),
         input: false
+      }
+    },
+    changeEmail: {
+      enabled: true,
+      sendChangeEmailConfirmation: async ({ newEmail, url }) => {
+        void sendEmailChangeConfirmation({ newEmail, url });
       }
     }
   },
@@ -91,10 +99,16 @@ export const auth = betterAuth({
   rateLimit: {
     enabled: true,
     customRules: {
-      '/api/auth/change-password': async () => {
+      '/change-password': async () => {
         return {
           max: 3,
           window: 60
+        };
+      },
+      '/change-email': async () => {
+        return {
+          max: 1,
+          window: 120
         };
       }
     }

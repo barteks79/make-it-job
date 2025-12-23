@@ -4,17 +4,20 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-type SendVerificationEmailT = {
-  userEmail: string;
+type SendEmailChangeConfirmationT = {
+  newEmail: string;
   url: string;
 };
 
-export const sendVerificationEmail = async ({ userEmail, url }: SendVerificationEmailT) => {
+export const sendEmailChangeConfirmation = async ({
+  newEmail,
+  url
+}: SendEmailChangeConfirmationT) => {
   const { error } = await resend.emails.send({
     from: 'Make IT Job <onboarding@resend.dev>',
     to: process.env.MY_EMAIL!,
-    subject: 'Verify your email address',
-    text: `Click the link to verify your email: ${url}`
+    subject: 'Update your email address',
+    text: `Click the link to update your email address: ${url}`
   });
 
   if (error) {
