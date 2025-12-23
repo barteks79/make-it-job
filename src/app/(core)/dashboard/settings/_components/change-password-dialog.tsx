@@ -34,8 +34,8 @@ import { AlertCircleIcon, CheckCircle2 } from 'lucide-react';
 import { changePasswordSchema, type TChangePassword } from '@/types/change-password-schema';
 
 export function ChangePasswordDialog({ children }: React.PropsWithChildren) {
-  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(true);
-  const [isSuccess, setIsSuccess] = useState<boolean>(true);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
 
   const form = useForm<TChangePassword>({
     resolver: zodResolver(changePasswordSchema),

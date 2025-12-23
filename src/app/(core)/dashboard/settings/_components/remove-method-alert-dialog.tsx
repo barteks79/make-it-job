@@ -20,9 +20,8 @@ import { AlertCircleIcon } from 'lucide-react';
 
 export function RemoveMethodAlertDialog({
   children,
-  accountId,
-  onRemoveComplete
-}: { accountId: string; onRemoveComplete: () => void } & React.PropsWithChildren) {
+  accountId
+}: { accountId: string } & React.PropsWithChildren) {
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -34,10 +33,7 @@ export function RemoveMethodAlertDialog({
     provider: 'credential',
     accountId,
     onError: () => setError('Failed to remove method. Please try again later.'),
-    onSuccess: () => {
-      setIsAlertOpen(false);
-      onRemoveComplete();
-    }
+    onSuccess: () => setIsAlertOpen(false)
   });
 
   return (

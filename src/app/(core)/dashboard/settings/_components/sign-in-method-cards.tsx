@@ -2,6 +2,7 @@ import { GoogleConnectButton } from './google-connect-button';
 import { GithubConnectButton } from './github-connect-button';
 import { CredentialManageDropdown } from './credential-manage-dropdown';
 
+import { SetupPasswordDialog } from './setup-password-dialog';
 import { Button } from '@/components/ui/button';
 import { GithubLogo, GoogleIcon } from '@/app/(auth)/(main-pages)/sign-in/_components/auth-icons';
 import { CheckIcon, XIcon, MailIcon } from 'lucide-react';
@@ -42,11 +43,7 @@ export function EmailPasswordMethodCard({
         </div>
       </div>
 
-      <CredentialManageDropdown>
-        <Button type="button" variant="outline">
-          Manage
-        </Button>
-      </CredentialManageDropdown>
+      <CredentialManageDropdown />
     </div>
   );
 }
