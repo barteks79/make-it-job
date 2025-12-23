@@ -46,7 +46,8 @@ export const auth = betterAuth({
       enabled: true,
       sendChangeEmailConfirmation: async ({ newEmail, url }) => {
         void sendEmailChangeConfirmation({ newEmail, url });
-      }
+      },
+      updateEmailWithoutVerification: true
     }
   },
   // email & password config
