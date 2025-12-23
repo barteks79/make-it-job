@@ -33,7 +33,7 @@ export function ApplicationCard({ entry }: ApplicationCardProps) {
 
   return (
     <article className="rounded-lg border bg-card shadow-xs">
-      <div className="flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-2 p-4">
         <header className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
           <div className="flex items-center gap-3">
             <CompanyLogo className="size-10" image={company.image ?? null} alt={company.name} />
@@ -72,11 +72,11 @@ export function ApplicationCard({ entry }: ApplicationCardProps) {
           </div>
         </dl>
 
-        <div className="flex justify-end">
+        {/* <div className="flex justify-end">
           <Button variant="outline" size="sm" className="px-4">
             Contact
           </Button>
-        </div>
+        </div> */}
       </div>
     </article>
   );

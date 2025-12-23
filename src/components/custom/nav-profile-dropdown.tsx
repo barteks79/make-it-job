@@ -47,12 +47,12 @@ export default function NavProfileDropdown() {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownLink href="/applications">
+          <DropdownLink href="/dashboard/applications">
             <BriefcaseBusinessIcon />
             Applications
           </DropdownLink>
 
-          <DropdownLink href="/inbox">
+          <DropdownLink href="/dashboard/inbox">
             <InboxIcon />
             Inbox
           </DropdownLink>
@@ -61,12 +61,12 @@ export default function NavProfileDropdown() {
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownLink href="/profile">
+          <DropdownLink href="/dashboard/profile">
             <UserIcon />
             Profile
           </DropdownLink>
 
-          <DropdownLink href="/settings">
+          <DropdownLink href="/dashboard/settings">
             <SettingsIcon />
             Settings
           </DropdownLink>
