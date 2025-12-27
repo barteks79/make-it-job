@@ -1,9 +1,8 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { authClient } from '@/lib/auth/client';
-
 import Link from 'next/link';
-
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -13,12 +12,20 @@ import {
   NavigationMenuList,
   navigationMenuTriggerStyle
 } from '@/components/ui/navigation-menu';
-
 import { Settings, User, Inbox, BriefcaseBusiness } from 'lucide-react';
 import type { ComponentType, SVGProps } from 'react';
 
 export default function MainNavigation() {
+  const [isMounted, setIsMounted] = useState(false);
   const { data: auth, isPending } = authClient.useSession();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; // Or a loading skeleton if you prefer
+  }
 
   return (
     <NavigationMenu className="hidden md:flex" viewport={false}>

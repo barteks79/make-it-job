@@ -1,13 +1,26 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { authClient } from '@/lib/auth/client';
-
 import { Drawer, DrawerContent, DrawerTrigger, DrawerTitle } from '@/components/ui/drawer';
 import { MenuIcon } from 'lucide-react';
 import NavItem from './nav-item';
 
 export default function MobileNav() {
+  const [isMounted, setIsMounted] = useState(false);
   const { data: auth } = authClient.useSession();
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return (
+      <button className="grid place-content-center size-8 cursor-pointer">
+        <MenuIcon />
+      </button>
+    );
+  }
 
   return (
     <Drawer>
