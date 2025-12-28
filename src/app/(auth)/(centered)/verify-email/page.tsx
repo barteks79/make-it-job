@@ -24,7 +24,7 @@ export default function VerifyEmailPage() {
       </header>
 
       <Button asChild className="h-12 px-10 text-base font-semibold">
-        <Link href="/dashboard/settings">Skip verification for now</Link>
+        <Link href="/complete-profile">Skip verification for now</Link>
       </Button>
     </article>
   );

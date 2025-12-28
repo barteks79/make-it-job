@@ -19,7 +19,13 @@ const timestamps = {
     .$onUpdate(() => new Date())
 };
 
-export type Profile = { biography?: string; skills?: string[] };
+export type Profile = {
+  biography?: string;
+  skills?: string[];
+  firstName?: string;
+  lastName?: string;
+  dateOfBirth?: string;
+};
 
 export const users = pgTable('user', {
   id: uuid('id').primaryKey(),

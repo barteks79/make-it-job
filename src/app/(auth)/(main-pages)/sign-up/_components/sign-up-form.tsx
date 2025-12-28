@@ -39,7 +39,7 @@ export function SignUpForm() {
         email: data.email,
         password: data.password,
         name: 'Static Name',
-        callbackURL: '/dashboard/settings'
+        callbackURL: '/dashboard/profile'
       },
       {
         onSuccess: () => {

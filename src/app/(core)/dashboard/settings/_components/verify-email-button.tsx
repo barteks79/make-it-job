@@ -12,7 +12,7 @@ export function VerifyEmailButton({ userEmail }: { userEmail: string }) {
   const handleVerifyEmail = async () => {
     await authClient.sendVerificationEmail({
       email: userEmail,
-      callbackURL: '/dashboard/settings'
+      callbackURL: '/complete-profile'
     });
 
     router.push('/verify-email');
