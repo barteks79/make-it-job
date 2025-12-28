@@ -5,18 +5,24 @@ import { authClient } from '@/lib/auth/client';
 import { type Profile } from '@/db/schema';
 
 type ImageT = File | string | null;
+type NamesT = { firstName: string; lastName: string };
 
 export type ProfileFormT = {
   image: ImageT; // Realtime selected image
   setImage: (file: File | null) => void;
   initialImage: ImageT; // Custom image or provider
   username: string;
+
+  firstName: string;
+  lastName: string;
+  setName: (name: 'firstName' | 'lastName', value: string) => void;
+
   initialUsername: string;
   setUsername: (value: string) => void;
   profile: Profile;
   setProfile: React.Dispatch<SetStateAction<Profile>>;
   initialProfile: Profile;
-  refetch: (query: { query?: { disableCookieCache?: boolean; } }) => void;
+  refetch: (query: { query?: { disableCookieCache?: boolean } }) => void;
 };
 
 export const ProfileFormContext = createContext<ProfileFormT>({
@@ -24,6 +30,11 @@ export const ProfileFormContext = createContext<ProfileFormT>({
   setImage: () => {},
   initialImage: '',
   username: '',
+
+  firstName: '',
+  lastName: '',
+  setName: () => {},
+
   initialUsername: '',
   setUsername: () => {},
   profile: { biography: '', skills: [] },
@@ -45,9 +56,15 @@ export function useProfileForm() {
 export default function ProfileFormProvider({ children }: { children: React.ReactNode }) {
   const { data: auth, isPending, refetch } = authClient.useSession();
 
-  const [profile, setProfile] = useState<Profile>({ biography: '' });
+  const [profile, setProfile] = useState<Profile>({ biography: '', firstName: '', lastName: '' });
   const [username, setUsername] = useState<string>('');
+
+  const [names, setNames] = useState<NamesT>({ firstName: '', lastName: '' });
   const [image, setImage] = useState<ImageT>('/images/user-default1.jpg');
+
+  function handleNameChange(name: 'firstName' | 'lastName', value: string) {
+    setNames(prev => ({ ...prev, [name]: value }));
+  }
 
   useEffect(() => {
     if (!auth) return;
@@ -74,6 +91,9 @@ export default function ProfileFormProvider({ children }: { children: React.Reac
         setImage,
         username,
         setUsername,
+        firstName: names.firstName,
+        lastName: names.lastName,
+        setName: handleNameChange,
         initialUsername: auth.user.name,
         profile,
         setProfile,

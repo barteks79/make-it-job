@@ -32,7 +32,7 @@ export function ProfileForm() {
           <Textarea
             className="h-full resize-none shadow-sm"
             placeholder="Tell us about yourself"
-            value={profileData.profile.biography}
+            defaultValue={profileData.profile.biography}
             onChange={e =>
               profileData.setProfile({ ...profileData.profile, biography: e.target.value })
             }
@@ -49,12 +49,22 @@ export function ProfileForm() {
         <section className="flex flex-col gap-3">
           <div className="flex flex-col gap-2">
             <Label className="text-muted-foreground">First Name</Label>
-            <Input className="text-base" placeholder="Enter the first name" />
+            <Input
+              defaultValue={profileData.profile.firstName}
+              onChange={e => profileData.setName('firstName', e.target.value)}
+              className="text-base"
+              placeholder="Enter the first name"
+            />
           </div>
 
           <div className="flex flex-col gap-2">
             <Label className="text-muted-foreground">Last Name</Label>
-            <Input className="text-base" placeholder="Enter the last name" />
+            <Input
+              defaultValue={profileData.profile.lastName}
+              onChange={e => profileData.setName('lastName', e.target.value)}
+              className="text-base"
+              placeholder="Enter the last name"
+            />
           </div>
         </section>
 
@@ -66,14 +76,14 @@ export function ProfileForm() {
         </section>
       </section>
 
-      <div className="flex gap-8">
-        {/* <section className="flex flex-col gap-3">
+      {/* <div className="flex gap-8"> */}
+      {/* <section className="flex flex-col gap-3">
           <Label className="text-muted-foreground">Profile Picture</Label>
           <div className="flex items-center gap-5">
             <ImageUploader />
           </div>
         </section> */}
-      </div>
+      {/* </div> */}
 
       <section className="col-span-2 flex flex-col gap-3">
         <div className="flex flex-col gap-1.5">
