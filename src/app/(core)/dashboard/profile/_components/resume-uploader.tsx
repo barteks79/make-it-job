@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useFileUpload, formatBytes, type FileWithPreview } from '@/hooks/use-file-upload';
+import { saveResume } from '../_actions/save-resume';
 
 import { FileText, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardAction } from '@/components/ui/card';
@@ -77,6 +78,11 @@ export function ResumeUploader() {
 
     return () => clearInterval(interval);
   }, [uploadFile]);
+
+  const handleSaveResume = async () => {
+    if (!uploadFile) return;
+    await saveResume({ filename: uploadFile.file.name });
+  };
 
   // Helper function to get progress bar color based on percentage
   const getProgressColor = (progress: number, status: 'uploading' | 'completed' | 'error') => {
@@ -178,8 +184,9 @@ export function ResumeUploader() {
           {uploadFile.status === 'completed' && (
             <CardAction className="flex gap-2">
               <Button
-                onClick={openFileDialog}
+                onClick={handleSaveResume}
                 variant="default"
+                type="button"
                 className="px-4 h-min py-1 w-min border-none bg-primary/10 hover:bg-primary/15"
               >
                 Save
