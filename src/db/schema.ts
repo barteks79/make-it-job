@@ -124,6 +124,15 @@ export const applications = pgTable('application', {
   ...timestamps
 });
 
+export const resumes = pgTable('resume', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  userId: uuid('userId')
+    .references(() => users.id, { onDelete: 'cascade', onUpdate: 'cascade' })
+    .notNull(),
+  extension: text('extension', { enum: ['pdf', 'doc', 'docx'] }).notNull(),
+  ...timestamps
+});
+
 export type User = InferSelectModel<typeof users>;
 export type NewUser = InferInsertModel<typeof users>;
 
@@ -138,3 +147,6 @@ export type NewBookmark = InferInsertModel<typeof bookmarks>;
 
 export type Application = InferSelectModel<typeof applications>;
 export type NewApplication = InferInsertModel<typeof applications>;
+
+export type Resume = InferSelectModel<typeof resumes>;
+export type NewResume = InferInsertModel<typeof resumes>;
