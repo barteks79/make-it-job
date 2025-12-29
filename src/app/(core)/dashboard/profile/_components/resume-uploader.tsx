@@ -39,6 +39,7 @@ export function ResumeUploader() {
     onFilesChange: files => {
       if (files.length > 0) {
         const file = files[0];
+        setIsSaved(false);
         setUploadFile({
           ...file,
           progress: 0,
@@ -49,6 +50,8 @@ export function ResumeUploader() {
       }
     }
   });
+
+  const inputProps = getInputProps();
 
   // Simulate upload progress
   useEffect(() => {
@@ -119,7 +122,7 @@ export function ResumeUploader() {
         onClick={openFileDialog}
         className="border h-20 cursor-pointer"
       >
-        <input {...getInputProps()} className="sr-only" />
+        <input {...inputProps} className="sr-only" />
         <EmptyContent className="text-center gap-1">
           <EmptyTitle className="font-normal text-sm text-muted-foreground">
             Drop your resume here or <span className="font-medium text-primary">browse files</span>
@@ -154,9 +157,12 @@ export function ResumeUploader() {
                   {uploadFile.file.name}
                 </p>
                 {isSaved ? (
-                  <span className="flex items-center gap-1 text-xs text-green-600">
-                    <CheckCircle className="size-3" strokeWidth={2.5} /> Saved
-                  </span>
+                  <>
+                    <input {...inputProps} className="sr-only" />
+                    <span className="flex items-center gap-1 text-xs text-green-600">
+                      <CheckCircle className="size-3" strokeWidth={2.5} /> Saved
+                    </span>
+                  </>
                 ) : uploadFile.status === 'completed' ? (
                   <span className="flex items-center gap-1 text-xs text-green-600">
                     <CheckCircle className="size-3" strokeWidth={2.5} /> Completed
@@ -204,7 +210,7 @@ export function ResumeUploader() {
                 onClick={isSaved ? openFileDialog : handleSaveResume}
                 variant="default"
                 type="button"
-                className="px-4 h-min py-1 w-min border-none bg-primary/10 hover:bg-primary/15"
+                className="px-4 h-min py-1 w-min border-none bg-primary/10 hover:bg-primary/15 cursor-pointer"
               >
                 {isSaved ? 'Change' : 'Save'}
               </Button>
