@@ -87,13 +87,8 @@ export function CompleteProfileForm() {
             <div className="flex flex-col gap-2">
               <Label className="text-muted-foreground">First name</Label>
               <Input
-                value={profileData.profile.firstName ?? ''}
-                onChange={event =>
-                  profileData.setProfile({
-                    ...profileData.profile,
-                    firstName: event.target.value
-                  })
-                }
+                defaultValue={profileData.profile.firstName}
+                onChange={e => profileData.setName('firstName', e.target.value)}
                 placeholder="Enter your first name"
                 className="text-base"
               />
@@ -102,13 +97,8 @@ export function CompleteProfileForm() {
             <div className="flex flex-col gap-2">
               <Label className="text-muted-foreground">Last name</Label>
               <Input
-                value={profileData.profile.lastName ?? ''}
-                onChange={event =>
-                  profileData.setProfile({
-                    ...profileData.profile,
-                    lastName: event.target.value
-                  })
-                }
+                defaultValue={profileData.profile.lastName}
+                onChange={e => profileData.setName('lastName', e.target.value)}
                 placeholder="Enter your last name"
                 className="text-base"
               />

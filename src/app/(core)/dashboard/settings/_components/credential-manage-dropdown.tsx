@@ -12,7 +12,7 @@ export function CredentialManageDropdown() {
 
   return account ? (
     <RemoveMethodAlertDialog accountId={account.accountId}>
-      <Button type="button" variant="secondary">
+      <Button disabled={accounts.length === 1} type="button" variant="secondary">
         Remove
       </Button>
     </RemoveMethodAlertDialog>
