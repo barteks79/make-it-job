@@ -61,9 +61,10 @@ CREATE TABLE resume (
   id UUID NOT NULL DEFAULT gen_random_uuid(),
   "userId" UUID NOT NULL,
   extension "public"."resumeExtension" NOT NULL,
+  "fileName" TEXT NOT NULL,
   
   "createdAt" TIMESTAMPTZ NOT NULL DEFAULT now(),
-  "updatedAt" TIMESTAMPTZ NOT NULL DEFAULT now(),
+  "updatedAt" TIMESTAMPTZ NOT NULL DEFAULT now() ,
 
   constraint resume_pkey PRIMARY KEY (id),
   constraint resume_userId_fkey FOREIGN KEY ("userId") REFERENCES "user" (id) ON UPDATE CASCADE ON DELETE CASCADE

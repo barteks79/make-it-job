@@ -130,6 +130,7 @@ export const resumes = pgTable('resume', {
     .references(() => users.id, { onDelete: 'cascade', onUpdate: 'cascade' })
     .notNull(),
   extension: text('extension', { enum: ['.pdf', '.doc', '.docx'] }).notNull(),
+  fileName: text('fileName').notNull(),
   ...timestamps
 });
 

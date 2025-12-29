@@ -12,7 +12,7 @@ export const saveResume = async ({ filename }: { filename: string }) => {
   const data = await auth.api.getSession({ headers: await headers() });
   if (!data) unauthorized();
 
-  const extension = filename.split('.').at(-1);
+  const [name, extension] = filename.split('.', 2);
   if (!extension && extension !== 'pdf' && extension !== 'doc' && extension !== 'docx') return;
 
   const resumeExtension = `.${extension}` as '.pdf' | '.doc' | '.docx';
@@ -20,10 +20,18 @@ export const saveResume = async ({ filename }: { filename: string }) => {
 
   try {
     if (existingResume) {
-      const updatedResume = await updateUserResume({ userId: data.user.id, resumeExtension });
+      const updatedResume = await updateUserResume({
+        userId: data.user.id,
+        fileName: name,
+        resumeExtension
+      });
       return !!updatedResume;
     } else {
-      const createdResume = await createUserResume({ userId: data.user.id, resumeExtension });
+      const createdResume = await createUserResume({
+        userId: data.user.id,
+        fileName: name,
+        resumeExtension
+      });
       return !!createdResume;
     }
   } catch (err: unknown) {

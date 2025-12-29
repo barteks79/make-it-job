@@ -8,6 +8,7 @@ import { FileText, CheckCircle } from 'lucide-react';
 import { Card, CardContent, CardAction } from '@/components/ui/card';
 import { Empty, EmptyContent, EmptyDescription, EmptyTitle } from '@/components/ui/empty';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 interface ResumeUploadItem extends FileWithPreview {
   progress: number;
@@ -17,6 +18,7 @@ interface ResumeUploadItem extends FileWithPreview {
 
 export function ResumeUploader() {
   const [uploadFile, setUploadFile] = useState<ResumeUploadItem | null>(null);
+  const [isSaved, setIsSaved] = useState(false);
 
   const [
     { errors },
@@ -81,7 +83,10 @@ export function ResumeUploader() {
 
   const handleSaveResume = async () => {
     if (!uploadFile) return;
-    await saveResume({ filename: uploadFile.file.name });
+    const result = await saveResume({ filename: uploadFile.file.name });
+    if (result) {
+      setIsSaved(true);
+    }
   };
 
   // Helper function to get progress bar color based on percentage
@@ -101,6 +106,7 @@ export function ResumeUploader() {
       removeFile(uploadFile.id);
       setUploadFile(null);
     }
+    setIsSaved(false);
   };
 
   if (!uploadFile) {
@@ -137,12 +143,21 @@ export function ResumeUploader() {
             </div>
 
             {/* File Info */}
-            <div className="min-w-0 flex-1 space-y-1 py-0.5">
+            <div className={cn('min-w-0 flex-1 space-y-0.5 py-0.5', isSaved && 'space-y-0')}>
               <div className="flex items-center justify-between">
-                <p className="truncate text-xs font-medium text-foreground/80">
+                <p
+                  className={cn(
+                    'truncate text-xs font-medium text-foreground/80',
+                    isSaved && 'text-[13px]'
+                  )}
+                >
                   {uploadFile.file.name}
                 </p>
-                {uploadFile.status === 'completed' ? (
+                {isSaved ? (
+                  <span className="flex items-center gap-1 text-xs text-green-600">
+                    <CheckCircle className="size-3" strokeWidth={2.5} /> Saved
+                  </span>
+                ) : uploadFile.status === 'completed' ? (
                   <span className="flex items-center gap-1 text-xs text-green-600">
                     <CheckCircle className="size-3" strokeWidth={2.5} /> Completed
                   </span>
@@ -153,16 +168,18 @@ export function ResumeUploader() {
                 )}
               </div>
 
-              {/* Progress Bar */}
-              <div className="h-1.5 w-full rounded-full bg-accent">
-                <div
-                  className={`h-1.5 rounded-md transition-all duration-300 ease-out ${getProgressColor(
-                    uploadFile.progress,
-                    uploadFile.status
-                  )}`}
-                  style={{ width: `${uploadFile.progress}%` }}
-                />
-              </div>
+              {/* Progress Bar - hidden when saved */}
+              {!isSaved && (
+                <div className="h-1.5 w-full rounded-full bg-accent">
+                  <div
+                    className={`h-1.5 rounded-md transition-all duration-300 ease-out ${getProgressColor(
+                      uploadFile.progress,
+                      uploadFile.status
+                    )}`}
+                    style={{ width: `${uploadFile.progress}%` }}
+                  />
+                </div>
+              )}
 
               {/* Size Info */}
               {uploadFile.status === 'completed' ? (
@@ -184,12 +201,12 @@ export function ResumeUploader() {
           {uploadFile.status === 'completed' && (
             <CardAction className="flex gap-2">
               <Button
-                onClick={handleSaveResume}
+                onClick={isSaved ? openFileDialog : handleSaveResume}
                 variant="default"
                 type="button"
                 className="px-4 h-min py-1 w-min border-none bg-primary/10 hover:bg-primary/15"
               >
-                Save
+                {isSaved ? 'Change' : 'Save'}
               </Button>
 
               <Button
